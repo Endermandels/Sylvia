@@ -1,0 +1,207 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://assets/background.png" type="Texture" id=1]
+[ext_resource path="res://battle/Space.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/card.png" type="Texture" id=3]
+[ext_resource path="res://assets/horn.png" type="Texture" id=4]
+[ext_resource path="res://assets/grid.png" type="Texture" id=5]
+[ext_resource path="res://assets/apple.png" type="Texture" id=6]
+[ext_resource path="res://battle/Character.tscn" type="PackedScene" id=7]
+
+[node name="BattleScene" type="Node2D"]
+
+[node name="Background" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+centered = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Grid" type="Sprite" parent="."]
+position = Vector2( 400, 184 )
+scale = Vector2( 15.1034, 14.4762 )
+texture = ExtResource( 5 )
+
+[node name="Spaces" type="Node2D" parent="."]
+
+[node name="Space" parent="Spaces" instance=ExtResource( 2 )]
+position = Vector2( 218.395, 66.9937 )
+
+[node name="Space2" parent="Spaces" instance=ExtResource( 2 )]
+position = Vector2( 279.401, 67.8088 )
+
+[node name="Space3" parent="Spaces" instance=ExtResource( 2 )]
+position = Vector2( 338.676, 67.8088 )
+
+[node name="Space4" parent="Spaces" instance=ExtResource( 2 )]
+position = Vector2( 400.346, 67.8088 )
+
+[node name="Space5" parent="Spaces" instance=ExtResource( 2 )]
+position = Vector2( 460.818, 68.4076 )
+
+[node name="Space6" parent="Spaces" instance=ExtResource( 2 )]
+position = Vector2( 520.692, 68.4076 )
+
+[node name="Space7" parent="Spaces" instance=ExtResource( 2 )]
+position = Vector2( 580.566, 68.4076 )
+
+[node name="Space8" parent="Spaces" instance=ExtResource( 2 )]
+position = Vector2( 218.929, 127.084 )
+
+[node name="Space9" parent="Spaces" instance=ExtResource( 2 )]
+position = Vector2( 278.803, 125.886 )
+
+[node name="Space10" parent="Spaces" instance=ExtResource( 2 )]
+position = Vector2( 338.676, 126.485 )
+
+[node name="Space11" parent="Spaces" instance=ExtResource( 2 )]
+position = Vector2( 400.945, 126.485 )
+
+[node name="Space12" parent="Spaces" instance=ExtResource( 2 )]
+position = Vector2( 459.022, 126.485 )
+
+[node name="Space13" parent="Spaces" instance=ExtResource( 2 )]
+position = Vector2( 521.291, 126.485 )
+
+[node name="Space14" parent="Spaces" instance=ExtResource( 2 )]
+position = Vector2( 581.165, 125.886 )
+
+[node name="Space15" parent="Spaces" instance=ExtResource( 2 )]
+position = Vector2( 219.528, 182.766 )
+
+[node name="Space16" parent="Spaces" instance=ExtResource( 2 )]
+position = Vector2( 279.401, 183.964 )
+
+[node name="Space17" parent="Spaces" instance=ExtResource( 2 )]
+position = Vector2( 339.275, 183.964 )
+
+[node name="Space18" parent="Spaces" instance=ExtResource( 2 )]
+position = Vector2( 400.346, 182.766 )
+
+[node name="Space19" parent="Spaces" instance=ExtResource( 2 )]
+position = Vector2( 460.22, 183.964 )
+
+[node name="Space20" parent="Spaces" instance=ExtResource( 2 )]
+position = Vector2( 521.291, 185.161 )
+
+[node name="Space21" parent="Spaces" instance=ExtResource( 2 )]
+position = Vector2( 580.566, 184.563 )
+
+[node name="Space22" parent="Spaces" instance=ExtResource( 2 )]
+position = Vector2( 217.133, 242.041 )
+
+[node name="Space23" parent="Spaces" instance=ExtResource( 2 )]
+position = Vector2( 277.605, 241.443 )
+
+[node name="Space24" parent="Spaces" instance=ExtResource( 2 )]
+position = Vector2( 339.874, 242.041 )
+
+[node name="Space25" parent="Spaces" instance=ExtResource( 2 )]
+position = Vector2( 400.346, 242.64 )
+
+[node name="Space26" parent="Spaces" instance=ExtResource( 2 )]
+position = Vector2( 459.621, 241.443 )
+
+[node name="Space27" parent="Spaces" instance=ExtResource( 2 )]
+position = Vector2( 520.692, 240.844 )
+
+[node name="Space28" parent="Spaces" instance=ExtResource( 2 )]
+position = Vector2( 580.566, 243.239 )
+
+[node name="Space29" parent="Spaces" instance=ExtResource( 2 )]
+position = Vector2( 218.33, 300.717 )
+
+[node name="Space30" parent="Spaces" instance=ExtResource( 2 )]
+position = Vector2( 279.401, 300.119 )
+
+[node name="Space31" parent="Spaces" instance=ExtResource( 2 )]
+position = Vector2( 338.078, 300.119 )
+
+[node name="Space32" parent="Spaces" instance=ExtResource( 2 )]
+position = Vector2( 397.951, 300.119 )
+
+[node name="Space33" parent="Spaces" instance=ExtResource( 2 )]
+position = Vector2( 458.424, 299.52 )
+
+[node name="Space34" parent="Spaces" instance=ExtResource( 2 )]
+position = Vector2( 520.692, 299.52 )
+
+[node name="Space35" parent="Spaces" instance=ExtResource( 2 )]
+position = Vector2( 580.566, 300.119 )
+
+[node name="Card" type="Sprite" parent="."]
+position = Vector2( 49.1052, 295.368 )
+scale = Vector2( 0.220702, 0.276842 )
+texture = ExtResource( 3 )
+
+[node name="Card2" type="Sprite" parent="."]
+position = Vector2( 73.1052, 295.368 )
+scale = Vector2( 0.220702, 0.276842 )
+texture = ExtResource( 3 )
+
+[node name="Card3" type="Sprite" parent="."]
+position = Vector2( 97.1052, 295.368 )
+scale = Vector2( 0.220702, 0.276842 )
+texture = ExtResource( 3 )
+
+[node name="Card4" type="Sprite" parent="."]
+position = Vector2( 121.105, 295.368 )
+scale = Vector2( 0.220702, 0.276842 )
+texture = ExtResource( 3 )
+
+[node name="Horn" type="Sprite" parent="."]
+position = Vector2( 96, 152 )
+scale = Vector2( 2.1, 2.3 )
+texture = ExtResource( 4 )
+
+[node name="Food" type="Sprite" parent="."]
+position = Vector2( -34, 112 )
+scale = Vector2( 3.19667, 2.83958 )
+texture = ExtResource( 6 )
+offset = Vector2( 100.104, 50.7117 )
+
+[node name="Food2" type="Sprite" parent="."]
+position = Vector2( 214, -1.52588e-05 )
+scale = Vector2( 3.19667, 2.83958 )
+texture = ExtResource( 6 )
+offset = Vector2( 100.104, 50.7117 )
+
+[node name="Characters" type="Node2D" parent="."]
+
+[node name="Character" parent="Characters" instance=ExtResource( 7 )]
+position = Vector2( 400, 296 )
+[connection signal="move_player" from="Spaces/Space" to="Characters/Character" method="_on_Space_move_player"]
+[connection signal="move_player" from="Spaces/Space2" to="Characters/Character" method="_on_Space_move_player"]
+[connection signal="move_player" from="Spaces/Space3" to="Characters/Character" method="_on_Space_move_player"]
+[connection signal="move_player" from="Spaces/Space4" to="Characters/Character" method="_on_Space_move_player"]
+[connection signal="move_player" from="Spaces/Space5" to="Characters/Character" method="_on_Space_move_player"]
+[connection signal="move_player" from="Spaces/Space6" to="Characters/Character" method="_on_Space_move_player"]
+[connection signal="move_player" from="Spaces/Space7" to="Characters/Character" method="_on_Space_move_player"]
+[connection signal="move_player" from="Spaces/Space8" to="Characters/Character" method="_on_Space_move_player"]
+[connection signal="move_player" from="Spaces/Space9" to="Characters/Character" method="_on_Space_move_player"]
+[connection signal="move_player" from="Spaces/Space10" to="Characters/Character" method="_on_Space_move_player"]
+[connection signal="move_player" from="Spaces/Space11" to="Characters/Character" method="_on_Space_move_player"]
+[connection signal="move_player" from="Spaces/Space12" to="Characters/Character" method="_on_Space_move_player"]
+[connection signal="move_player" from="Spaces/Space13" to="Characters/Character" method="_on_Space_move_player"]
+[connection signal="move_player" from="Spaces/Space14" to="Characters/Character" method="_on_Space_move_player"]
+[connection signal="move_player" from="Spaces/Space15" to="Characters/Character" method="_on_Space_move_player"]
+[connection signal="move_player" from="Spaces/Space16" to="Characters/Character" method="_on_Space_move_player"]
+[connection signal="move_player" from="Spaces/Space17" to="Characters/Character" method="_on_Space_move_player"]
+[connection signal="move_player" from="Spaces/Space18" to="Characters/Character" method="_on_Space_move_player"]
+[connection signal="move_player" from="Spaces/Space19" to="Characters/Character" method="_on_Space_move_player"]
+[connection signal="move_player" from="Spaces/Space20" to="Characters/Character" method="_on_Space_move_player"]
+[connection signal="move_player" from="Spaces/Space21" to="Characters/Character" method="_on_Space_move_player"]
+[connection signal="move_player" from="Spaces/Space22" to="Characters/Character" method="_on_Space_move_player"]
+[connection signal="move_player" from="Spaces/Space23" to="Characters/Character" method="_on_Space_move_player"]
+[connection signal="move_player" from="Spaces/Space24" to="Characters/Character" method="_on_Space_move_player"]
+[connection signal="move_player" from="Spaces/Space25" to="Characters/Character" method="_on_Space_move_player"]
+[connection signal="move_player" from="Spaces/Space26" to="Characters/Character" method="_on_Space_move_player"]
+[connection signal="move_player" from="Spaces/Space27" to="Characters/Character" method="_on_Space_move_player"]
+[connection signal="move_player" from="Spaces/Space28" to="Characters/Character" method="_on_Space_move_player"]
+[connection signal="move_player" from="Spaces/Space29" to="Characters/Character" method="_on_Space_move_player"]
+[connection signal="move_player" from="Spaces/Space30" to="Characters/Character" method="_on_Space_move_player"]
+[connection signal="move_player" from="Spaces/Space31" to="Characters/Character" method="_on_Space_move_player"]
+[connection signal="move_player" from="Spaces/Space32" to="Characters/Character" method="_on_Space_move_player"]
+[connection signal="move_player" from="Spaces/Space33" to="Characters/Character" method="_on_Space_move_player"]
+[connection signal="move_player" from="Spaces/Space34" to="Characters/Character" method="_on_Space_move_player"]
+[connection signal="move_player" from="Spaces/Space35" to="Characters/Character" method="_on_Space_move_player"]
