@@ -1,7 +1,7 @@
 extends Node2D
 
-onready var sprite = $Sprite
-onready var stats = $Stats
+@onready var sprite = $Sprite2D
+@onready var stats = $Stats
 
 var grid_rows = 5
 var grid_cols = 7
@@ -18,7 +18,7 @@ func _ready():
 	possible_moves = update_possible_moves(grid_pos, stats.mov)
 
 func _input(event):
-	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		# Left mouse button is pressed
 		var mouse_position = get_global_mouse_position()
 		if sprite.get_rect().has_point(to_local(mouse_position)):
