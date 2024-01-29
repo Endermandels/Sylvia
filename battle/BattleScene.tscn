@@ -1,12 +1,22 @@
-[gd_scene load_steps=8 format=3 uid="uid://srh7fu8uprij"]
+[gd_scene load_steps=9 format=3 uid="uid://srh7fu8uprij"]
 
-[ext_resource type="Texture2D" uid="uid://dkushodgai21s" path="res://assets/background.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://d1ac6buqpih8o" path="res://assets/background.png" id="1"]
 [ext_resource type="PackedScene" path="res://battle/Space.tscn" id="2"]
-[ext_resource type="Texture2D" uid="uid://bitai2b163x1n" path="res://assets/card.png" id="3"]
-[ext_resource type="Texture2D" uid="uid://bdbdjokq50uqt" path="res://assets/horn.png" id="4"]
-[ext_resource type="Texture2D" uid="uid://cifdlrxp33p1u" path="res://assets/grid.png" id="5"]
-[ext_resource type="Texture2D" uid="uid://ci27jwlgn78tc" path="res://assets/apple.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://ccghml0c837vc" path="res://assets/card.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://dlhs3or5ovjtu" path="res://assets/horn.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://bs6ofqmqg1132" path="res://assets/grid.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://bvant378toy5d" path="res://assets/apple.png" id="6"]
 [ext_resource type="PackedScene" uid="uid://bub37ipigql3v" path="res://battle/Character.tscn" id="7"]
+
+[sub_resource type="GDScript" id="GDScript_76nkh"]
+script/source = "extends Button
+
+
+
+
+func _on_pressed():
+	get_tree().change_scene_to_file(\"res://start_menu/start_menu.tscn\")
+"
 
 [node name="BattleScene" type="Node2D"]
 
@@ -202,6 +212,16 @@ offset = Vector2(100.104, 50.7117)
 [node name="Player" parent="Characters" instance=ExtResource("7")]
 position = Vector2(400, 296)
 
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Button" type="Button" parent="UI"]
+offset_left = 16.0
+offset_top = 9.0
+offset_right = 89.0
+offset_bottom = 25.0
+text = "Quit to Menu"
+script = SubResource("GDScript_76nkh")
+
 [connection signal="move_player" from="Spaces/Space" to="Characters/Player" method="_on_Space_move_player"]
 [connection signal="move_player" from="Spaces/Space2" to="Characters/Player" method="_on_Space_move_player"]
 [connection signal="move_player" from="Spaces/Space3" to="Characters/Player" method="_on_Space_move_player"]
@@ -237,3 +257,4 @@ position = Vector2(400, 296)
 [connection signal="move_player" from="Spaces/Space33" to="Characters/Player" method="_on_Space_move_player"]
 [connection signal="move_player" from="Spaces/Space34" to="Characters/Player" method="_on_Space_move_player"]
 [connection signal="move_player" from="Spaces/Space35" to="Characters/Player" method="_on_Space_move_player"]
+[connection signal="pressed" from="UI/Button" to="UI/Button" method="_on_pressed"]
