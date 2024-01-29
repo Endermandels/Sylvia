@@ -64,3 +64,6 @@ func _on_Space_move_player(new_position, new_grid_pos):
 	if move_to(grid_pos, new_grid_pos, stats.mov_left, 1):
 		sprite.global_position = new_position
 		grid_pos = new_grid_pos
+
+func _on_battle_scene_players_turn():
+	stats.reset()

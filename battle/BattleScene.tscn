@@ -1,12 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://srh7fu8uprij"]
+[gd_scene load_steps=11 format=3 uid="uid://srh7fu8uprij"]
 
-[ext_resource type="Texture2D" uid="uid://d1ac6buqpih8o" path="res://assets/background.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://dkushodgai21s" path="res://assets/background.png" id="1"]
+[ext_resource type="Script" path="res://battle/BattleScene.gd" id="1_vb5nx"]
 [ext_resource type="PackedScene" path="res://battle/Space.tscn" id="2"]
-[ext_resource type="Texture2D" uid="uid://ccghml0c837vc" path="res://assets/card.png" id="3"]
-[ext_resource type="Texture2D" uid="uid://dlhs3or5ovjtu" path="res://assets/horn.png" id="4"]
-[ext_resource type="Texture2D" uid="uid://bs6ofqmqg1132" path="res://assets/grid.png" id="5"]
-[ext_resource type="Texture2D" uid="uid://bvant378toy5d" path="res://assets/apple.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://bitai2b163x1n" path="res://assets/card.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://cifdlrxp33p1u" path="res://assets/grid.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://ci27jwlgn78tc" path="res://assets/apple.png" id="6"]
 [ext_resource type="PackedScene" uid="uid://bub37ipigql3v" path="res://battle/Character.tscn" id="7"]
+[ext_resource type="PackedScene" uid="uid://d2x4fgnxceh5u" path="res://battle/end_of_turn.tscn" id="7_np6ef"]
+[ext_resource type="PackedScene" uid="uid://t32b4boxehdt" path="res://battle/Enemy.tscn" id="8_kyk1e"]
 
 [sub_resource type="GDScript" id="GDScript_76nkh"]
 script/source = "extends Button
@@ -19,6 +21,7 @@ func _on_pressed():
 "
 
 [node name="BattleScene" type="Node2D"]
+script = ExtResource("1_vb5nx")
 
 [node name="Background" type="Sprite2D" parent="."]
 texture = ExtResource("1")
@@ -190,11 +193,6 @@ position = Vector2(121.105, 295.368)
 scale = Vector2(0.220702, 0.276842)
 texture = ExtResource("3")
 
-[node name="Horn" type="Sprite2D" parent="."]
-position = Vector2(96, 152)
-scale = Vector2(2.1, 2.3)
-texture = ExtResource("4")
-
 [node name="Food" type="Sprite2D" parent="."]
 position = Vector2(-34, 112)
 scale = Vector2(3.19667, 2.83958)
@@ -212,6 +210,8 @@ offset = Vector2(100.104, 50.7117)
 [node name="Player" parent="Characters" instance=ExtResource("7")]
 position = Vector2(400, 296)
 
+[node name="Enemy" parent="Characters" instance=ExtResource("8_kyk1e")]
+
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="Button" type="Button" parent="UI"]
@@ -222,6 +222,11 @@ offset_bottom = 25.0
 text = "Quit to Menu"
 script = SubResource("GDScript_76nkh")
 
+[node name="EndOfTurn" parent="." instance=ExtResource("7_np6ef")]
+position = Vector2(90, 152)
+
+[connection signal="enemys_turn" from="." to="Characters/Enemy" method="_on_battle_scene_enemys_turn"]
+[connection signal="players_turn" from="." to="Characters/Player" method="_on_battle_scene_players_turn"]
 [connection signal="move_player" from="Spaces/Space" to="Characters/Player" method="_on_Space_move_player"]
 [connection signal="move_player" from="Spaces/Space2" to="Characters/Player" method="_on_Space_move_player"]
 [connection signal="move_player" from="Spaces/Space3" to="Characters/Player" method="_on_Space_move_player"]
@@ -257,4 +262,6 @@ script = SubResource("GDScript_76nkh")
 [connection signal="move_player" from="Spaces/Space33" to="Characters/Player" method="_on_Space_move_player"]
 [connection signal="move_player" from="Spaces/Space34" to="Characters/Player" method="_on_Space_move_player"]
 [connection signal="move_player" from="Spaces/Space35" to="Characters/Player" method="_on_Space_move_player"]
+[connection signal="end_turn" from="Characters/Enemy" to="." method="_on_enemy_end_turn"]
 [connection signal="pressed" from="UI/Button" to="UI/Button" method="_on_pressed"]
+[connection signal="end_turn" from="EndOfTurn" to="." method="_on_end_of_turn_end_turn"]
