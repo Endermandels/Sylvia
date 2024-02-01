@@ -7,9 +7,9 @@ Sylvia is a strategic card-based fantasy roguelike which combines deckbuilding, 
 1. **Clone the repository:** 'git clone https://github.com/Endermandels/Sylvia.git'
 2. **Open Godot Engine:** Start the Godot Engine (v4.2.1) on your computer
 3. **Import the Project:** 
-  - In the Godot project manager, click 'Import Project'.
-  - Navigate to the cloned repository folder.
-  - Select the 'project.godot' file and click 'Open'.
+    - In the Godot project manager, click 'Import Project'.
+    - Navigate to the cloned repository folder.
+    - Select the 'project.godot' file and click 'Open'.
 4. **Run the Game:**
   - The project will now be listed in the Godot project manager. Select it and, on the right side, click 'Run'.
 
