@@ -15,9 +15,9 @@ func _on_battle_scene_enemys_turn():
 	print(possible_positions)
 	var new_position = possible_positions[randi() % len(possible_positions)]
 	enemy_pos = new_position
-	var new_pos := Vector2(new_position[0], new_position[1])
-	print("Moved to: ", new_pos)
-	new_pos = to_global(new_pos)
+	print("Moved to: ", new_position)
+	print()
+	var new_pos := Vector2(218 + new_position[0] * 60, 67 + new_position[1] * 60)
 	sprite.global_position = new_pos
 	emit_signal("end_turn")
 
