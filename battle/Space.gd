@@ -4,6 +4,8 @@ extends Area2D
 
 @export var grid_pos = [0,0]
 
+@export var enemy_pos = [0,0]
+
 signal move_player
 
 func _on_Space_input_event(viewport, event, shape_idx):
