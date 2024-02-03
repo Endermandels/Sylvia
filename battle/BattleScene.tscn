@@ -269,6 +269,7 @@ texture = ExtResource("3")
 position = Vector2(400, 296)
 
 [node name="Enemy" parent="Characters" instance=ExtResource("8_kyk1e")]
+position = Vector2(399, 68)
 
 [node name="UI" type="CanvasLayer" parent="."]
 
