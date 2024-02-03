@@ -17,8 +17,12 @@ func _on_battle_scene_enemys_turn():
 	enemy_pos = new_position
 	print("Moved to: ", new_position)
 	print()
+	
+	# Purpose of below lines is to update the global coordinates for the visual
+	# sprite.
 	var new_pos := Vector2(218 + new_position[0] * 60, 67 + new_position[1] * 60)
 	sprite.global_position = new_pos
+	
 	emit_signal("end_turn")
 
 # Start is an array with two elements. The first element is the x
