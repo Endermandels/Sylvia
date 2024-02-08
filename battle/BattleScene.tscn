@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://srh7fu8uprij"]
+[gd_scene load_steps=12 format=3 uid="uid://srh7fu8uprij"]
 
 [ext_resource type="Texture2D" uid="uid://dkushodgai21s" path="res://assets/background.png" id="1"]
 [ext_resource type="Script" path="res://battle/BattleScene.gd" id="1_vb5nx"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://d2x4fgnxceh5u" path="res://battle/end_of_turn.tscn" id="7_np6ef"]
 [ext_resource type="PackedScene" uid="uid://t32b4boxehdt" path="res://battle/Enemy.tscn" id="8_kyk1e"]
 [ext_resource type="PackedScene" uid="uid://deikkfb2ghqvw" path="res://battle/food.tscn" id="9_1n73l"]
+[ext_resource type="AudioStream" uid="uid://88wruo2jyoh8" path="res://Music/battle_music (surf).ogg" id="10_i4mvg"]
 
 [sub_resource type="GDScript" id="GDScript_76nkh"]
 script/source = "extends Button
@@ -286,6 +287,10 @@ position = Vector2(90, 152)
 
 [node name="Food" parent="." instance=ExtResource("9_1n73l")]
 position = Vector2(339, 182)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_i4mvg")
+autoplay = true
 
 [connection signal="enemys_turn" from="." to="Characters/Enemy" method="_on_battle_scene_enemys_turn"]
 [connection signal="players_turn" from="." to="Characters/Player" method="_on_battle_scene_players_turn"]
