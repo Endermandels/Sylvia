@@ -1,10 +1,15 @@
 extends Node
 
+# Unit Stats
+@export var HP = 5
+@export var ATK = 2
 @export var ACT = 2 # maximum number of actions
 @export var MOV = 2 # maximum movement
 @export var MOR = 3 # maximum morsel count
 # Morsels are used for abilities and certain items.
 
+var hp = HP
+var atk = ATK
 var act = ACT
 var mov = MOV
 var mor = 0
@@ -28,6 +33,9 @@ func collect_morsel(amount):
 			act -= 1
 		else:
 			print('Cannot Exceed Maximum Morsel Count')
+
+func receiveDMG(damage):
+	hp -= damage
 
 func reset():
 	mov = MOV
