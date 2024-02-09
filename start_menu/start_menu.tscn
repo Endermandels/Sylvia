@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://djde2gxuvi4wy"]
+[gd_scene load_steps=5 format=3 uid="uid://djde2gxuvi4wy"]
 
-[ext_resource type="Texture2D" uid="uid://d1ac6buqpih8o" path="res://assets/background.png" id="1_cgg54"]
+[ext_resource type="Texture2D" uid="uid://dkushodgai21s" path="res://assets/background.png" id="1_cgg54"]
 [ext_resource type="Script" path="res://start_menu/start_menu.gd" id="1_ynbil"]
+[ext_resource type="AudioStream" path="res://Music/menu_music.ogg" id="3_g6p36"]
 
 [sub_resource type="SystemFont" id="SystemFont_r2mg2"]
 font_names = PackedStringArray("Castellar")
@@ -84,6 +85,10 @@ custom_minimum_size = Vector2(150, 30)
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Exit"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_g6p36")
+autoplay = true
 
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

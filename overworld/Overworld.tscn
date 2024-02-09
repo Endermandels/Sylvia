@@ -1,6 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://bp7rhwjkjjd4u"]
+[gd_scene load_steps=10 format=3 uid="uid://ciygfyllvwgoa"]
 
 [ext_resource type="Texture2D" uid="uid://c0lc0q4evr4jg" path="res://assets/background_brown.png" id="1_u7u2j"]
+[ext_resource type="Script" path="res://View Characters.gd" id="2_53q78"]
+[ext_resource type="Script" path="res://View Decks.gd" id="3_6c3lq"]
+[ext_resource type="PackedScene" uid="uid://cutxjovwrqa24" path="res://overworld/map_space.tscn" id="4_tca60"]
+[ext_resource type="Texture2D" uid="uid://bv644lx4cgdho" path="res://assets/map_player.png" id="5_08g2d"]
+[ext_resource type="Texture2D" uid="uid://48hkerx52bn" path="res://assets/map_enemy.png" id="6_fybd1"]
+[ext_resource type="Texture2D" uid="uid://cfhp6lmgf0vvb" path="res://assets/map_event.png" id="7_gemks"]
+[ext_resource type="Texture2D" uid="uid://dgfmeavsuqd20" path="res://assets/map_shop.png" id="8_uej0p"]
 
 [sub_resource type="GDScript" id="GDScript_8ndto"]
 script/source = "extends Button
@@ -15,17 +22,92 @@ func _on_pressed():
 [node name="Overworld" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(577, 325)
+position = Vector2(320, 182)
+scale = Vector2(0.552083, 0.555556)
 texture = ExtResource("1_u7u2j")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Button" type="Button" parent="CanvasLayer"]
-offset_left = 16.0
-offset_top = 9.0
-offset_right = 89.0
-offset_bottom = 25.0
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+offset_left = 7.0
+offset_top = 14.0
+offset_right = 118.0
+offset_bottom = 94.0
+
+[node name="Quit to Menu" type="Button" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
 text = "Quit to Menu"
 script = SubResource("GDScript_8ndto")
 
-[connection signal="pressed" from="CanvasLayer/Button" to="CanvasLayer/Button" method="_on_pressed"]
+[node name="View Characters" type="Button" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+text = "View Characters"
+script = ExtResource("2_53q78")
+
+[node name="View Decks" type="Button" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+text = "View Decks"
+script = ExtResource("3_6c3lq")
+
+[node name="Map" type="Node2D" parent="."]
+
+[node name="map_space" parent="Map" instance=ExtResource("4_tca60")]
+position = Vector2(231, 192)
+
+[node name="Sprite2D" parent="Map/map_space" index="0"]
+texture = ExtResource("5_08g2d")
+
+[node name="map_space2" parent="Map" instance=ExtResource("4_tca60")]
+position = Vector2(300, 142)
+
+[node name="Sprite2D" parent="Map/map_space2" index="0"]
+texture = ExtResource("6_fybd1")
+
+[node name="map_space3" parent="Map" instance=ExtResource("4_tca60")]
+position = Vector2(298, 245)
+
+[node name="Sprite2D" parent="Map/map_space3" index="0"]
+texture = ExtResource("7_gemks")
+
+[node name="map_space4" parent="Map" instance=ExtResource("4_tca60")]
+position = Vector2(400, 143)
+
+[node name="Sprite2D" parent="Map/map_space4" index="0"]
+texture = ExtResource("8_uej0p")
+
+[node name="map_space5" parent="Map" instance=ExtResource("4_tca60")]
+position = Vector2(401, 246)
+
+[node name="Sprite2D" parent="Map/map_space5" index="0"]
+texture = ExtResource("6_fybd1")
+
+[node name="map_space6" parent="Map" instance=ExtResource("4_tca60")]
+position = Vector2(497, 141)
+
+[node name="Sprite2D" parent="Map/map_space6" index="0"]
+texture = ExtResource("7_gemks")
+
+[node name="map_space7" parent="Map" instance=ExtResource("4_tca60")]
+position = Vector2(495, 248)
+
+[node name="Sprite2D" parent="Map/map_space7" index="0"]
+texture = ExtResource("8_uej0p")
+
+[node name="map_space8" parent="Map" instance=ExtResource("4_tca60")]
+position = Vector2(568, 192)
+
+[node name="TextureButton" parent="Map/map_space8" index="1"]
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/Quit to Menu" to="CanvasLayer/VBoxContainer/Quit to Menu" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/View Characters" to="CanvasLayer/VBoxContainer/View Characters" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/View Decks" to="CanvasLayer/VBoxContainer/View Decks" method="_on_pressed"]
+
+[editable path="Map/map_space"]
+[editable path="Map/map_space2"]
+[editable path="Map/map_space3"]
+[editable path="Map/map_space4"]
+[editable path="Map/map_space5"]
+[editable path="Map/map_space6"]
+[editable path="Map/map_space7"]
+[editable path="Map/map_space8"]
