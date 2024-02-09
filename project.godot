@@ -28,6 +28,14 @@ window/size/test_height=720
 "rendering]textures/canvas_textures/default_texture_filter"=0
 renderer/rendering_method="mobile"
 
+[layer_names]
+
+2d_physics/layer_1="Player"
+2d_physics/layer_2="Space"
+2d_physics/layer_3="Enemy"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+renderer/rendering_method="mobile"
+

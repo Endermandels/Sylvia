@@ -11,10 +11,6 @@ var grid_cols = 7
 
 var grid_pos = [3, 4]
 
-"""
-VERY USEFUL INFORMATION BELOW:
-	to_local - converts global coordinates to local coordinates
-"""
 
 """
 Recursively checks if the player can move to target space.
@@ -83,3 +79,11 @@ func _on_food_collect_food():
 func _on_food_ignore_food():
 	is_making_decision = false
 	print('Ignored morsel.  Morsel count: ' + str(stats.mor))
+
+func _on_area_2d_area_entered(area):
+	# TODO: Make this work for any Enemy name
+	var parent = area.get_parent()
+	print('attacking Enemy')
+	if parent and parent.name == "Enemy":
+		print('attacking Enemy')
+		parent.attacked_for(stats.atk)

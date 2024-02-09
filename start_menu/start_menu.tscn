@@ -2,7 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://dkushodgai21s" path="res://assets/background.png" id="1_cgg54"]
 [ext_resource type="Script" path="res://start_menu/start_menu.gd" id="1_ynbil"]
-[ext_resource type="AudioStream" path="res://Music/menu_music.ogg" id="3_g6p36"]
+
+
 
 [sub_resource type="SystemFont" id="SystemFont_r2mg2"]
 font_names = PackedStringArray("Castellar")
