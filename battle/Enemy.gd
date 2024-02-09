@@ -76,5 +76,5 @@ func update_visual_position(new_pos):
 	
 	# Gets the location of the Space node which lives in the path
 	# "/root/BattleScene/Spaces/SpaceN"
-	var space_n_node = battle_scene_node.get_node("Spaces/Space" + str(space_loc))
+	var space_n_node = battle_scene_node.get_node(space_path)
 	sprite.global_position = space_n_node.get_global_position()
