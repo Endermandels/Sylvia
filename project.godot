@@ -11,7 +11,6 @@ config_version=5
 [application]
 
 config/name="Sylvia"
-
 run/main_scene="res://start_menu/start_menu.tscn"
 config/features=PackedStringArray("4.2")
 config/icon="res://icon.svg"
@@ -27,7 +26,13 @@ window/size/height=1080
 window/size/test_width=1280
 window/size/test_height=720
 
-rendering]
+[layer_names]
+
+2d_physics/layer_1="Player"
+2d_physics/layer_2="Space"
+2d_physics/layer_3="Enemy"
+
+[rendering]
 
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="mobile"
