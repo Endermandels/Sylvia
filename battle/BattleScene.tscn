@@ -23,15 +23,6 @@ func _on_pressed():
 [node name="BattleScene" type="Node2D"]
 script = ExtResource("1_vb5nx")
 
-[node name="Background" type="Sprite2D" parent="."]
-texture = ExtResource("1")
-centered = false
-
-[node name="Grid" type="Sprite2D" parent="."]
-position = Vector2(400, 184)
-scale = Vector2(15.1034, 14.4762)
-texture = ExtResource("5")
-
 [node name="Spaces" type="Node2D" parent="."]
 
 [node name="Space" parent="Spaces" instance=ExtResource("2")]
@@ -242,6 +233,15 @@ position = Vector2(580.566, 300.119)
 collision_layer = 2
 collision_mask = 0
 grid_pos = [6, 4]
+
+[node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("1")
+centered = false
+
+[node name="Grid" type="Sprite2D" parent="."]
+position = Vector2(400, 184)
+scale = Vector2(15.1034, 14.4762)
+texture = ExtResource("5")
 
 [node name="Card" type="Sprite2D" parent="."]
 position = Vector2(49.1052, 295.368)

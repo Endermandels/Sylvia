@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=3 uid="uid://ciygfyllvwgoa"]
+
+[ext_resource type="Texture2D" uid="uid://c0lc0q4evr4jg" path="res://assets/background_brown.png" id="1_u7u2j"]
+[ext_resource type="Script" path="res://View Characters.gd" id="2_ceimb"]
+[ext_resource type="Script" path="res://View Decks.gd" id="3_7tmat"]
+
+[sub_resource type="GDScript" id="GDScript_8ndto"]
+script/source = "extends Button
+
+
+
+
+func _on_pressed():
+	get_tree().change_scene_to_file(\"res://start_menu/start_menu.tscn\")
+"
+
+[node name="Overworld" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(578, 326)
+texture = ExtResource("1_u7u2j")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+offset_left = 7.0
+offset_top = 14.0
+offset_right = 118.0
+offset_bottom = 94.0
+
+[node name="Quit to Menu" type="Button" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+text = "Quit to Menu"
+script = SubResource("GDScript_8ndto")
+
+[node name="View Characters" type="Button" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+text = "View Characters"
+script = ExtResource("2_ceimb")
+
+[node name="View Decks" type="Button" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+text = "View Decks"
+script = ExtResource("3_7tmat")
+
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/Quit to Menu" to="CanvasLayer/VBoxContainer/Quit to Menu" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/View Characters" to="CanvasLayer/VBoxContainer/View Characters" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/View Decks" to="CanvasLayer/VBoxContainer/View Decks" method="_on_pressed"]
