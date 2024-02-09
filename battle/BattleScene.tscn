@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://srh7fu8uprij"]
+[gd_scene load_steps=14 format=3 uid="uid://srh7fu8uprij"]
 
 [ext_resource type="Texture2D" uid="uid://dkushodgai21s" path="res://assets/background.png" id="1"]
 [ext_resource type="Script" path="res://battle/BattleScene.gd" id="1_vb5nx"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://t32b4boxehdt" path="res://battle/Enemy.tscn" id="8_kyk1e"]
 [ext_resource type="PackedScene" uid="uid://deikkfb2ghqvw" path="res://battle/food.tscn" id="9_1n73l"]
 [ext_resource type="AudioStream" uid="uid://88wruo2jyoh8" path="res://Music/battle_music (surf).ogg" id="10_i4mvg"]
+[ext_resource type="PackedScene" uid="uid://dxqbt1cqviw66" path="res://card_ui/card_ui.tscn" id="11_23mjc"]
 
 [sub_resource type="GDScript" id="GDScript_76nkh"]
 script/source = "extends Button
@@ -20,6 +21,9 @@ script/source = "extends Button
 func _on_pressed():
 	get_tree().change_scene_to_file(\"res://start_menu/start_menu.tscn\")
 "
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u21m3"]
+size = Vector2(437, 304)
 
 [node name="BattleScene" type="Node2D"]
 script = ExtResource("1_vb5nx")
@@ -238,9 +242,10 @@ grid_pos = [6, 4]
 [node name="Background" type="Sprite2D" parent="."]
 texture = ExtResource("1")
 centered = false
+metadata/_edit_lock_ = true
 
 [node name="Grid" type="Sprite2D" parent="."]
-position = Vector2(400, 184)
+position = Vector2(399, 183)
 scale = Vector2(15.1034, 14.4762)
 texture = ExtResource("5")
 
@@ -255,12 +260,12 @@ scale = Vector2(0.220702, 0.276842)
 texture = ExtResource("3")
 
 [node name="Card3" type="Sprite2D" parent="."]
-position = Vector2(97.1052, 295.368)
+position = Vector2(92, 295)
 scale = Vector2(0.220702, 0.276842)
 texture = ExtResource("3")
 
 [node name="Card4" type="Sprite2D" parent="."]
-position = Vector2(121.105, 295.368)
+position = Vector2(123, 295)
 scale = Vector2(0.220702, 0.276842)
 texture = ExtResource("3")
 
@@ -292,6 +297,40 @@ position = Vector2(339, 182)
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_i4mvg")
 autoplay = true
+
+[node name="CardDropArea" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CardDropArea"]
+position = Vector2(398.5, 184)
+shape = SubResource("RectangleShape2D_u21m3")
+
+[node name="BattleUI" type="CanvasLayer" parent="."]
+
+[node name="Hand" type="HBoxContainer" parent="BattleUI"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 22.0
+offset_top = -84.0
+offset_right = 140.0
+offset_bottom = -54.0
+grow_vertical = 0
+
+[node name="Container" type="Container" parent="BattleUI/Hand"]
+layout_mode = 2
+
+[node name="CardUI" parent="BattleUI/Hand" instance=ExtResource("11_23mjc")]
+layout_mode = 2
+
+[node name="CardUI2" parent="BattleUI/Hand" instance=ExtResource("11_23mjc")]
+layout_mode = 2
+
+[node name="CardUI3" parent="BattleUI/Hand" instance=ExtResource("11_23mjc")]
+layout_mode = 2
+
+[node name="CardUI4" parent="BattleUI/Hand" instance=ExtResource("11_23mjc")]
+layout_mode = 2
 
 [connection signal="enemys_turn" from="." to="Characters/Enemy" method="_on_battle_scene_enemys_turn"]
 [connection signal="players_turn" from="." to="Characters/Player" method="_on_battle_scene_players_turn"]
