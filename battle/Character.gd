@@ -1,7 +1,10 @@
 extends Node2D
 
 @onready var sprite = $Sprite2D
+@onready var hitbox = $Area2D
 @onready var stats = $Stats
+
+var is_making_decision = false
 
 var grid_rows = 5
 var grid_cols = 7
@@ -13,17 +16,10 @@ VERY USEFUL INFORMATION BELOW:
 	to_local - converts global coordinates to local coordinates
 """
 
-func _ready():
-	pass
-
-func _input(event):
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-		# Left mouse button is pressed
-		var mouse_position = get_global_mouse_position()
-		if sprite.get_rect().has_point(to_local(mouse_position)):
-			# Player sprite is clicked
-			print("Player sprite clicked!")
-
+"""
+Recursively checks if the player can move to target space.
+NOTE: Alters mov stat.
+"""
 func move_to(start, target, moves_left, moved):
 	if moves_left == 0:
 		return false
@@ -60,10 +56,30 @@ func move_to(start, target, moves_left, moved):
 	
 	return false
 
+"""
+A Space is requesting to move the player to its position.
+Check if the move is valid, and then move player's sprite and hitbox.
+"""
 func _on_Space_move_player(new_position, new_grid_pos):
-	if move_to(grid_pos, new_grid_pos, stats.mov_left, 1):
+	if not is_making_decision and stats.can_perform_act() and \
+		move_to(grid_pos, new_grid_pos, stats.mov, 1):
+		print('Mov left: ' + str(stats.mov))
 		sprite.global_position = new_position
+		hitbox.global_position = new_position
 		grid_pos = new_grid_pos
 
 func _on_battle_scene_players_turn():
 	stats.reset()
+
+func _on_food_decision_collect_food():
+	is_making_decision = true
+	print('Decide whether to collect food.  Morsel count: ' + str(stats.mor))
+
+func _on_food_collect_food():
+	stats.collect_morsel(1)
+	is_making_decision = false
+	print('Collected morsel.  New morsel count: ' + str(stats.mor))
+
+func _on_food_ignore_food():
+	is_making_decision = false
+	print('Ignored morsel.  Morsel count: ' + str(stats.mor))
