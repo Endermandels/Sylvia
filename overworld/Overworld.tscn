@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://bp7rhwjkjjd4u"]
+
+[ext_resource type="Texture2D" uid="uid://c0lc0q4evr4jg" path="res://assets/background_brown.png" id="1_u7u2j"]
+
+[sub_resource type="GDScript" id="GDScript_8ndto"]
+script/source = "extends Button
+
+
+
+
+func _on_pressed():
+	get_tree().change_scene_to_file(\"res://start_menu/start_menu.tscn\")
+"
+
+[node name="Overworld" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(577, 325)
+texture = ExtResource("1_u7u2j")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Button" type="Button" parent="CanvasLayer"]
+offset_left = 16.0
+offset_top = 9.0
+offset_right = 89.0
+offset_bottom = 25.0
+text = "Quit to Menu"
+script = SubResource("GDScript_8ndto")
+
+[connection signal="pressed" from="CanvasLayer/Button" to="CanvasLayer/Button" method="_on_pressed"]
