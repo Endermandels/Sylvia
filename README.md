@@ -11,7 +11,7 @@ Sylvia is a strategic card-based fantasy roguelike which combines deckbuilding, 
     - Navigate to the cloned repository folder.
     - Select the 'project.godot' file and click 'Open'.
 4. **Run the Game:**
-  - The project will now be listed in the Godot project manager. Select it and, on the right side, click 'Run'.
+    - The project will now be listed in the Godot project manager. Select it and, on the right side, click 'Run'.
 
 ## How to Play 
 - You start with a character who is given certain attributes: *Move*, *Attack*, and *HP*. 
@@ -21,3 +21,6 @@ Sylvia is a strategic card-based fantasy roguelike which combines deckbuilding, 
 - Navigate your character to the top of the grid and let one turn pass in order to move on! No enemy can be on the top grid with you in order for you to move on. Either defeat the enemy or sneak past them.
 - Use your character's *Action/Item Cards* in battle! Your character needs food for manna in order to perform actions, so make sure to collect food.
 - When you are finished with your turn, click *The Horn* to indicate the end of your turn.
+
+## Credits
+Music in the background from https://www.FesliyanStudios.com
