@@ -26,12 +26,6 @@ window/size/height=1080
 window/size/test_width=1280
 window/size/test_height=720
 
-[layer_names]
-
-2d_physics/layer_1="Player"
-2d_physics/layer_2="Space"
-2d_physics/layer_3="Enemy"
-
 [input]
 
 left_mouse={
@@ -47,7 +41,9 @@ right_mouse={
 
 [layer_names]
 
+2d_physics/layer_1="Player"
 2d_physics/layer_2="card_drop_area"
+2d_physics/layer_3="Enemy"
 
 [rendering]
 
