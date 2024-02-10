@@ -53,4 +53,6 @@ text = "Return"
 stream = ExtResource("2_xes4o")
 autoplay = true
 
+[connection signal="toggled" from="MarginContainer/VBoxContainer/Large Text" to="." method="_on_large_text_toggled"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/Dyslexia-Friendly  Font" to="." method="_on_dyslexia_friendly__font_toggled"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/return" to="." method="_on_return_pressed"]
