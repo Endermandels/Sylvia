@@ -1,7 +1,8 @@
 extends Node2D
 
-var enemy_speed = 2
 @onready var sprite = $Sprite2D
+@onready var stats = $Stats
+@onready var hitbox = $Area2D
 
 var grid_rows = 5
 var grid_cols = 7
@@ -9,8 +10,13 @@ var enemy_pos = [3, 0]
 
 signal end_turn
 
+func attacked_for(damage):
+	print('Enemy attacked for ' + str(damage))
+	stats.receiveDMG(damage)
+	print('Enemy remaining HP ' + str(stats.hp))
+
 func _on_battle_scene_enemys_turn():
-	var possible_positions = generate_move_list(enemy_pos, enemy_speed)
+	var possible_positions = generate_move_list(enemy_pos, stats.mov)
 	print("All the possible positions for the enemy are: ")
 	print(possible_positions)
 	var new_position = possible_positions[randi() % len(possible_positions)]
@@ -78,3 +84,4 @@ func update_visual_position(new_pos):
 	# "/root/BattleScene/Spaces/SpaceN"
 	var space_n_node = battle_scene_node.get_node(space_path)
 	sprite.global_position = space_n_node.get_global_position()
+	hitbox.global_position = sprite.global_position
