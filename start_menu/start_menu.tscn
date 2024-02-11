@@ -108,6 +108,7 @@ layout_mode = 2
 stream = ExtResource("3_g6p36")
 autoplay = true
 
+[connection signal="ready" from="." to="." method="_on_ready"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

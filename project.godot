@@ -17,7 +17,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Settings="*res://start_menu/Settings.gd"
+Settings="*res://ui_theme/Settings.gd"
+ApplySettings="*res://ui_theme/apply_settings.gd"
 
 [display]
 

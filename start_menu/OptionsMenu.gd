@@ -7,8 +7,8 @@ func _on_ready():
 	get_theme().default_font_size = Settings.font_size
 	$MarginContainer/VBoxContainer/dyslexia.set_pressed_no_signal(Settings.dyslexia_toggle)
 	$MarginContainer/VBoxContainer/large_text.set_pressed_no_signal(Settings.large_toggle)
+	
 func _on_return_pressed():
-	#this is when the changes should be applied to the rest of the game
 	get_tree().change_scene_to_file('res://start_menu/start_menu.tscn')
 
 func _on_dyslexia_friendly__font_toggled(toggled_on):
