@@ -1,0 +1,12 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://dkexfnao3uaod"]
+
+[ext_resource type="FontFile" uid="uid://b2mvtvbkmci77" path="res://assets/Font/Montserrat-Regular.ttf" id="1_jqg4b"]
+[ext_resource type="FontFile" uid="uid://mdn03mrrb765" path="res://assets/Font/Metamorphous-Regular.ttf" id="2_jwwdc"]
+
+[resource]
+default_font = ExtResource("1_jqg4b")
+default_font_size = 20
+Button/font_sizes/font_size = 20
+Button/fonts/font = ExtResource("1_jqg4b")
+Label/font_sizes/font_size = 20
+Label/fonts/font = ExtResource("2_jwwdc")

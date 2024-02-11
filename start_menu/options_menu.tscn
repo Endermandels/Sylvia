@@ -37,11 +37,11 @@ grow_vertical = 2
 layout_mode = 2
 alignment = 1
 
-[node name="Large Text" type="CheckButton" parent="MarginContainer/VBoxContainer"]
+[node name="large_text" type="CheckButton" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Large Text"
 
-[node name="Dyslexia-Friendly  Font" type="CheckButton" parent="MarginContainer/VBoxContainer"]
+[node name="dyslexia" type="CheckButton" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Dyslexia-Friendly Font"
 
@@ -53,6 +53,7 @@ text = "Return"
 stream = ExtResource("2_xes4o")
 autoplay = true
 
-[connection signal="toggled" from="MarginContainer/VBoxContainer/Large Text" to="." method="_on_large_text_toggled"]
-[connection signal="toggled" from="MarginContainer/VBoxContainer/Dyslexia-Friendly  Font" to="." method="_on_dyslexia_friendly__font_toggled"]
+[connection signal="ready" from="." to="." method="_on_ready"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/large_text" to="." method="_on_large_text_toggled"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/dyslexia" to="." method="_on_dyslexia_friendly__font_toggled"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/return" to="." method="_on_return_pressed"]
