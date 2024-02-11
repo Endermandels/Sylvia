@@ -1,37 +1,37 @@
 extends Control
 
+#Apply saved settings values
 func _on_ready():
-	if Settings.theme != "default":
-		theme = load("res://ui_theme/dyslexia.tres")
-		$MarginContainer/VBoxContainer/dyslexia.set_pressed_no_signal(true)
-		set_theme(theme)
-	else:
-		theme = load("res://ui_theme/default.tres")
-		set_theme(theme)
-		
-	if Settings.font_size != null:
-		$MarginContainer/VBoxContainer/large_text.set_pressed_no_signal(true)
-		
+	theme = load(Settings.theme)
+	set_theme(theme)
+	get_theme().default_font_size = Settings.font_size
+	$MarginContainer/VBoxContainer/dyslexia.set_pressed_no_signal(Settings.dyslexia_toggle)
+	$MarginContainer/VBoxContainer/large_text.set_pressed_no_signal(Settings.large_toggle)
 func _on_return_pressed():
 	#this is when the changes should be applied to the rest of the game
 	get_tree().change_scene_to_file('res://start_menu/start_menu.tscn')
 
 func _on_dyslexia_friendly__font_toggled(toggled_on):
+	var theme_path
 	if(toggled_on == true):
-		theme = load("res://ui_theme/dyslexia.tres")
-		set_theme(theme)
-		Settings.theme = "dyslexia"
+		theme_path = "res://ui_theme/dyslexia.tres"
+		Settings.dyslexia_toggle = true
 	else:
-		theme = load("res://ui_theme/default.tres")
-		set_theme(theme)
-		Settings.theme = "default"
-		
+		theme_path = "res://ui_theme/default.tres"
+		Settings.dyslexia_toggle = false
+	theme = load(theme_path)
+	Settings.theme = theme_path
+	set_theme(theme)
+	get_theme().default_font_size = Settings.font_size
+	
 func _on_large_text_toggled(toggled_on):
 	if(toggled_on == true):
-		Settings.font_size = 80
-		print("Large text on")
+		get_theme().default_font_size = 35
+		Settings.font_size = 35
+		Settings.large_toggle = true
 	else:
-		Settings.font_size = null
-		print("default text size")
+		Settings.font_size = 20
+		get_theme().default_font_size = 20
+		Settings.large_toggle = false
 
 
