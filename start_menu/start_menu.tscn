@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dkushodgai21s" path="res://assets/background.png" id="1_cgg54"]
 [ext_resource type="Script" path="res://start_menu/start_menu.gd" id="1_ynbil"]
-[ext_resource type="FontFile" uid="uid://mdn03mrrb765" path="res://assets/Font/Metamorphous-Regular.ttf" id="3_1piai"]
+[ext_resource type="FontFile" uid="uid://mdn03mrrb765" path="res://ui_theme/Font/Metamorphous-Regular.ttf" id="3_1piai"]
 [ext_resource type="AudioStream" uid="uid://bkxkg2r02rl40" path="res://Music/menu_music.ogg" id="3_g6p36"]
 
 [node name="Main_menu" type="Control"]
@@ -110,6 +110,7 @@ autoplay = true
 
 [node name="Options_Menu" type="PopupPanel" parent="."]
 size = Vector2i(648, 368)
+visible = true
 always_on_top = true
 
 [node name="TextureRect" type="TextureRect" parent="Options_Menu"]

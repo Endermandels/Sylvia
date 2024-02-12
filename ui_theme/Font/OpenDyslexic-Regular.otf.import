@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://mdn03mrrb765"
-path="res://.godot/imported/Metamorphous-Regular.ttf-88f58045181dfdd9dc88348362113734.fontdata"
+uid="uid://d211d3vrg5jvw"
+path="res://.godot/imported/OpenDyslexic-Regular.otf-954012bc8f20273b9e8c54e5e2f36354.fontdata"
 
 [deps]
 
-source_file="res://assets/Font/Metamorphous-Regular.ttf"
-dest_files=["res://.godot/imported/Metamorphous-Regular.ttf-88f58045181dfdd9dc88348362113734.fontdata"]
+source_file="res://ui_theme/Font/OpenDyslexic-Regular.otf"
+dest_files=["res://.godot/imported/OpenDyslexic-Regular.otf-954012bc8f20273b9e8c54e5e2f36354.fontdata"]
 
 [params]
 

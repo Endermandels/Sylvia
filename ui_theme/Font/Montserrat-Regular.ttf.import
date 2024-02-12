@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://d211d3vrg5jvw"
-path="res://.godot/imported/OpenDyslexic-Regular.otf-71ff37ee198a9d79aba2afce64751303.fontdata"
+uid="uid://b2mvtvbkmci77"
+path="res://.godot/imported/Montserrat-Regular.ttf-77715196fe0e17d70405d9155cb53672.fontdata"
 
 [deps]
 
-source_file="res://assets/Font/OpenDyslexic-Regular.otf"
-dest_files=["res://.godot/imported/OpenDyslexic-Regular.otf-71ff37ee198a9d79aba2afce64751303.fontdata"]
+source_file="res://ui_theme/Font/Montserrat-Regular.ttf"
+dest_files=["res://.godot/imported/Montserrat-Regular.ttf-77715196fe0e17d70405d9155cb53672.fontdata"]
 
 [params]
 

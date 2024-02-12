@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=20 format=3 uid="uid://68v05ijpuewx"]
 
-[ext_resource type="FontFile" uid="uid://d211d3vrg5jvw" path="res://assets/Font/OpenDyslexic-Regular.otf" id="1_dtit4"]
+[ext_resource type="FontFile" uid="uid://d211d3vrg5jvw" path="res://ui_theme/Font/OpenDyslexic-Regular.otf" id="1_dtit4"]
 
 [sub_resource type="Image" id="Image_oy60s"]
 data = {
