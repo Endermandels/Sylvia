@@ -1,13 +1,13 @@
 extends Control
 
-#Apply saved settings values
+#Apply current theme settings to root
 func _on_ready():
 	theme = load(Settings.theme)
 	set_theme(theme)
 	get_theme().default_font_size = Settings.font_size
-	$Options_Menu/MarginContainer/VBoxContainer/large_text.set_pressed_no_signal(Settings.large_toggle)
-	$Options_Menu/MarginContainer/VBoxContainer/dyslexia.set_pressed_no_signal(Settings.dyslexia_toggle)
-	
+	%large_text.set_pressed_no_signal(Settings.large_toggle)
+	%dyslexia.set_pressed_no_signal(Settings.dyslexia_toggle)
+
 func _on_start_pressed():
 	get_tree().change_scene_to_file("res://battle/BattleScene.tscn")
 
@@ -18,7 +18,7 @@ func _on_options_pressed():
 	$Options_Menu.show()
 
 func _on_return_pressed():
-	#apply changes
+	#apply changes here
 	$Options_Menu.hide()
 
 func _on_large_text_toggled(toggled_on):
@@ -44,3 +44,10 @@ func _on_dyslexia_toggled(toggled_on):
 	theme = load(theme_path)
 	set_theme(theme)
 	get_theme().default_font_size = Settings.font_size
+
+func _on_tab_bar_tab_button_pressed(tab):
+	if tab == 0:
+		$Options_Menu/Text_Menu.show()
+	elif tab == 1:
+		$Options_Menu/Text_Menu.hide()
+		
