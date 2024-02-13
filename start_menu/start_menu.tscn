@@ -3,10 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://dkushodgai21s" path="res://assets/background.png" id="1_cgg54"]
 [ext_resource type="Script" path="res://start_menu/start_menu.gd" id="1_ynbil"]
 
-[ext_resource type="AudioStream" uid="uid://bkxkg2r02rl40" path="res://Music/menu_music.ogg" id="3_g6p36"]
+[ext_resource type="FontFile" uid="uid://mdn03mrrb765" path="res://assets/Font/Metamorphous-Regular.ttf" id="3_1piai"]
 
-[sub_resource type="SystemFont" id="SystemFont_r2mg2"]
-font_names = PackedStringArray("Castellar")
+[ext_resource type="AudioStream" uid="uid://bkxkg2r02rl40" path="res://Music/menu_music.ogg" id="3_g6p36"]
 
 [node name="Main_menu" type="Control"]
 layout_mode = 3
@@ -40,23 +39,33 @@ theme_override_constants/margin_bottom = 12
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 30
+theme_override_constants/separation = 3
 
 [node name="Seperator" type="Control" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.580392, 1, 0.835294, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 6
-theme_override_constants/shadow_outline_size = 10
-theme_override_fonts/font = SubResource("SystemFont_r2mg2")
+theme_override_fonts/font = ExtResource("3_1piai")
 theme_override_font_sizes/font_size = 44
-text = "Sylvia Battle Demo"
+text = "Sylvia"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Seperator2" type="Control" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_1piai")
+theme_override_font_sizes/font_size = 24
+text = "B a t t l e  D e m o "
+horizontal_alignment = 1
+justification_flags = 2
+uppercase = true
+
+[node name="Seperator3" type="Control" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
@@ -64,11 +73,8 @@ alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 18
-alignment = 1
-
-[node name="Seperator2" type="Control" parent="MarginContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 2
 
 [node name="Start" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 clip_contents = true
@@ -76,6 +82,16 @@ custom_minimum_size = Vector2(40, 10)
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Start"
+
+[node name="Seperator4" type="Control" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Options" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(40, 10)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Options"
 
 [node name="Seperator3" type="Control" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -87,9 +103,13 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Exit"
 
+[node name="Seperator2" type="Control" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_g6p36")
 autoplay = true
 
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
