@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://mdn03mrrb765"
-path="res://.godot/imported/Metamorphous-Regular.ttf-c8ac257e82e72558d6969e0aa516144e.fontdata"
+uid="uid://vkbcwysqi60p"
+path="res://.godot/imported/Montserrat-VariableFont_wght.ttf-3df17635aecfd61464b94ccbd80d48b3.fontdata"
 
 [deps]
 
-source_file="res://ui_theme/Font/Metamorphous-Regular.ttf"
-dest_files=["res://.godot/imported/Metamorphous-Regular.ttf-c8ac257e82e72558d6969e0aa516144e.fontdata"]
+source_file="res://assets/Font/Montserrat-VariableFont_wght.ttf"
+dest_files=["res://.godot/imported/Montserrat-VariableFont_wght.ttf-3df17635aecfd61464b94ccbd80d48b3.fontdata"]
 
 [params]
 
@@ -27,7 +27,12 @@ Fallbacks=null
 fallbacks=[]
 Compress=null
 compress=true
-preload=[]
+preload=[{
+"chars": [],
+"glyphs": [],
+"name": "New Configuration",
+"size": Vector2i(16, 0)
+}]
 language_support={}
 script_support={}
 opentype_features={}
