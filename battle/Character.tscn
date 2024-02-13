@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://beaxj4qxkqcsh" path="res://assets/character.png" id="1"]
 [ext_resource type="Script" path="res://battle/Character.gd" id="2"]
-[ext_resource type="PackedScene" uid="uid://cxofnj810alwn" path="res://battle/Stats.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://thokds7o172e" path="res://battle/Stats.tscn" id="3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dfh8g"]
 radius = 16.0
