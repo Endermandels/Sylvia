@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://t32b4boxehdt"]
 
 [ext_resource type="Script" path="res://battle/Enemy.gd" id="1_0foq6"]
-[ext_resource type="Texture2D" uid="uid://diabusi8j80nn" path="res://assets/enemy.png" id="2_olglr"]
-[ext_resource type="PackedScene" uid="uid://thokds7o172e" path="res://battle/Stats.tscn" id="3_xep2x"]
+[ext_resource type="Texture2D" uid="uid://cw3knxt30ej07" path="res://assets/enemy.png" id="2_olglr"]
+[ext_resource type="PackedScene" uid="uid://cxofnj810alwn" path="res://battle/Stats.tscn" id="3_xep2x"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vkj6t"]
 radius = 16.0
