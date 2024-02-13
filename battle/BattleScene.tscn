@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://srh7fu8uprij"]
+[gd_scene load_steps=15 format=3 uid="uid://srh7fu8uprij"]
 
 [ext_resource type="Texture2D" uid="uid://dkushodgai21s" path="res://assets/background.png" id="1"]
 [ext_resource type="Script" path="res://battle/BattleScene.gd" id="1_vb5nx"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cifdlrxp33p1u" path="res://assets/grid.png" id="5"]
 [ext_resource type="PackedScene" uid="uid://bub37ipigql3v" path="res://battle/Character.tscn" id="7"]
 [ext_resource type="PackedScene" uid="uid://d2x4fgnxceh5u" path="res://battle/end_of_turn.tscn" id="7_np6ef"]
+[ext_resource type="Script" path="res://battle/Control.gd" id="7_w84vo"]
 [ext_resource type="PackedScene" uid="uid://t32b4boxehdt" path="res://battle/Enemy.tscn" id="8_kyk1e"]
 [ext_resource type="PackedScene" uid="uid://deikkfb2ghqvw" path="res://battle/food.tscn" id="9_1n73l"]
 [ext_resource type="AudioStream" uid="uid://88wruo2jyoh8" path="res://Music/battle_music (surf).ogg" id="10_i4mvg"]
@@ -259,11 +260,18 @@ position = Vector2(399, 68)
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="Button" type="Button" parent="UI"]
+[node name="Control" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("7_w84vo")
+
+[node name="Button" type="Button" parent="UI/Control"]
 offset_left = 16.0
 offset_top = 9.0
-offset_right = 127.0
-offset_bottom = 40.0
+offset_right = 157.0
+offset_bottom = 43.0
 text = "Quit to Menu"
 script = SubResource("GDScript_76nkh")
 metadata/_edit_use_anchors_ = true
@@ -351,7 +359,8 @@ layout_mode = 2
 [connection signal="move_player" from="Spaces/Space33" to="Characters/Player" method="_on_Space_move_player"]
 [connection signal="move_player" from="Spaces/Space34" to="Characters/Player" method="_on_Space_move_player"]
 [connection signal="end_turn" from="Characters/Enemy" to="." method="_on_enemy_end_turn"]
-[connection signal="pressed" from="UI/Button" to="UI/Button" method="_on_pressed"]
+[connection signal="ready" from="UI/Control" to="UI/Control" method="_on_ready"]
+[connection signal="pressed" from="UI/Control/Button" to="UI/Control/Button" method="_on_pressed"]
 [connection signal="end_turn" from="EndOfTurn" to="." method="_on_end_of_turn_end_turn"]
 [connection signal="collect_food" from="Food" to="Characters/Player" method="_on_food_collect_food"]
 [connection signal="decision_collect_food" from="Food" to="Characters/Player" method="_on_food_decision_collect_food"]
