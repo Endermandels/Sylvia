@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://ciygfyllvwgoa"]
 
 [ext_resource type="Texture2D" uid="uid://c0lc0q4evr4jg" path="res://assets/background_brown.png" id="1_u7u2j"]
-[ext_resource type="Script" path="res://View Characters.gd" id="2_53q78"]
-[ext_resource type="Script" path="res://View Decks.gd" id="3_6c3lq"]
+[ext_resource type="Script" path="res://overworld/View Characters.gd" id="2_53q78"]
+[ext_resource type="Script" path="res://overworld/View Decks.gd" id="3_6c3lq"]
 [ext_resource type="PackedScene" uid="uid://cutxjovwrqa24" path="res://overworld/map_space.tscn" id="4_tca60"]
 [ext_resource type="Texture2D" uid="uid://bv644lx4cgdho" path="res://assets/map_player.png" id="5_08g2d"]
 [ext_resource type="Texture2D" uid="uid://48hkerx52bn" path="res://assets/map_enemy.png" id="6_fybd1"]
