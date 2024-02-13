@@ -1,10 +1,14 @@
+"""
+The Character handles:
+	- Updating and remembering position
+	- Updating and remembering stats
+	- Collisions
+"""
+
 extends Node2D
 
 @onready var sprite = $Sprite2D
-@onready var hitbox = $Area2D
 @onready var stats = $Stats
-
-var is_making_decision = false
 
 var grid_rows = 5
 var grid_cols = 7
@@ -55,35 +59,27 @@ func move_to(start, target, moves_left, moved):
 """
 A Space is requesting to move the player to its position.
 Check if the move is valid, and then move player's sprite and hitbox.
+Returns success (true) or failure (false).
 """
-func _on_Space_move_player(new_position, new_grid_pos):
-	if not is_making_decision and stats.can_perform_act() and \
-		move_to(grid_pos, new_grid_pos, stats.mov, 1):
+func move_char(new_position, new_grid_pos):
+	if move_to(grid_pos, new_grid_pos, stats.mov, 1):
 		print('Mov left: ' + str(stats.mov))
 		sprite.global_position = new_position
-		hitbox.global_position = new_position
 		grid_pos = new_grid_pos
+		return true
+	return false
 
-func _on_battle_scene_players_turn():
+func reset_stats():
 	stats.reset()
 
-func _on_food_decision_collect_food():
-	is_making_decision = true
-	print('Decide whether to collect food.  Morsel count: ' + str(stats.mor))
-
-func _on_food_collect_food():
+func collect_food():
 	stats.collect_morsel(1)
-	is_making_decision = false
-	print('Collected morsel.  New morsel count: ' + str(stats.mor))
 
-func _on_food_ignore_food():
-	is_making_decision = false
-	print('Ignored morsel.  Morsel count: ' + str(stats.mor))
+func use_action():
+	stats.use_action()
 
-func _on_area_2d_area_entered(area):
-	# TODO: Make this work for any Enemy name
-	var parent = area.get_parent()
-	print('attacking Enemy')
-	if parent and parent.name == "Enemy":
-		print('attacking Enemy')
-		parent.attacked_for(stats.atk)
+func can_collect_food():
+	return stats.can_collect_morsel()
+
+func can_act():
+	return stats.can_perform_act()
