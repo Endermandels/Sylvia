@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://cki5carrlqcf3"]
+[gd_scene load_steps=4 format=3 uid="uid://606pn3omxx3r"]
 
 [ext_resource type="Script" path="res://start_menu/OptionsMenu.gd" id="1_b4ugi"]
 [ext_resource type="AudioStream" uid="uid://bkxkg2r02rl40" path="res://Music/menu_music.ogg" id="2_xes4o"]

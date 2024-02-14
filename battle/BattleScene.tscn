@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dkushodgai21s" path="res://assets/background.png" id="1"]
 [ext_resource type="Script" path="res://battle/BattleScene.gd" id="1_vb5nx"]
-[ext_resource type="PackedScene" uid="uid://cuiudykokmmoj" path="res://battle/Space.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://exjc5ylsqgyj" path="res://battle/Space.tscn" id="2"]
 [ext_resource type="Texture2D" uid="uid://cifdlrxp33p1u" path="res://assets/grid.png" id="5"]
 [ext_resource type="PackedScene" uid="uid://bub37ipigql3v" path="res://battle/Character.tscn" id="7"]
 [ext_resource type="PackedScene" uid="uid://d2x4fgnxceh5u" path="res://battle/end_of_turn.tscn" id="7_np6ef"]
