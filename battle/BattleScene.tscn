@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dkushodgai21s" path="res://assets/background.png" id="1"]
 [ext_resource type="Script" path="res://battle/BattleScene.gd" id="1_vb5nx"]
-[ext_resource type="PackedScene" path="res://battle/Space.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://exjc5ylsqgyj" path="res://battle/Space.tscn" id="2"]
 [ext_resource type="Texture2D" uid="uid://cifdlrxp33p1u" path="res://assets/grid.png" id="5"]
 [ext_resource type="PackedScene" uid="uid://bub37ipigql3v" path="res://battle/Character.tscn" id="7"]
 [ext_resource type="PackedScene" uid="uid://d2x4fgnxceh5u" path="res://battle/end_of_turn.tscn" id="7_np6ef"]
@@ -28,6 +28,16 @@ size = Vector2(437, 304)
 
 [node name="BattleScene" type="Node2D"]
 script = ExtResource("1_vb5nx")
+
+[node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("1")
+centered = false
+metadata/_edit_lock_ = true
+
+[node name="Grid" type="Sprite2D" parent="."]
+position = Vector2(399, 183)
+scale = Vector2(15.1034, 14.4762)
+texture = ExtResource("5")
 
 [node name="Spaces" type="Node2D" parent="."]
 
@@ -240,23 +250,15 @@ collision_layer = 2
 collision_mask = 0
 grid_pos = [6, 4]
 
-[node name="Background" type="Sprite2D" parent="."]
-texture = ExtResource("1")
-centered = false
-metadata/_edit_lock_ = true
+[node name="Enemies" type="Node2D" parent="."]
 
-[node name="Grid" type="Sprite2D" parent="."]
-position = Vector2(399, 183)
-scale = Vector2(15.1034, 14.4762)
-texture = ExtResource("5")
+[node name="Jerry" parent="Enemies" instance=ExtResource("8_kyk1e")]
+position = Vector2(399, 68)
 
 [node name="Characters" type="Node2D" parent="."]
 
-[node name="Player" parent="Characters" instance=ExtResource("7")]
+[node name="Clover" parent="Characters" instance=ExtResource("7")]
 position = Vector2(400, 296)
-
-[node name="Enemy" parent="Characters" instance=ExtResource("8_kyk1e")]
-position = Vector2(399, 68)
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -268,6 +270,7 @@ offset_bottom = 40.0
 script = ExtResource("7_w84vo")
 
 [node name="Button" type="Button" parent="UI/Control"]
+layout_mode = 0
 offset_left = 16.0
 offset_top = 9.0
 offset_right = 157.0
@@ -279,7 +282,9 @@ metadata/_edit_use_anchors_ = true
 [node name="EndOfTurn" parent="." instance=ExtResource("7_np6ef")]
 position = Vector2(90, 152)
 
-[node name="Food" parent="." instance=ExtResource("9_1n73l")]
+[node name="FoodSpaces" type="Node2D" parent="."]
+
+[node name="Food" parent="FoodSpaces" instance=ExtResource("9_1n73l")]
 position = Vector2(339, 182)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
@@ -321,47 +326,24 @@ layout_mode = 2
 [node name="CardUI4" parent="BattleUI/Hand" instance=ExtResource("11_23mjc")]
 layout_mode = 2
 
-[connection signal="enemys_turn" from="." to="Characters/Enemy" method="_on_battle_scene_enemys_turn"]
-[connection signal="players_turn" from="." to="Characters/Player" method="_on_battle_scene_players_turn"]
-[connection signal="move_player" from="Spaces/Space0" to="Characters/Player" method="_on_Space_move_player"]
-[connection signal="move_player" from="Spaces/Space1" to="Characters/Player" method="_on_Space_move_player"]
-[connection signal="move_player" from="Spaces/Space2" to="Characters/Player" method="_on_Space_move_player"]
-[connection signal="move_player" from="Spaces/Space3" to="Characters/Player" method="_on_Space_move_player"]
-[connection signal="move_player" from="Spaces/Space4" to="Characters/Player" method="_on_Space_move_player"]
-[connection signal="move_player" from="Spaces/Space5" to="Characters/Player" method="_on_Space_move_player"]
-[connection signal="move_player" from="Spaces/Space6" to="Characters/Player" method="_on_Space_move_player"]
-[connection signal="move_player" from="Spaces/Space7" to="Characters/Player" method="_on_Space_move_player"]
-[connection signal="move_player" from="Spaces/Space8" to="Characters/Player" method="_on_Space_move_player"]
-[connection signal="move_player" from="Spaces/Space9" to="Characters/Player" method="_on_Space_move_player"]
-[connection signal="move_player" from="Spaces/Space10" to="Characters/Player" method="_on_Space_move_player"]
-[connection signal="move_player" from="Spaces/Space11" to="Characters/Player" method="_on_Space_move_player"]
-[connection signal="move_player" from="Spaces/Space12" to="Characters/Player" method="_on_Space_move_player"]
-[connection signal="move_player" from="Spaces/Space13" to="Characters/Player" method="_on_Space_move_player"]
-[connection signal="move_player" from="Spaces/Space14" to="Characters/Player" method="_on_Space_move_player"]
-[connection signal="move_player" from="Spaces/Space15" to="Characters/Player" method="_on_Space_move_player"]
-[connection signal="move_player" from="Spaces/Space16" to="Characters/Player" method="_on_Space_move_player"]
-[connection signal="move_player" from="Spaces/Space17" to="Characters/Player" method="_on_Space_move_player"]
-[connection signal="move_player" from="Spaces/Space18" to="Characters/Player" method="_on_Space_move_player"]
-[connection signal="move_player" from="Spaces/Space19" to="Characters/Player" method="_on_Space_move_player"]
-[connection signal="move_player" from="Spaces/Space20" to="Characters/Player" method="_on_Space_move_player"]
-[connection signal="move_player" from="Spaces/Space21" to="Characters/Player" method="_on_Space_move_player"]
-[connection signal="move_player" from="Spaces/Space22" to="Characters/Player" method="_on_Space_move_player"]
-[connection signal="move_player" from="Spaces/Space23" to="Characters/Player" method="_on_Space_move_player"]
-[connection signal="move_player" from="Spaces/Space24" to="Characters/Player" method="_on_Space_move_player"]
-[connection signal="move_player" from="Spaces/Space25" to="Characters/Player" method="_on_Space_move_player"]
-[connection signal="move_player" from="Spaces/Space26" to="Characters/Player" method="_on_Space_move_player"]
-[connection signal="move_player" from="Spaces/Space27" to="Characters/Player" method="_on_Space_move_player"]
-[connection signal="move_player" from="Spaces/Space28" to="Characters/Player" method="_on_Space_move_player"]
-[connection signal="move_player" from="Spaces/Space29" to="Characters/Player" method="_on_Space_move_player"]
-[connection signal="move_player" from="Spaces/Space30" to="Characters/Player" method="_on_Space_move_player"]
-[connection signal="move_player" from="Spaces/Space31" to="Characters/Player" method="_on_Space_move_player"]
-[connection signal="move_player" from="Spaces/Space32" to="Characters/Player" method="_on_Space_move_player"]
-[connection signal="move_player" from="Spaces/Space33" to="Characters/Player" method="_on_Space_move_player"]
-[connection signal="move_player" from="Spaces/Space34" to="Characters/Player" method="_on_Space_move_player"]
-[connection signal="end_turn" from="Characters/Enemy" to="." method="_on_enemy_end_turn"]
+[node name="CollectFoodButton" type="Button" parent="."]
+offset_left = 23.0
+offset_top = 210.0
+offset_right = 156.0
+offset_bottom = 244.0
+text = "Collect Food"
+
+[node name="FinishMovementButton" type="Button" parent="."]
+offset_left = 5.0
+offset_top = 316.0
+offset_right = 188.0
+offset_bottom = 350.0
+text = "Finish Movement"
+
+[connection signal="enemys_turn" from="." to="Enemies/Jerry" method="_on_battle_scene_enemys_turn"]
+[connection signal="end_turn" from="Enemies/Jerry" to="." method="_on_enemy_end_turn"]
 [connection signal="ready" from="UI/Control" to="UI/Control" method="_on_ready"]
 [connection signal="pressed" from="UI/Control/Button" to="UI/Control/Button" method="_on_pressed"]
 [connection signal="end_turn" from="EndOfTurn" to="." method="_on_end_of_turn_end_turn"]
-[connection signal="collect_food" from="Food" to="Characters/Player" method="_on_food_collect_food"]
-[connection signal="decision_collect_food" from="Food" to="Characters/Player" method="_on_food_decision_collect_food"]
-[connection signal="ignore_food" from="Food" to="Characters/Player" method="_on_food_ignore_food"]
+[connection signal="pressed" from="CollectFoodButton" to="." method="_on_collect_food_button_pressed"]
+[connection signal="pressed" from="FinishMovementButton" to="." method="_on_finish_movement_button_pressed"]
