@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bp7rhwjkjjd4u"]
+[gd_scene load_steps=5 format=3 uid="uid://ciygfyllvwgoa"]
 
 [ext_resource type="Texture2D" uid="uid://c0lc0q4evr4jg" path="res://assets/background_brown.png" id="1_u7u2j"]
+[ext_resource type="Script" path="res://overworld/View Characters.gd" id="2_pkrh1"]
+[ext_resource type="Script" path="res://overworld/View Decks.gd" id="3_x04dj"]
 
 [sub_resource type="GDScript" id="GDScript_8ndto"]
 script/source = "extends Button
@@ -15,17 +17,32 @@ func _on_pressed():
 [node name="Overworld" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(577, 325)
+position = Vector2(578, 326)
 texture = ExtResource("1_u7u2j")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Button" type="Button" parent="CanvasLayer"]
-offset_left = 16.0
-offset_top = 9.0
-offset_right = 89.0
-offset_bottom = 25.0
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+offset_left = 7.0
+offset_top = 14.0
+offset_right = 118.0
+offset_bottom = 94.0
+
+[node name="Quit to Menu" type="Button" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
 text = "Quit to Menu"
 script = SubResource("GDScript_8ndto")
 
-[connection signal="pressed" from="CanvasLayer/Button" to="CanvasLayer/Button" method="_on_pressed"]
+[node name="View Characters" type="Button" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+text = "View Characters"
+script = ExtResource("2_pkrh1")
+
+[node name="View Decks" type="Button" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+text = "View Decks"
+script = ExtResource("3_x04dj")
+
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/Quit to Menu" to="CanvasLayer/VBoxContainer/Quit to Menu" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/View Characters" to="CanvasLayer/VBoxContainer/View Characters" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/View Decks" to="CanvasLayer/VBoxContainer/View Decks" method="_on_pressed"]
