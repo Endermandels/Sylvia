@@ -1,14 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://deikkfb2ghqvw"]
+[gd_scene load_steps=3 format=3 uid="uid://deikkfb2ghqvw"]
 
 [ext_resource type="Texture2D" uid="uid://ci27jwlgn78tc" path="res://assets/apple.png" id="1_23re6"]
 [ext_resource type="Script" path="res://battle/food.gd" id="1_iogj3"]
-[ext_resource type="Texture2D" uid="uid://bo2ouxwab7gjl" path="res://assets/check.png" id="3_j3qht"]
-[ext_resource type="Texture2D" uid="uid://bo8xs1f50h6d0" path="res://assets/ex.png" id="4_xnqu2"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_xp1f7"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_qi8id"]
-radius = 16.0
 
 [node name="Food" type="Node2D"]
 script = ExtResource("1_iogj3")
@@ -17,31 +10,3 @@ script = ExtResource("1_iogj3")
 position = Vector2(-1.19209e-07, 2.38419e-07)
 scale = Vector2(3.19667, 2.83958)
 texture = ExtResource("1_23re6")
-
-[node name="Collect" type="Sprite2D" parent="."]
-position = Vector2(-27, -32)
-texture = ExtResource("3_j3qht")
-
-[node name="CollectArea2D" type="Area2D" parent="Collect"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Collect/CollectArea2D"]
-shape = SubResource("CircleShape2D_xp1f7")
-
-[node name="Ignore" type="Sprite2D" parent="."]
-position = Vector2(27, -32)
-texture = ExtResource("4_xnqu2")
-
-[node name="IgnoreArea2D" type="Area2D" parent="Ignore"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ignore/IgnoreArea2D"]
-shape = SubResource("CircleShape2D_xp1f7")
-
-[node name="Area2D" type="Area2D" parent="."]
-collision_layer = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_qi8id")
-
-[connection signal="input_event" from="Collect/CollectArea2D" to="." method="_on_collect_area_2d_input_event"]
-[connection signal="input_event" from="Ignore/IgnoreArea2D" to="." method="_on_ignore_area_2d_input_event"]
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

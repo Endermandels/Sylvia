@@ -17,27 +17,22 @@ var mor = 0
 func can_perform_act():
 	return act > 0
 
-func move(spaces):
-	if act > 0:
-		mov -= spaces
-		if mov == 0:
-			act -= 1
-		if mov < 0:
-			print('! Error: Moved too far')
-			get_tree().quit()
+func can_collect_morsel():
+	return mor < MOR
 
-func collect_morsel(amount):
-	if act > 0:
-		if mor < MOR:
-			mor = min(mor + amount, MOR)
-			act -= 1
-		else:
-			print('Cannot Exceed Maximum Morsel Count')
+func move(spaces):
+	mov -= spaces
 
 func receiveDMG(damage):
 	hp -= damage
 
+func use_action():
+	act -= 1
+
 func reset():
 	mov = MOV
-	mor = MOR
 	act = ACT
+
+func collect_morsel(amount):
+	mor = min(mor + amount, MOR)
+	print('Collected Morsel.  mor: ' + str(mor))
