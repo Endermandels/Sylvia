@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://mdn03mrrb765"
-path="res://.godot/imported/Metamorphous-Regular.ttf-88f58045181dfdd9dc88348362113734.fontdata"
+uid="uid://b2mvtvbkmci77"
+path="res://.godot/imported/Montserrat-Regular.ttf-77715196fe0e17d70405d9155cb53672.fontdata"
 
 [deps]
 
-source_file="res://assets/Font/Metamorphous-Regular.ttf"
-dest_files=["res://.godot/imported/Metamorphous-Regular.ttf-88f58045181dfdd9dc88348362113734.fontdata"]
+source_file="res://ui_theme/Font/Montserrat-Regular.ttf"
+dest_files=["res://.godot/imported/Montserrat-Regular.ttf-77715196fe0e17d70405d9155cb53672.fontdata"]
 
 [params]
 
