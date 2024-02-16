@@ -8,6 +8,8 @@ var grid_rows = 5
 var grid_cols = 7
 var enemy_pos = [3, 0]
 
+# Temporary solution to get player's coordinates.
+
 signal end_turn
 
 func attacked_for(damage):
@@ -16,13 +18,16 @@ func attacked_for(damage):
 	print('Enemy remaining HP ' + str(stats.enemy_hp))
 
 func _on_battle_scene_enemys_turn():
-	var possible_actions = [["generate_move_list", true, true]]
-	var action_list = generate_turn_list(possible_actions, enemy_pos,
+	var possible_actions = [["generate_move_list", true, true],
+	["generate_attack_list", true, false]]
+	var turn_list = generate_turn_list(possible_actions, enemy_pos,
 	stats.enemy_mov, stats.enemy_act)
 	print("All the actions for the enemy are: ")
-	print(action_list)
-	print()
-	var next_turn = action_list[randi() % len(action_list)]
+	for turn in turn_list:
+		print(turn)
+	var next_turn = turn_list[0]
+	# var next_turn = [["move", [[3, 1]]], ["attack", [2]]]
+	# var next_turn = [["move", [[3, 1]]]]
 	print("Next turn will be: ")
 	print(next_turn)
 	for action in next_turn:
@@ -31,13 +36,13 @@ func _on_battle_scene_enemys_turn():
 	emit_signal("end_turn")
 
 """
-Generates all the possible actions that a given animal can do for its turn
-turn. This function has 4 parameters.
+Generates all the possible actions that a given animal can do for its turn.
+This function has 4 parameters.
 
 The purpose of the first parameter is to indicate what the possible
 actions are for a given animal and to generate the possible outcomes for
 doing any given action. The first parameter is an array of arrays in which each
-sub-array contains three elements. 
+the sub-array(s) contains three elements. 
 The first element is the string of the function that generates all the possible 
 outcomes for performing a given action (ex. moving or attacking some animal). 
 The rest of the parameters are boolean values that indicate if you need to
@@ -59,7 +64,7 @@ parameters that they would need.
 """
 func generate_turn_list(possible_actions, pos, speed, num_actions):
 	if num_actions == 0: return
-	var action_list = []
+	var turn_list = []
 	var stats = [pos, speed]
 	for action in possible_actions:
 		var action_args = []
@@ -75,28 +80,32 @@ func generate_turn_list(possible_actions, pos, speed, num_actions):
 		# The second parameter is an array of argument(s) that need to be passed
 		# to the function defined by the first parameter.
 		var new_actions = callv(action[0], action_args)
-		for next_action in possible_actions:
+		if new_actions == null: continue
+		var next_possible_actions = possible_actions.duplicate(true)
+		next_possible_actions.remove_at(next_possible_actions.find(action))
+		if len(next_possible_actions) == 0: 
+			turn_list.append(new_actions)
+			continue
 			
-			# Can't do the same type of action multiple times in one turn so
-			# move on to the next possible action.
-			if next_action == action:
-				continue
+		for next_action in next_possible_actions:
 			var original_pos = pos
 			for possible_action in new_actions:
 				
-				# The move function is requires the animal to change position
+				# The move function requires the animal to change position
 				# which we need to consider for the following actions in a
 				# given turn.
 				if possible_action[0] == "move":
-					pos = possible_action
-				var possible_next_actions = generate_turn_list(possible_actions, 
-				enemy_pos, speed, num_actions - 1)
-				if possible_next_actions != null:
-					next_action.append(possible_next_actions)
-			pos = original_pos
+					pos = possible_action[1][0]
+					
+				var possible_next_actions = generate_turn_list(
+				next_possible_actions, pos, speed, num_actions - 1)
+				if possible_next_actions != []:
+					for new_action in possible_next_actions[0]:
+						turn_list += [[possible_action] + [new_action]]
+				pos = original_pos
 		for turn in new_actions:
-			action_list.append([turn])
-	return action_list
+			turn_list.append([turn])
+	return turn_list
 	
 """
 Start is an array with two elements. The first element is the x
@@ -110,6 +119,8 @@ The first element is the string "move" and the second element is a
 coordinate that the animal can move to which is the argument
 that would be passed when calling the move function.
 """
+# TODO: Make it so that an animal can not move to a space that is already
+# occupied.
 func generate_move_list(start, animal_speed : int):
 	var row : int = start[0]
 	var col : int = start[1]
@@ -137,7 +148,33 @@ func move(coordinates):
 	print("Moved to: ", enemy_pos)
 	print()
 	update_visual_position(enemy_pos)
+
+"""
+Currently determines if enemy can attack player and if true then return
+an array of two elements. The first element is the string "attack" which
+corresponds with the function attack and the second element is an array of
+the arguments needed for the function attack which is the amount of damage
+the attack will do.
+"""
+func generate_attack_list(pos):
+	# TODO: Make function generalizable for a board with more than
+	# two animals and for animals that are not the enemy.
 	
+	# Temporary way of getting player's position.
+	var clover_pos = get_parent().get_parent().get_node(
+		"Characters/Clover").grid_pos
+	for i in range(len(pos)):
+		# Attack range is currently one tile.
+		for j in [-1, 1]:
+			var attack_pos = pos.duplicate(false)
+			attack_pos[i] = pos[i] + j
+			if attack_pos == clover_pos:
+				return [["attack", [stats.enemy_atk]]]
+			
+func attack(damage):
+	print('Player attacked for ' + str(damage))
+	stats.receiveDMG(stats.enemy_atk)
+	print('Player remaining HP ' + str(stats.hp))
 """
 new_pos is an array with two elements. The first element is the x
 coordinate of the animal and the second element is the y coordinate.
