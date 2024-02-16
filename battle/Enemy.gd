@@ -24,8 +24,6 @@ func _on_battle_scene_enemys_turn():
 	for turn in turn_list:
 		print(turn)
 	var next_turn = turn_list[0]
-	# var next_turn = [["move", [[3, 1]]], ["attack", [2]]]
-	# var next_turn = [["move", [[3, 1]]]]
 	print("Next turn will be: ")
 	print(next_turn)
 	for action in next_turn:
