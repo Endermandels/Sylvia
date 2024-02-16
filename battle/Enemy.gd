@@ -8,8 +8,6 @@ var grid_rows = 5
 var grid_cols = 7
 var enemy_pos = [3, 0]
 
-# Temporary solution to get player's coordinates.
-
 signal end_turn
 
 func attacked_for(damage):
@@ -54,12 +52,12 @@ The second parameter is the position of the animal.
 
 The third parameter is the speed of the animal.
 
-The fourth parameter is the number of actions that animal can make in a given
-turn.
+The fourth parameter is the number of actions that an animal can make in a 
+given turn.
 
 This function returns an array of possible turns that the animal can make.
 Each turn is represented by an array that contains the function(s) names 
-necessary to actually perform the action(s) along with the necessary
+necessary to perform the action(s) along with the necessary
 parameters that they would need.
 """
 func generate_turn_list(possible_actions, pos, speed, num_actions):
@@ -170,7 +168,8 @@ func generate_attack_list(pos):
 			attack_pos[i] = pos[i] + j
 			if attack_pos == clover_pos:
 				return [["attack", [stats.enemy_atk]]]
-			
+
+# Attacks the player
 func attack(damage):
 	print('Player attacked for ' + str(damage))
 	stats.receiveDMG(stats.enemy_atk)
