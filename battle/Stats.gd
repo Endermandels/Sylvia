@@ -8,11 +8,18 @@ extends Node
 @export var MOR = 3 # maximum morsel count
 # Morsels are used for abilities and certain items.
 
+# Stats below are for the player.
 var hp = HP
 var atk = ATK
 var act = ACT
 var mov = MOV
 var mor = 0
+
+# Stats below are for the enemy.
+var enemy_hp = HP
+var enemy_atk = ATK
+var enemy_act = ACT
+var enemy_mov = MOV
 
 func can_perform_act():
 	return act > 0
