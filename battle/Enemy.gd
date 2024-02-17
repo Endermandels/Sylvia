@@ -4,22 +4,26 @@ extends Node2D
 @onready var stats = $Stats
 @onready var hitbox = $Area2D
 
+#temp way to get the player
+@onready var clover = get_parent().get_parent().get_node("Characters/Clover")
+
+
 var grid_rows = 5
 var grid_cols = 7
 var enemy_pos = [3, 0]
 
 signal end_turn
-
+	
 func attacked_for(damage):
 	print('Enemy attacked for ' + str(damage))
 	stats.receiveDMG(damage)
-	print('Enemy remaining HP ' + str(stats.enemy_hp))
+	print('Enemy remaining HP ' + str(stats.hp))
 
 func _on_battle_scene_enemys_turn():
 	var possible_actions = [["generate_move_list", true, true],
 	["generate_attack_list", true, false]]
 	var turn_list = generate_turn_list(possible_actions, enemy_pos,
-	stats.enemy_mov, stats.enemy_act)
+	stats.mov, stats.act)
 	print("All the actions for the enemy are: ")
 	for turn in turn_list:
 		print(turn)
@@ -157,21 +161,23 @@ func generate_attack_list(pos):
 	# two animals and for animals that are not the enemy.
 	
 	# Temporary way of getting player's position.
-	var clover_pos = get_parent().get_parent().get_node(
-		"Characters/Clover").grid_pos
+	var clover_pos = clover.grid_pos
 	for i in range(len(pos)):
 		# Attack range is currently one tile.
 		for j in [-1, 1]:
 			var attack_pos = pos.duplicate(false)
 			attack_pos[i] = pos[i] + j
 			if attack_pos == clover_pos:
-				return [["attack", [stats.enemy_atk]]]
+				
+				return [["attack", [stats.atk]]]
 
 # Attacks the player
 func attack(damage):
+	#temp way getting the characters stats
+	var clover_stats = clover.get_node("Stats")
 	print('Player attacked for ' + str(damage))
-	stats.receiveDMG(stats.enemy_atk)
-	print('Player remaining HP ' + str(stats.hp))
+	clover_stats.receiveDMG(stats.atk)
+	print('Player remaining HP ' + str(clover_stats.hp))
 """
 new_pos is an array with two elements. The first element is the x
 coordinate of the animal and the second element is the y coordinate.
