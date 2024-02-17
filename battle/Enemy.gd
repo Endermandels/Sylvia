@@ -27,7 +27,7 @@ func _on_battle_scene_enemys_turn():
 	print("All the actions for the enemy are: ")
 	for turn in turn_list:
 		print(turn)
-	var next_turn = turn_list[0]
+	var next_turn = turn_list[randi() % len(turn_list)]
 	print("Next turn will be: ")
 	print(next_turn)
 	for action in next_turn:
