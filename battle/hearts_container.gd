@@ -9,7 +9,7 @@ func _ready():
 
 func setHearts(num: int):
 	var current_hearts = get_child_count()
-	if num > current_hearts: # we have too many hearts, remove the excess
+	if num > current_hearts: # we need to add hearts
 		addHearts(num - current_hearts)
 	elif num < current_hearts: # we have too many hearts, remove the excess
 		removeHearts(current_hearts - num)
