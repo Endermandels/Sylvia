@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://coy0qnx785hfq"]
+
+[ext_resource type="Script" path="res://Audio Subsystem/AudioManager.gd" id="1_lbwbv"]
+[ext_resource type="Script" path="res://Audio Subsystem/MusicPlayer.gd" id="2_or6a0"]
+[ext_resource type="Script" path="res://Audio Subsystem/SFXPlayer.gd" id="3_uvf7d"]
+[ext_resource type="Script" path="res://Audio Subsystem/UIAudioPlayer.gd" id="4_sange"]
+
+[node name="AudioManager" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lbwbv")
+
+[node name="MusicPlayer" type="Node" parent="."]
+script = ExtResource("2_or6a0")
+
+[node name="SFXPlayer" type="Node" parent="."]
+script = ExtResource("3_uvf7d")
+
+[node name="UIAudioPlayer" type="Node" parent="."]
+script = ExtResource("4_sange")
