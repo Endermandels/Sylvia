@@ -12,14 +12,12 @@ var grid_rows = 5
 var grid_cols = 7
 var enemy_pos = [3, 0]
 
-
-
 signal end_turn
-
+	
 func attacked_for(damage):
 	print('Enemy attacked for ' + str(damage))
 	stats.receiveDMG(damage)
-	print('Enemy remaining HP ' + str(stats.enemy_hp))
+	print('Enemy remaining HP ' + str(stats.hp))
 
 func _on_battle_scene_enemys_turn():
 	var possible_actions = [["generate_move_list", true, true],
@@ -170,6 +168,7 @@ func generate_attack_list(pos):
 			var attack_pos = pos.duplicate(false)
 			attack_pos[i] = pos[i] + j
 			if attack_pos == clover_pos:
+				
 				return [["attack", [stats.atk]]]
 
 # Attacks the player

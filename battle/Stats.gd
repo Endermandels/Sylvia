@@ -1,5 +1,6 @@
 extends Node
 
+@onready var heartsContainer = $"../Sprite2D/heartsContainer"
 # Unit Stats
 @export var HP = 5
 @export var ATK = 2
@@ -31,7 +32,13 @@ func receiveDMG(damage):
 	
 #temporarily set hp back to max hp when player dies
 	if hp <= 0:
+		print("Player Died, resetting HP...")
 		hp = HP
+		
+	#update hearts container
+	heartsContainer.setHearts(hp)
+		
+	 
 
 func use_action():
 	act -= 1
