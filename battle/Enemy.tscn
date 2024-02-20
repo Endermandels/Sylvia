@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://t32b4boxehdt"]
+[gd_scene load_steps=6 format=3 uid="uid://t32b4boxehdt"]
 
 [ext_resource type="Script" path="res://battle/Enemy.gd" id="1_0foq6"]
 [ext_resource type="Texture2D" uid="uid://diabusi8j80nn" path="res://assets/enemy.png" id="2_olglr"]
+[ext_resource type="PackedScene" uid="uid://blul8swm87aem" path="res://battle/hearts_container.tscn" id="3_08k4c"]
 [ext_resource type="PackedScene" uid="uid://thokds7o172e" path="res://battle/Stats.tscn" id="3_xep2x"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vkj6t"]
@@ -17,7 +18,16 @@ texture = ExtResource("2_olglr")
 hframes = 4
 script = ExtResource("1_0foq6")
 
+[node name="heartsContainer" parent="Sprite2D" instance=ExtResource("3_08k4c")]
+offset_left = -49.2754
+offset_top = -17.971
+offset_right = 150.725
+offset_bottom = -0.971014
+scale = Vector2(0.5, 0.5)
+size_flags_vertical = 0
+
 [node name="Stats" parent="." instance=ExtResource("3_xep2x")]
+HP = 3
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 4

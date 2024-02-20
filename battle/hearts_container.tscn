@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://blul8swm87aem"]
+
+[ext_resource type="Script" path="res://battle/hearts_container.gd" id="1_x0vii"]
+
+[node name="heartsContainer" type="HBoxContainer"]
+offset_left = -28.0
+offset_top = -2.0
+offset_right = 28.0
+offset_bottom = 38.0
+size_flags_horizontal = 3
+theme_override_constants/separation = 1
+alignment = 1
+script = ExtResource("1_x0vii")

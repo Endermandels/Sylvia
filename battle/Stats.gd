@@ -1,5 +1,6 @@
 extends Node
 
+@onready var heartsContainer = $"../Sprite2D/heartsContainer"
 # Unit Stats
 @export var HP = 5
 @export var ATK = 2
@@ -8,11 +9,14 @@ extends Node
 @export var MOR = 3 # maximum morsel count
 # Morsels are used for abilities and certain items.
 
+
 var hp = HP
 var atk = ATK
 var act = ACT
 var mov = MOV
 var mor = 0
+
+
 
 func can_perform_act():
 	return act > 0
@@ -25,6 +29,16 @@ func move(spaces):
 
 func receiveDMG(damage):
 	hp -= damage
+	
+#temporarily set hp back to max hp when player dies
+	if hp <= 0:
+		print("Player Died, resetting HP...")
+		hp = HP
+		
+	#update hearts container
+	heartsContainer.setHearts(hp)
+		
+	 
 
 func use_action():
 	act -= 1
