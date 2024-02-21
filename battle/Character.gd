@@ -69,6 +69,11 @@ func move_char(new_position, new_grid_pos):
 		return true
 	return false
 
+func attack(enemy):
+	print(enemy.name + " attacked for " + str(stats.atk))
+	enemy.stats.receiveDMG(stats.atk)
+	print(enemy.name + " remaining HP " + str(enemy.stats.hp))
+
 func reset_stats():
 	stats.reset()
 
@@ -77,6 +82,9 @@ func collect_food():
 
 func use_action():
 	stats.use_action()
+
+func get_attack_range():
+	return stats.get_attack_range()
 
 func can_collect_food():
 	return stats.can_collect_morsel()
