@@ -269,7 +269,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("7_w84vo")
 
-[node name="Button" type="Button" parent="UI/Control"]
+[node name="Quit" type="Button" parent="UI/Control"]
 layout_mode = 0
 offset_left = 16.0
 offset_top = 9.0
@@ -343,7 +343,7 @@ text = "Finish Movement"
 [connection signal="enemys_turn" from="." to="Enemies/Jerry" method="_on_battle_scene_enemys_turn"]
 [connection signal="end_turn" from="Enemies/Jerry" to="." method="_on_enemy_end_turn"]
 [connection signal="ready" from="UI/Control" to="UI/Control" method="_on_ready"]
-[connection signal="pressed" from="UI/Control/Button" to="UI/Control/Button" method="_on_pressed"]
+[connection signal="pressed" from="UI/Control/Quit" to="UI/Control/Quit" method="_on_pressed"]
 [connection signal="end_turn" from="EndOfTurn" to="." method="_on_end_of_turn_end_turn"]
 [connection signal="pressed" from="CollectFoodButton" to="." method="_on_collect_food_button_pressed"]
 [connection signal="pressed" from="FinishMovementButton" to="." method="_on_finish_movement_button_pressed"]

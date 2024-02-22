@@ -45,6 +45,9 @@ func _ready():
 	set_process_input(true)
 	hide_nodes()
 	decide_turn_order()
+	if Settings.keyboard_toggle:
+		$UI/Control/Quit.grab_focus()
+		
 
 func hide_nodes():
 	collect_food_button.visible = false
