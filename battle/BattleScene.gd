@@ -17,11 +17,13 @@ enum State {
 	ENEMY_TURN
 }
 
-@onready var collect_food_button = $CollectFoodButton
-@onready var finish_movement_button = $FinishMovementButton
+@onready var collect_food_button = $UI/Control/CollectFoodButton
+@onready var finish_movement_button = $UI/Control/FinishMovementButton
+@onready var attack_button = $UI/Control/AttackButton
 
 @onready var food_spaces = $FoodSpaces
 @onready var spaces = $Spaces
+@onready var enemies = $Enemies
 
 var gamestate = State.PLAYER_TURN
 var actions_taken = []
@@ -31,9 +33,6 @@ var battle_queue = [] # TODO: Implement
 
 # Reference to the current character
 var current_char = null
-
-# Stop all player actions until the player has made a decision
-var is_making_decision = false
 
 signal enemys_turn
 
@@ -45,6 +44,7 @@ func _ready():
 	set_process_input(true)
 	hide_nodes()
 	decide_turn_order()
+	players_turn()
 
 func hide_nodes():
 	collect_food_button.visible = false
@@ -90,9 +90,11 @@ func _on_enemy_end_turn():
 Either enemy just ended their turn or player has used an action.
 """
 func players_turn():
+	collect_food_button.visible = false
+	finish_movement_button.visible = false
+	attack_button.visible = false
+	
 	if not current_char.can_act():
-		collect_food_button.visible = false
-		finish_movement_button.visible = false
 		return
 	
 	# Show Collect Food Button if:
@@ -104,15 +106,10 @@ func players_turn():
 				food.grid_pos[1] == current_char.grid_pos[1]:
 				collect_food_button.visible = true
 				break
-			else:
-				collect_food_button.visible = false
-	else:
-		collect_food_button.visible = false
 	
-	if not 'movement' in actions_taken:
-		finish_movement_button.visible = true
-	else:
-		finish_movement_button.visible = false
+	if not 'attack' in actions_taken and len(enemies_in_range(current_char.get_attack_range())) > 0:
+		attack_button.visible = true
+
 
 """
 FOOD
@@ -129,20 +126,61 @@ MOVEMENT
 """
 
 func _on_finish_movement_button_pressed():
-	actions_taken.append('movement')
 	current_char.use_action()
+	actions_taken.append('movement')
 	players_turn()
 
 """
 Find the space with the mouse pointer in it.
 Then try and move the player to that space.
-Hide the collect food button if the player does move.
+Hide other action buttons if the player moves.
+Show finish movement button if the player moves.
 """
 func move_char():
 	if gamestate == State.PLAYER_TURN and current_char.can_act() and not 'movement' in actions_taken:
 		for space in spaces.get_children():
 			if space.has_mouse:
 				if current_char.move_char(space.global_position, space.grid_pos):
-					# Need to remove the option to collect food after moving
+					# Need to remove other actions while moving
 					collect_food_button.visible = false
+					attack_button.visible = false
+					finish_movement_button.visible = true
 
+"""
+ATTACK
+"""
+
+func _on_attack_button_pressed():
+	print('attack')
+	var choices = enemies_in_range(current_char.get_attack_range())
+	var chosen_enemy = null
+	
+	if len(choices) > 1:
+		#TODO: Implement Selection between multiple enemies
+		pass
+	else:
+		chosen_enemy = choices[0]
+	
+	current_char.attack(chosen_enemy)
+	current_char.use_action()
+	actions_taken.append('attack')
+	players_turn()
+
+"""
+Check if there is an enemy within a custom range of the current character.
+The custom_range parameter is a list of coordinates from the current character's grid position.
+(E.G. [[0,1],[0,-1],[1,0],[-1,0]])
+
+Returns:
+	in_range - which enemies are in range of attack (or ability).
+	If in_range is null, there are no enemies in range.
+"""
+func enemies_in_range(custom_range):
+	var in_range = []
+	for enemy in enemies.get_children():
+		for coord in custom_range:
+			if enemy.enemy_pos[0] == coord[0] + current_char.grid_pos[0] and \
+				enemy.enemy_pos[1] == coord[1] + current_char.grid_pos[1]:
+				in_range.append(enemy)
+				break
+	return in_range
