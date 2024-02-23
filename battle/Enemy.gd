@@ -189,7 +189,7 @@ visually.
 func update_visual_position(new_pos):
 	# Gets the number corresponding to the specific space node that we
 	# want to go to.
-	var space_loc : int = enemy_pos[0] + 7 * enemy_pos[1]
+	var space_loc : int = new_pos[0] + 7 * new_pos[1]
 	
 	"""
 	The space nodes can be found in the absolute path 
