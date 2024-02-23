@@ -65,15 +65,15 @@ parameters that they would need.
 func generate_turn_list(possible_actions, pos, speed, num_actions):
 	if num_actions == 0: return
 	var turn_list = []
-	var stats = [pos, speed]
+	var char_stats = [pos, speed]
 	for action in possible_actions:
 		var action_args = []
 		
 		# Below for loop puts the necessary arguments needed
 		# for the function given in action[0].
-		for i in range(len(stats)):
+		for i in range(len(char_stats)):
 			if action[i+1]: 
-				action_args.append(stats[i])
+				action_args.append(char_stats[i])
 		
 		# callv first parameter is a string used to call the corresponding 
 		# function. 
