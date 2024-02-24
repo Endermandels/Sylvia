@@ -1,9 +1,14 @@
+class_name map_space
 extends Node2D
 
+enum Type {NO_TYPE, ENEMY, EVENT, SHOP, BOSS}
 
-@onready var collision = $CollisionShape2D
-@onready var tex = $Sprite2D.texture.resource_path
+@export var type: Type
+@export var row: int
+@export var column: int
+@export var positioning: Vector2
+@export var next_rooms: Array[map_space]
+@export var selected: = false
 
-func _on_texture_button_pressed():
-	if tex == "res://assets/map_enemy.png":
-		get_tree().change_scene_to_file("res://battle/BattleScene.tscn")
+func _to_string() -> String:
+	return "%s (%s)" % [column, Type.keys()[type][1]]
