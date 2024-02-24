@@ -250,6 +250,19 @@ collision_layer = 2
 collision_mask = 0
 grid_pos = [6, 4]
 
+[node name="FoodSpaces" type="Node2D" parent="."]
+
+[node name="Food" parent="FoodSpaces" instance=ExtResource("9_1n73l")]
+position = Vector2(339, 182)
+
+[node name="Food2" parent="FoodSpaces" instance=ExtResource("9_1n73l")]
+position = Vector2(280, 126)
+grid_pos = [1, 1]
+
+[node name="Food3" parent="FoodSpaces" instance=ExtResource("9_1n73l")]
+position = Vector2(576, 182)
+grid_pos = [6, 2]
+
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="Jerry" parent="Enemies" instance=ExtResource("8_kyk1e")]
@@ -291,8 +304,9 @@ text = "Collect Food"
 layout_mode = 0
 offset_left = 8.0
 offset_top = 213.0
-offset_right = 191.0
+offset_right = 165.0
 offset_bottom = 247.0
+theme_override_font_sizes/font_size = 17
 text = "Finish Movement"
 
 [node name="AttackButton" type="Button" parent="UI/Control"]
@@ -305,11 +319,6 @@ text = "Attack"
 
 [node name="EndOfTurn" parent="." instance=ExtResource("7_np6ef")]
 position = Vector2(56, 88)
-
-[node name="FoodSpaces" type="Node2D" parent="."]
-
-[node name="Food" parent="FoodSpaces" instance=ExtResource("9_1n73l")]
-position = Vector2(339, 182)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_i4mvg")
@@ -331,9 +340,9 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 4.0
-offset_top = -108.041
+offset_top = -95.0
 offset_right = 176.0
-offset_bottom = -52.041
+offset_bottom = -39.0
 grow_vertical = 0
 alignment = 1
 script = ExtResource("11_o3fgr")
