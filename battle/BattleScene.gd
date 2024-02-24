@@ -24,6 +24,7 @@ enum State {
 @onready var food_spaces = $FoodSpaces
 @onready var spaces = $Spaces
 @onready var enemies = $Enemies
+@onready var food_counter = $FoodCounter
 
 var gamestate = State.PLAYER_TURN
 var actions_taken = []
@@ -101,11 +102,8 @@ func players_turn():
 	# player starts their turn on a food space
 	# and they have room to collect more morsels
 	if not 'collect_food' in actions_taken and current_char.can_collect_food():
-		for food in food_spaces.get_children():
-			if food.grid_pos[0] == current_char.grid_pos[0] and \
-				food.grid_pos[1] == current_char.grid_pos[1]:
-				collect_food_button.visible = true
-				break
+		if get_food_under_character():
+			collect_food_button.visible = true
 	
 	if not 'attack' in actions_taken and len(enemies_in_range(current_char.get_attack_range())) > 0:
 		attack_button.visible = true
@@ -114,11 +112,20 @@ func players_turn():
 """
 FOOD
 """
+# check if play is standing on a food space, return that food node
+func get_food_under_character():
+	for food in food_spaces.get_children():
+		if food.grid_pos == current_char.grid_pos:
+			return food
+	return null
+	
 
 func _on_collect_food_button_pressed():
 	current_char.collect_food()
 	current_char.use_action()
 	actions_taken.append('collect_food')
+	get_food_under_character().queue_free() # make that food item disapear.
+	food_counter.increment_count() # increment the food counter
 	players_turn()
 
 """
