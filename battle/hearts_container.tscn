@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://blul8swm87aem"]
+[gd_scene load_steps=3 format=3 uid="uid://blul8swm87aem"]
 
 [ext_resource type="Script" path="res://battle/hearts_container.gd" id="1_x0vii"]
+[ext_resource type="PackedScene" uid="uid://bk4y0qroc24of" path="res://battle/heart_gui.tscn" id="2_q6cd4"]
 
 [node name="heartsContainer" type="HBoxContainer"]
 offset_left = -28.0
@@ -11,3 +12,12 @@ size_flags_horizontal = 3
 theme_override_constants/separation = 1
 alignment = 1
 script = ExtResource("1_x0vii")
+
+[node name="heartGUI" parent="." instance=ExtResource("2_q6cd4")]
+layout_mode = 2
+
+[node name="heartGUI2" parent="." instance=ExtResource("2_q6cd4")]
+layout_mode = 2
+
+[node name="heartGUI3" parent="." instance=ExtResource("2_q6cd4")]
+layout_mode = 2

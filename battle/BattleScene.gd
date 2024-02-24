@@ -24,6 +24,7 @@ enum State {
 @onready var food_spaces = $FoodSpaces
 @onready var spaces = $Spaces
 @onready var enemies = $Enemies
+@onready var food_counter = $FoodCounter
 
 var gamestate = State.PLAYER_TURN
 var actions_taken = []
@@ -124,6 +125,7 @@ func _on_collect_food_button_pressed():
 	current_char.use_action()
 	actions_taken.append('collect_food')
 	get_food_under_character().queue_free() # make that food item disapear.
+	food_counter.increment_count() # increment the food counter
 	players_turn()
 
 """

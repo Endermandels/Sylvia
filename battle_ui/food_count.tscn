@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://d0dini4k6lsu7"]
+
+[ext_resource type="Texture2D" uid="uid://ci27jwlgn78tc" path="res://assets/apple.png" id="1_lcmds"]
+[ext_resource type="Script" path="res://battle_ui/food_count.gd" id="1_riikw"]
+
+[node name="FoodCounter" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_riikw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(4.91667, 4.91667)
+texture = ExtResource("1_lcmds")
+
+[node name="Label" type="Label" parent="Sprite2D"]
+anchors_preset = -1
+offset_left = -1.62712
+offset_top = -2.44068
+offset_right = 22.3729
+offset_bottom = 42.5593
+scale = Vector2(0.153307, 0.195869)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 36
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
