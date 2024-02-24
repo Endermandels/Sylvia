@@ -1,7 +1,7 @@
 class_name map_space
 extends Node2D
 
-enum Type {NO_TYPE, ENEMY, EVENT, SHOP, BOSS}
+enum Type {NO_TYPE, ENEMY, EVENT, SHOP, TREASURE, BOSS}
 
 @export var type: Type
 @export var row: int

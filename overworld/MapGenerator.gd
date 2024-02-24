@@ -41,6 +41,10 @@ func generate_map() -> Array[Array]:
 		var current_j := j
 		for i in FLOORS - 1:
 			current_j = _setup_connection(i, current_j)
+			
+	_setup_boss_room()
+	_setup_random_room_weights()
+	_setup_room_types()
 	
 	#for testing, will print the following 2 lines for each floor:
 	#floor x
@@ -153,13 +157,98 @@ func _would_cross_existing_path(i: int, j: int, space: map_space) -> bool:
 	
 	
 	
+func _setup_boss_room() -> void:
+	var center := floori(MAP_WIDTH * 0.5)
+	var boss_room := map_data[FLOORS -1][center] as map_space
+	
+	#connect previous floor to all come to boss room
+	for j in MAP_WIDTH:
+		var current_room = map_data[FLOORS -2][j] as map_space
+		if current_room.next_rooms:
+			current_room.next_rooms = [] as Array[map_space]
+			current_room.next_rooms.append(boss_room)
+	
+	boss_room.type = map_space.Type.BOSS
+
+func _setup_random_room_weights() -> void:
+	random_room_type_weights[map_space.Type.ENEMY] = ENEMY_ROOM_WEIGHT
+	random_room_type_weights[map_space.Type.SHOP] = ENEMY_ROOM_WEIGHT + SHOP_ROOM_WEIGHT
+	random_room_type_weights[map_space.Type.EVENT] = ENEMY_ROOM_WEIGHT + EVENT_ROOM_WEIGHT + SHOP_ROOM_WEIGHT
+	
+
+	random_room_type_total_weight = random_room_type_weights[map_space.Type.SHOP]
+	
+#changes all map_space types so they aren't NO_TYPE
+func _setup_room_types() -> void:
+	#1st floor is a battle
+	for room: map_space in map_data[0]:
+		if room.next_rooms.size() > 0:
+			room.type = map_space.Type.ENEMY
+		
+	#9th floor is treasure
+	for room: map_space in map_data[8]:
+		if room.next_rooms.size() > 0:
+			room.type = map_space.Type.TREASURE
+			
+	#set the rest of the floors
+	for current_floor in map_data:
+		#check each room on the floor
+		for room: map_space in current_floor:
+			#check the next_rooms of every room
+			for next_room: map_space in room.next_rooms:
+				#randomly set each floor
+				if next_room.type == map_space.Type.NO_TYPE:
+					_set_room_randomly(next_room)
+	
+#sets rooms randomly, enforces these rules:
+#1) Shops cannot be consecutive
+func _set_room_randomly(room_to_set: map_space) -> void:
+	var consecutive_shop := true
+	var type_candidate: map_space.Type
+	
+	#runs until consecutive_shop is false
+	while consecutive_shop:
+		type_candidate = _get_random_room_type_by_weight()
+		var is_shop := type_candidate == map_space.Type.SHOP
+		var parent_is_shop := _room_has_parent_of_type(room_to_set, map_space.Type.SHOP)
+		consecutive_shop = is_shop and parent_is_shop
+	
+	room_to_set.type = type_candidate
+	
+func _room_has_parent_of_type(room: map_space, type: map_space.Type) -> bool:
+	var parents: Array[map_space] = []
+	#left parent
+	if room.column > 0 and room.row > 0:
+		var parent_candidate := map_data[room.row - 1][room.column - 1] as map_space
+		if parent_candidate.next_rooms.has(room):
+			parents.append(parent_candidate)
+	#middle parent
+	if room.row > 0:
+		var parent_candidate := map_data[room.row -1][room.column] as map_space
+		if parent_candidate.next_rooms.has(room):
+			parents.append(parent_candidate)
+	#right parent
+	if room.column < MAP_WIDTH-1 and room.row > 0:
+		var parent_candidate := map_data[room.row - 1][room.column + 1] as map_space
+		if parent_candidate.next_rooms.has(room):
+			parents.append(parent_candidate)
+	#check all parents to see if they are the type we're looking for		
+	for parent: map_space in parents:
+		if parent.type == type:
+			return true
+	
+	return false
 	
 	
-	
-	
-	
-	
-	
+func _get_random_room_type_by_weight() -> map_space.Type:
+	#we will check each types weight against the roll, if the type is greater than the roll
+	#we use that type. 
+	var roll := randf_range(0.0, random_room_type_total_weight)
+	for type: map_space.Type in random_room_type_weights:
+		if random_room_type_weights[type] > roll: 
+			return type
+			
+	return map_space.Type.NO_TYPE
 	
 	
 	
