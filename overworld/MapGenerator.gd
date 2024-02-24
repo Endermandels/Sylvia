@@ -25,11 +25,6 @@ var random_room_type_weights = {
 }
 var random_room_type_total_weight := 0
 
-
-func _ready() -> void:
-	generate_map()
-
-
 func generate_map() -> Array[Array]:
 	#generate an empty grid of map_spaces
 	map_data = _generate_initial_grid()
@@ -46,20 +41,6 @@ func generate_map() -> Array[Array]:
 	_setup_random_room_weights()
 	_setup_room_types()
 	
-	#for testing, will print the following 2 lines for each floor:
-	#floor x
-	#[column (type), column (type), ...] 
-	#where type is the 2nd character of the type (so it's unique, ie {O, N, V, H})		
-	#and it only prints map_spaces that have a next_room that isn't empy (part of a path)
-	var i := 0
-	for floors in map_data:
-		print("floor %s" % i)
-		var used_rooms = floors.filter(
-			func(rooms: map_space): return rooms.next_rooms.size() > 0
-		)
-		print(used_rooms)
-		i += 1
-
 	return map_data
 	
 #returns a 2d array of map_spaces with position values initialized to match the 2d array,

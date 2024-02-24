@@ -1,8 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://ciygfyllvwgoa"]
 
-[ext_resource type="Texture2D" uid="uid://c0lc0q4evr4jg" path="res://assets/background_brown.png" id="1_u7u2j"]
-[ext_resource type="Script" path="res://overworld/View Characters.gd" id="2_pkrh1"]
-[ext_resource type="Script" path="res://overworld/View Decks.gd" id="3_x04dj"]
+[ext_resource type="Script" path="res://overworld/Overworld.gd" id="1_t75pi"]
 [ext_resource type="Script" path="res://overworld/MapGenerator.gd" id="4_3k8ay"]
 
 [sub_resource type="GDScript" id="GDScript_8ndto"]
@@ -15,38 +13,53 @@ func _on_pressed():
 	get_tree().change_scene_to_file(\"res://start_menu/start_menu.tscn\")
 "
 
+[sub_resource type="Gradient" id="Gradient_j8the"]
+offsets = PackedFloat32Array(0, 0.993506)
+colors = PackedColorArray(0.144063, 0.144063, 0.144063, 1, 0.516809, 0.218354, 0.121666, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_kpcvw"]
+gradient = SubResource("Gradient_j8the")
+width = 50
+
 [node name="Overworld" type="Node2D"]
+script = ExtResource("1_t75pi")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(578, 326)
-texture = ExtResource("1_u7u2j")
+[node name="Visuals" type="Node2D" parent="."]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="Lines" type="Node2D" parent="Visuals"]
+unique_name_in_owner = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+[node name="Rooms" type="Node2D" parent="Visuals"]
+unique_name_in_owner = true
+
+[node name="MapGenerator" type="Node2D" parent="."]
+script = ExtResource("4_3k8ay")
+
+[node name="Menu" type="CanvasLayer" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu"]
 offset_left = 7.0
 offset_top = 14.0
 offset_right = 118.0
 offset_bottom = 94.0
 
-[node name="Quit to Menu" type="Button" parent="CanvasLayer/VBoxContainer"]
+[node name="Quit to Menu" type="Button" parent="Menu/VBoxContainer"]
 layout_mode = 2
 text = "Quit to Menu"
 script = SubResource("GDScript_8ndto")
 
-[node name="View Characters" type="Button" parent="CanvasLayer/VBoxContainer"]
-layout_mode = 2
-text = "View Characters"
-script = ExtResource("2_pkrh1")
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(320, 180)
 
-[node name="View Decks" type="Button" parent="CanvasLayer/VBoxContainer"]
-layout_mode = 2
-text = "View Decks"
-script = ExtResource("3_x04dj")
+[node name="MapBackground" type="CanvasLayer" parent="."]
+layer = -1
 
-[node name="MapGenerator" type="Node2D" parent="."]
-script = ExtResource("4_3k8ay")
+[node name="Background" type="TextureRect" parent="MapBackground"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_kpcvw")
 
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/Quit to Menu" to="CanvasLayer/VBoxContainer/Quit to Menu" method="_on_pressed"]
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/View Characters" to="CanvasLayer/VBoxContainer/View Characters" method="_on_pressed"]
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/View Decks" to="CanvasLayer/VBoxContainer/View Decks" method="_on_pressed"]
+[connection signal="pressed" from="Menu/VBoxContainer/Quit to Menu" to="Menu/VBoxContainer/Quit to Menu" method="_on_pressed"]
