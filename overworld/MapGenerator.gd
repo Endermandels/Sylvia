@@ -1,3 +1,10 @@
+
+#this code was written following the guide on: 
+#https://www.youtube.com/watch?v=7HYu7QXBuCY&t=6341s&ab_channel=GodotGameLab
+#the github for the video's "starter project" is here:
+#https://github.com/guladam/deck_builder_tutorial/tree/season-2-starter-project
+#however only line.png was taken from the github
+
 class_name MapGenerator
 extends Node
 
