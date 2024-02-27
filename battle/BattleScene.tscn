@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://srh7fu8uprij"]
+[gd_scene load_steps=16 format=3 uid="uid://srh7fu8uprij"]
 
 [ext_resource type="Texture2D" uid="uid://dkushodgai21s" path="res://assets/background.png" id="1"]
 [ext_resource type="Script" path="res://battle/BattleScene.gd" id="1_vb5nx"]
@@ -12,6 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://88wruo2jyoh8" path="res://Music/battle_music (surf).ogg" id="10_i4mvg"]
 [ext_resource type="PackedScene" uid="uid://dxqbt1cqviw66" path="res://card_ui/card_ui.tscn" id="11_23mjc"]
 [ext_resource type="Script" path="res://battle_ui/hand.gd" id="11_o3fgr"]
+[ext_resource type="PackedScene" uid="uid://d0dini4k6lsu7" path="res://battle_ui/food_count.tscn" id="13_dakvr"]
 
 [sub_resource type="GDScript" id="GDScript_76nkh"]
 script/source = "extends Button
@@ -250,6 +251,19 @@ collision_layer = 2
 collision_mask = 0
 grid_pos = [6, 4]
 
+[node name="FoodSpaces" type="Node2D" parent="."]
+
+[node name="Food" parent="FoodSpaces" instance=ExtResource("9_1n73l")]
+position = Vector2(339, 182)
+
+[node name="Food2" parent="FoodSpaces" instance=ExtResource("9_1n73l")]
+position = Vector2(280, 126)
+grid_pos = [1, 1]
+
+[node name="Food3" parent="FoodSpaces" instance=ExtResource("9_1n73l")]
+position = Vector2(576, 182)
+grid_pos = [6, 2]
+
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="Jerry" parent="Enemies" instance=ExtResource("8_kyk1e")]
@@ -269,7 +283,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("7_w84vo")
 
-[node name="Button" type="Button" parent="UI/Control"]
+[node name="QuitButton" type="Button" parent="UI/Control"]
 layout_mode = 0
 offset_left = 16.0
 offset_top = 9.0
@@ -279,13 +293,40 @@ text = "Quit to Menu"
 script = SubResource("GDScript_76nkh")
 metadata/_edit_use_anchors_ = true
 
+[node name="CollectFoodButton" type="Button" parent="UI/Control"]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 171.0
+offset_right = 140.0
+offset_bottom = 205.0
+text = "Collect Food"
+
+[node name="FinishMovementButton" type="Button" parent="UI/Control"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 213.0
+offset_right = 165.0
+offset_bottom = 247.0
+theme_override_font_sizes/font_size = 17
+text = "Finish Movement"
+
+[node name="AttackButton" type="Button" parent="UI/Control"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 129.0
+offset_right = 83.0
+offset_bottom = 163.0
+text = "Attack"
+
 [node name="EndOfTurn" parent="." instance=ExtResource("7_np6ef")]
-position = Vector2(90, 152)
+position = Vector2(56, 88)
 
-[node name="FoodSpaces" type="Node2D" parent="."]
-
-[node name="Food" parent="FoodSpaces" instance=ExtResource("9_1n73l")]
-position = Vector2(339, 182)
+[node name="FoodCounter" parent="." instance=ExtResource("13_dakvr")]
+offset_left = 136.0
+offset_top = 88.0
+offset_right = 136.0
+offset_bottom = 88.0
+scale = Vector2(0.836259, 0.836259)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_i4mvg")
@@ -307,9 +348,9 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 4.0
-offset_top = -108.041
+offset_top = -95.0
 offset_right = 176.0
-offset_bottom = -52.041
+offset_bottom = -39.0
 grow_vertical = 0
 alignment = 1
 script = ExtResource("11_o3fgr")
@@ -326,24 +367,11 @@ layout_mode = 2
 [node name="CardUI4" parent="BattleUI/Hand" instance=ExtResource("11_23mjc")]
 layout_mode = 2
 
-[node name="CollectFoodButton" type="Button" parent="."]
-offset_left = 23.0
-offset_top = 210.0
-offset_right = 156.0
-offset_bottom = 244.0
-text = "Collect Food"
-
-[node name="FinishMovementButton" type="Button" parent="."]
-offset_left = 5.0
-offset_top = 316.0
-offset_right = 188.0
-offset_bottom = 350.0
-text = "Finish Movement"
-
 [connection signal="enemys_turn" from="." to="Enemies/Jerry" method="_on_battle_scene_enemys_turn"]
 [connection signal="end_turn" from="Enemies/Jerry" to="." method="_on_enemy_end_turn"]
 [connection signal="ready" from="UI/Control" to="UI/Control" method="_on_ready"]
-[connection signal="pressed" from="UI/Control/Button" to="UI/Control/Button" method="_on_pressed"]
+[connection signal="pressed" from="UI/Control/QuitButton" to="UI/Control/QuitButton" method="_on_pressed"]
+[connection signal="pressed" from="UI/Control/CollectFoodButton" to="." method="_on_collect_food_button_pressed"]
+[connection signal="pressed" from="UI/Control/FinishMovementButton" to="." method="_on_finish_movement_button_pressed"]
+[connection signal="pressed" from="UI/Control/AttackButton" to="." method="_on_attack_button_pressed"]
 [connection signal="end_turn" from="EndOfTurn" to="." method="_on_end_of_turn_end_turn"]
-[connection signal="pressed" from="CollectFoodButton" to="." method="_on_collect_food_button_pressed"]
-[connection signal="pressed" from="FinishMovementButton" to="." method="_on_finish_movement_button_pressed"]
