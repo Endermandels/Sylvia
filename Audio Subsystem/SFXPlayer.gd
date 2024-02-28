@@ -4,8 +4,11 @@ var soundEffects: Dictionary = {}
 var audioStreamPlayers: Dictionary = {}
 
 func _ready():
-	# TODO: Initialize AudioStreamPlayer nodes here or dynamically create them when needed
-	pass
+	var effects = {
+		"button" : "res://Sound Effects/Menu-Selection-Change-E.ogg", \
+		"eating" : "res://Sound Effects/eating-sound-effect-36186.ogg", \
+		"horn" : "res://Sound Effects/horn.ogg" \
+	}
 
 func play(effect: String) -> void:
 	if soundEffects.has(effect):
@@ -19,12 +22,15 @@ func stop(effect: String) -> void:
 
 func loadEffects(effects: Dictionary) -> void:
 	for effect in effects.keys():
-		var stream = effects[effect]
-		var player = AudioStreamPlayer.new()
-		player.stream = stream
-		add_child(player)
-		soundEffects[effect] = stream
-		audioStreamPlayers[effect] = player
+		var stream = load(effects[effect])
+		if stream:
+			var player = AudioStreamPlayer.new()
+			player.stream = stream
+			add_child(player)
+			soundEffects[effect] = stream
+			audioStreamPlayers[effect] = player
+		else:
+			print("Failed to load effect: " + effects[effect])
 		
 		
 func set_volume(volume: float) -> void:

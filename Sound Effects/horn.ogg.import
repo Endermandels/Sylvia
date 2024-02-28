@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://mfqp66w6ydm5"
+path="res://.godot/imported/horn.ogg-fecf125b9ea998f4a415d43e812db1ff.oggvorbisstr"
+
+[deps]
+
+source_file="res://Sound Effects/horn.ogg"
+dest_files=["res://.godot/imported/horn.ogg-fecf125b9ea998f4a415d43e812db1ff.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
