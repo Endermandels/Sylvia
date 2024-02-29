@@ -1,7 +1,3 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://dkexfnao3uaod"]
-
-[ext_resource type="FontFile" uid="uid://b2mvtvbkmci77" path="res://ui_theme/Font/Montserrat-Regular.ttf" id="1_jqg4b"]
+[gd_resource type="Theme" format=3 uid="uid://dkexfnao3uaod"]
 
 [resource]
-default_font = ExtResource("1_jqg4b")
-default_font_size = 20

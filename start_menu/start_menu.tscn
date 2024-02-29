@@ -78,6 +78,7 @@ theme_override_constants/separation = 20
 alignment = 2
 
 [node name="Start" type="Button" parent="MarginContainer/VBoxContainer2/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
 clip_contents = true
 custom_minimum_size = Vector2(40, 10)
 layout_mode = 2
@@ -87,6 +88,7 @@ text = "Start"
 layout_mode = 2
 
 [node name="Options" type="Button" parent="MarginContainer/VBoxContainer2/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
 clip_contents = true
 custom_minimum_size = Vector2(40, 10)
 layout_mode = 2
@@ -96,6 +98,7 @@ text = "Options"
 layout_mode = 2
 
 [node name="Exit" type="Button" parent="MarginContainer/VBoxContainer2/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
 clip_contents = true
 custom_minimum_size = Vector2(150, 30)
 layout_mode = 2
@@ -125,6 +128,7 @@ offset_bottom = 364.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
+focus_mode = 2
 
 [node name="Text" type="Control" parent="Options_Menu/TabContainer"]
 layout_mode = 2
@@ -171,10 +175,6 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="SpinBox" type="SpinBox" parent="Options_Menu/TabContainer/Sound/VBoxContainer"]
-layout_mode = 2
-max_value = 10.0
-
 [node name="return" type="Button" parent="Options_Menu/TabContainer/Sound/VBoxContainer"]
 layout_mode = 2
 text = "Return"
@@ -195,6 +195,11 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
+[node name="keyboard" type="CheckButton" parent="Options_Menu/TabContainer/Controls/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Accept Keyboard Input"
+
 [node name="return" type="Button" parent="Options_Menu/TabContainer/Controls/VBoxContainer"]
 layout_mode = 2
 text = "Return"
@@ -211,4 +216,5 @@ autoplay = true
 [connection signal="toggled" from="Options_Menu/TabContainer/Text/VBoxContainer/dyslexia" to="." method="_on_dyslexia_toggled"]
 [connection signal="pressed" from="Options_Menu/TabContainer/Text/VBoxContainer/return" to="." method="_on_return_pressed"]
 [connection signal="pressed" from="Options_Menu/TabContainer/Sound/VBoxContainer/return" to="." method="_on_return_pressed"]
+[connection signal="toggled" from="Options_Menu/TabContainer/Controls/VBoxContainer/keyboard" to="." method="_on_keyboard_toggled"]
 [connection signal="pressed" from="Options_Menu/TabContainer/Controls/VBoxContainer/return" to="." method="_on_return_pressed"]

@@ -45,6 +45,8 @@ func _ready():
 	set_process_input(true)
 	hide_nodes()
 	decide_turn_order()
+	if Settings.keyboard_toggle:
+		$UI/Control/QuitButton.grab_focus()
 	players_turn()
 
 func hide_nodes():

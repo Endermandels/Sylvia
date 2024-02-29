@@ -1,13 +1,15 @@
 extends Control
 
-#Apply current theme settings to root
+
 func _on_ready():
 	theme = load(Settings.theme)
 	set_theme(theme)
 	get_theme().default_font_size = Settings.font_size
 	%large_text.set_pressed_no_signal(Settings.large_toggle)
 	%dyslexia.set_pressed_no_signal(Settings.dyslexia_toggle)
-
+	%keyboard.set_pressed_no_signal(Settings.keyboard_toggle)
+	%Start.grab_focus()
+		
 func _on_start_pressed():
 	get_tree().change_scene_to_file("res://battle/BattleScene.tscn")
 
@@ -16,6 +18,8 @@ func _on_exit_pressed():
 
 func _on_options_pressed():
 	$Options_Menu.show()
+	$Options_Menu/TabContainer.current_tab = 0;
+	$Options_Menu/TabContainer/Text/VBoxContainer/return.grab_focus()
 
 func _on_return_pressed():
 	#apply changes here
@@ -45,9 +49,16 @@ func _on_dyslexia_toggled(toggled_on):
 	set_theme(theme)
 	get_theme().default_font_size = Settings.font_size
 
-func _on_tab_bar_tab_button_pressed(tab):
-	if tab == 0:
-		$Options_Menu/Text_Menu.show()
-	elif tab == 1:
-		$Options_Menu/Text_Menu.hide()
+
+func _on_keyboard_toggled(toggled_on):
+	if toggled_on:
+		print("Allow keyboard input")
+		Settings.keyboard_toggle = true
+		var button_focus = load("res://ui_theme/button_focus.tres")
+		get_theme().merge_with(button_focus)
+		$Options_Menu/TabContainer/Controls/VBoxContainer/return.grab_focus()
 		
+	else:
+		print("No longer allowing keyboard input")
+		Settings.keyboard_toggle = false
+		get_theme().clear()
