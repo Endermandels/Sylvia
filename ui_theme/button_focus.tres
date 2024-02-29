@@ -1,0 +1,9 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://batb4oyriuhjd"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_nplab"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0ck6r"]
+texture = SubResource("PlaceholderTexture2D_nplab")
+
+[resource]
+Button/styles/focus = SubResource("StyleBoxTexture_0ck6r")
