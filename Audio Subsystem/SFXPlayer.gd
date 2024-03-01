@@ -11,6 +11,9 @@ func _ready():
 		"eating" : "res://Sound Effects/eating-sound-effect-36186.ogg", \
 	}
 	loadEffects(effects)
+	audioStreamPlayers["horn"].volume_db = -12
+	audioStreamPlayers["button"].volume_db = -12
+	audioStreamPlayers["eating"].volume_db = -12
 
 func play(effect: String) -> void:
 	if soundEffects.has(effect):

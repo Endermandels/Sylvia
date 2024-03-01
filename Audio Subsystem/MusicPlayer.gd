@@ -7,6 +7,7 @@ var audioStreamPlayer = AudioStreamPlayer.new()
 
 func _ready():
 	add_child(audioStreamPlayer)
+	audioStreamPlayer.volume_db = -10
 
 func play(track: String) -> void:
 	currentTrack = track
