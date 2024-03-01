@@ -1,3 +1,4 @@
+class_name AudioManager
 extends Node
 
 var globalVolume: float = 1.0
