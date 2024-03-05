@@ -63,7 +63,7 @@ necessary to perform the action(s) along with the necessary
 parameters that they would need.
 """
 func generate_turn_list(possible_actions, pos, speed, num_actions):
-	if num_actions == 0: return
+	if num_actions == 0: return []
 	var turn_list = []
 	var char_stats = [pos, speed]
 	for action in possible_actions:
@@ -99,6 +99,7 @@ func generate_turn_list(possible_actions, pos, speed, num_actions):
 					
 				var possible_next_actions = generate_turn_list(
 				next_possible_actions, pos, speed, num_actions - 1)
+
 				if possible_next_actions != []:
 					for new_action in possible_next_actions[0]:
 						turn_list += [[possible_action] + [new_action]]
