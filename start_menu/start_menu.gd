@@ -1,7 +1,9 @@
 extends Control
 
+@onready var audio_manager = $AudioManager
 
 func _on_ready():
+	audio_manager.playMusic("res://Music/menu_music.ogg")
 	theme = load(Settings.theme)
 	set_theme(theme)
 	get_theme().default_font_size = Settings.font_size
@@ -11,21 +13,26 @@ func _on_ready():
 	%Start.grab_focus()
 		
 func _on_start_pressed():
+	audio_manager.playSFX("button")
 	get_tree().change_scene_to_file("res://battle/BattleScene.tscn")
 
 func _on_exit_pressed():
+	audio_manager.playSFX("button")
 	get_tree().quit()
 
 func _on_options_pressed():
+	audio_manager.playSFX("button")
 	$Options_Menu.show()
 	$Options_Menu/TabContainer.current_tab = 0;
 	$Options_Menu/TabContainer/Text/VBoxContainer/return.grab_focus()
 
 func _on_return_pressed():
+	audio_manager.playSFX("button")
 	#apply changes here
 	$Options_Menu.hide()
 
 func _on_large_text_toggled(toggled_on):
+	audio_manager.playSFX("button")
 	if toggled_on:
 		Settings.large_toggle = true
 		Settings.font_size = 35
@@ -37,6 +44,7 @@ func _on_large_text_toggled(toggled_on):
 		get_theme().default_font_size = 20
 
 func _on_dyslexia_toggled(toggled_on):
+	audio_manager.playSFX("button")
 	var theme_path
 	if toggled_on:
 		Settings.dyslexia_toggle = true
@@ -51,6 +59,7 @@ func _on_dyslexia_toggled(toggled_on):
 
 
 func _on_keyboard_toggled(toggled_on):
+	audio_manager.playSFX("button")
 	if toggled_on:
 		print("Allow keyboard input")
 		Settings.keyboard_toggle = true
