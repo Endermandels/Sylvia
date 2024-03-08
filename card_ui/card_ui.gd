@@ -7,6 +7,8 @@ signal reparent_requested(which_card_ui: CardUI)
 @onready var drop_point_detector = $dropPointDetector
 @onready var card_state_machine: CardStateMachine = $CardStateMachine as CardStateMachine
 @onready var targets: Array[Node] = []
+@onready var released_state = $CardStateMachine/CardReleasedState
+@onready var stats = $CardStats
 
 func _ready() -> void:
 	card_state_machine.init(self)
@@ -30,7 +32,6 @@ func _on_mouse_exited() -> void:
 func _on_drop_point_detector_area_entered(area):
 	if not targets.has(area):
 		targets.append(area)
-
 
 # when the card leaves an area2d that area2d is removed from the targets list
 func _on_drop_point_detector_area_exited(area):
