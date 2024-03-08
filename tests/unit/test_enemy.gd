@@ -62,7 +62,7 @@ var cannot_move_params=[
 ]
 
 '''
-This is a black box acceptance that uses the parameters cannot_move_params.
+This is a black box acceptance test that uses the parameters cannot_move_params.
 to test the generate_move_list function in enemy.gd.
 '''
 func test_enemy_cannot_move_to(params=use_parameters(cannot_move_params)):
@@ -82,7 +82,7 @@ var can_move_params = [
 ]
 
 '''
-This is a black box acceptance that uses the parameters can_move_params.
+This is a black box acceptance test that uses the parameters can_move_params.
 to test the generate_move_list function in enemy.gd.
 '''
 func test_enemy_can_move_to(params=use_parameters(can_move_params)):
