@@ -26,6 +26,7 @@ enum State {
 @onready var cards = $BattleUI/Hand
 @onready var enemies = $Enemies
 @onready var food_counter = $FoodCounter
+@onready var audio_manager = $AudioManager
 
 var gamestate = State.PLAYER_TURN
 var actions_taken = []
@@ -45,6 +46,7 @@ SETUP
 """
 
 func _ready():
+	audio_manager.playMusic("res://Music/battle_music (surf).ogg")
 	set_process_input(true)
 	hide_nodes()
 	decide_turn_order()
@@ -79,6 +81,7 @@ STATE CHANGE
 When the player ends their turn, signal that it is the enemy's turn.
 """
 func _on_end_of_turn_end_turn():
+	audio_manager.playSFX("horn")
 	if gamestate == State.PLAYER_TURN:
 		gamestate = State.ENEMY_TURN
 		emit_signal("enemys_turn")
@@ -127,6 +130,7 @@ func get_food_under_character():
 	
 
 func _on_collect_food_button_pressed():
+	audio_manager.playSFX("eating")
 	current_char.collect_food()
 	current_char.use_action()
 	actions_taken.append('collect_food')
