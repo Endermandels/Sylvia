@@ -5,6 +5,7 @@ var soundEffects: Dictionary = {}
 var audioStreamPlayers: Dictionary = {}
 var recentlyPlayedEffects: Array = []
 var totalVolume: float
+var isPlaying: bool = false
 
 func _ready():
 	var effects = { \
@@ -22,11 +23,13 @@ func play(effect: String) -> void:
 		var player = audioStreamPlayers[effect]
 		player.play()
 		recentlyPlayedEffects.append(effect)
+		isPlaying = true
 
 func stop(effect: String) -> void:
 	if soundEffects.has(effect):
 		var player = audioStreamPlayers[effect]
 		player.stop()
+		isPlaying = false
 
 func loadEffects(effects: Dictionary) -> void:
 	for effect in effects.keys():
