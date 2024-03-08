@@ -12,9 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://88wruo2jyoh8" path="res://Music/battle_music (surf).ogg" id="10_i4mvg"]
 [ext_resource type="PackedScene" uid="uid://dxqbt1cqviw66" path="res://card_ui/card_ui.tscn" id="11_23mjc"]
 [ext_resource type="Script" path="res://battle_ui/hand.gd" id="11_o3fgr"]
-
-[ext_resource type="PackedScene" path="res://battle_ui/food_count.tscn" id="13_dakvr"]
-
+[ext_resource type="PackedScene" uid="uid://d0dini4k6lsu7" path="res://battle_ui/food_count.tscn" id="13_dakvr"]
 
 [sub_resource type="GDScript" id="GDScript_76nkh"]
 script/source = "extends Button
