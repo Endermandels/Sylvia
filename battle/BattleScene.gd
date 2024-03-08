@@ -23,8 +23,10 @@ enum State {
 
 @onready var food_spaces = $FoodSpaces
 @onready var spaces = $Spaces
+@onready var cards = $BattleUI/Hand
 @onready var enemies = $Enemies
 @onready var food_counter = $FoodCounter
+@onready var audio_manager = $AudioManager
 
 var gamestate = State.PLAYER_TURN
 var actions_taken = []
@@ -35,6 +37,8 @@ var battle_queue = [] # TODO: Implement
 # Reference to the current character
 var current_char = null
 
+var moving = false
+
 signal enemys_turn
 
 """
@@ -42,6 +46,7 @@ SETUP
 """
 
 func _ready():
+	audio_manager.playMusic("res://Music/battle_music (surf).ogg")
 	set_process_input(true)
 	hide_nodes()
 	decide_turn_order()
@@ -64,8 +69,9 @@ INPUT
 """
 
 func _input(event):
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-		move_char()
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		if event.pressed:
+			move_char()
 
 """
 STATE CHANGE
@@ -75,6 +81,7 @@ STATE CHANGE
 When the player ends their turn, signal that it is the enemy's turn.
 """
 func _on_end_of_turn_end_turn():
+	audio_manager.playSFX("horn")
 	if gamestate == State.PLAYER_TURN:
 		gamestate = State.ENEMY_TURN
 		emit_signal("enemys_turn")
@@ -123,6 +130,7 @@ func get_food_under_character():
 	
 
 func _on_collect_food_button_pressed():
+	audio_manager.playSFX("eating")
 	current_char.collect_food()
 	current_char.use_action()
 	actions_taken.append('collect_food')
@@ -137,6 +145,7 @@ MOVEMENT
 func _on_finish_movement_button_pressed():
 	current_char.use_action()
 	actions_taken.append('movement')
+	moving = false
 	players_turn()
 
 """
@@ -154,6 +163,7 @@ func move_char():
 					collect_food_button.visible = false
 					attack_button.visible = false
 					finish_movement_button.visible = true
+					moving = true
 
 """
 ATTACK
@@ -193,3 +203,23 @@ func enemies_in_range(custom_range):
 				in_range.append(enemy)
 				break
 	return in_range
+
+"""
+Ability
+"""
+
+func _on_hand_play_card(card, targets):
+	if not moving:
+		if gamestate == State.PLAYER_TURN and current_char.can_act() and \
+			not 'ability' in actions_taken:
+			for enemy in enemies.get_children():
+				# TODO: Affect multiple targets
+				print(enemy.enemy_pos, targets[0].grid_pos)
+				if enemy.enemy_pos[0] == targets[0].grid_pos[0] and \
+					enemy.enemy_pos[1] == targets[0].grid_pos[1]:
+					print('playing', card.stats.ability_name)
+					card.stats.apply_effects(enemy)
+					current_char.use_action()
+					actions_taken.append('ability')
+					players_turn()
+					break
