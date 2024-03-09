@@ -14,7 +14,9 @@ var grid_rows = 5
 var grid_cols = 7
 
 var grid_pos = [3, 4]
+var saved_grid_pos = []
 
+var affected_enemies = []
 
 """
 Recursively checks if the player can move to target space.
@@ -66,6 +68,7 @@ func move_char(new_position, new_grid_pos):
 		print('Mov left: ' + str(stats.mov))
 		sprite.global_position = new_position
 		grid_pos = new_grid_pos
+		
 		return true
 	return false
 
@@ -73,6 +76,18 @@ func attack(enemy):
 	print(enemy.name + " attacked for " + str(stats.atk))
 	enemy.stats.receiveDMG(stats.atk)
 	print(enemy.name + " remaining HP " + str(enemy.stats.hp))
+
+func save_stats():
+	stats.save_stats()
+	saved_grid_pos = [sprite.global_position, grid_pos]
+
+"""
+Load character's stats and enemies stats to before combat
+"""
+func load_stats():
+	stats.load_stats()
+	grid_pos = saved_grid_pos[1]
+	sprite.global_position = saved_grid_pos[0]
 
 func reset_stats():
 	stats.reset()
