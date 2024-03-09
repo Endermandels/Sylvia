@@ -100,6 +100,10 @@ func _on_enemy_end_turn():
 Either enemy just ended their turn or player has used an action.
 """
 func players_turn():
+	
+	if "movement" not in actions_taken:
+		moving = true
+		
 	collect_food_button.visible = false
 	finish_movement_button.visible = false
 	attack_button.visible = false
