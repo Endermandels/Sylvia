@@ -6,18 +6,16 @@
 [ext_resource type="Texture2D" uid="uid://cifdlrxp33p1u" path="res://assets/grid.png" id="5"]
 [ext_resource type="PackedScene" uid="uid://bub37ipigql3v" path="res://battle/Character.tscn" id="7"]
 [ext_resource type="PackedScene" uid="uid://d2x4fgnxceh5u" path="res://battle/end_of_turn.tscn" id="7_np6ef"]
-[ext_resource type="AudioStream" uid="uid://88wruo2jyoh8" path="res://Music/battle_music (surf).ogg" id="10_i4mvg"]
 [ext_resource type="Script" path="res://battle/Control.gd" id="7_w84vo"]
 [ext_resource type="PackedScene" uid="uid://t32b4boxehdt" path="res://battle/Enemy.tscn" id="8_kyk1e"]
 [ext_resource type="PackedScene" uid="uid://deikkfb2ghqvw" path="res://battle/food.tscn" id="9_1n73l"]
+[ext_resource type="AudioStream" uid="uid://88wruo2jyoh8" path="res://Music/battle_music (surf).ogg" id="10_i4mvg"]
 [ext_resource type="PackedScene" uid="uid://dxqbt1cqviw66" path="res://card_ui/card_ui.tscn" id="11_23mjc"]
 [ext_resource type="Script" path="res://battle_ui/hand.gd" id="11_o3fgr"]
-
 [ext_resource type="Script" path="res://Audio Subsystem/AudioManager.gd" id="13_4rmcv"]
 [ext_resource type="PackedScene" uid="uid://d0dini4k6lsu7" path="res://battle_ui/food_count.tscn" id="13_dakvr"]
 [ext_resource type="Script" path="res://Audio Subsystem/MusicPlayer.gd" id="14_cb6tr"]
 [ext_resource type="Script" path="res://Audio Subsystem/SFXPlayer.gd" id="15_rymsq"]
-
 
 [sub_resource type="GDScript" id="GDScript_76nkh"]
 script/source = "extends Button
@@ -202,7 +200,7 @@ collision_mask = 0
 grid_pos = [3, 3]
 
 [node name="Space25" parent="Spaces" instance=ExtResource("2")]
-position = Vector2(459.621, 241.443)
+position = Vector2(459, 241)
 collision_layer = 2
 collision_mask = 0
 grid_pos = [4, 3]

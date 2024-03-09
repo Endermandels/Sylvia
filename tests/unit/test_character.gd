@@ -111,7 +111,7 @@ func test_char_cannot_move_to(params=use_parameters(cannot_move_to_params)):
 	add_child(mychar)
 	
 	var this_params = params[0]
-	var result = mychar.move_to(this_params[0], this_params[1], this_params[2], this_params[3])
+	var result = mychar.move_to(this_params[0], this_params[1], this_params[2], this_params[3], 1)
 	assert_eq(result, false, "Character should not be able to move from " + str(this_params[0]) + 
 		" to " + str(this_params[1]))
 		
