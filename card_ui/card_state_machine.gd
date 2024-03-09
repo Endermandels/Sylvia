@@ -50,7 +50,7 @@ func _on_transition_requested(from: CardState, to: CardState.State) -> void:
 	var new_state: CardState = states[to]
 	if not new_state:
 		return
-		
+	
 	if current_state:
 		current_state.exit()
 	

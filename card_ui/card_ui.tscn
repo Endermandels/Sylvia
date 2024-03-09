@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dxqbt1cqviw66"]
+[gd_scene load_steps=9 format=3 uid="uid://dxqbt1cqviw66"]
 
 [ext_resource type="Script" path="res://card_ui/card_ui.gd" id="1_06nwt"]
 [ext_resource type="Texture2D" uid="uid://bitai2b163x1n" path="res://assets/card.png" id="2_e5gaa"]
@@ -6,9 +6,10 @@
 [ext_resource type="Script" path="res://card_ui/card_states/card_base_state.gd" id="3_dvo41"]
 [ext_resource type="Script" path="res://card_ui/card_states/card_dragging_state.gd" id="5_6td0n"]
 [ext_resource type="Script" path="res://card_ui/card_states/card_released_state.gd" id="6_5qs8v"]
+[ext_resource type="PackedScene" path="res://battle/CardStats.tscn" id="7_2hljo"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_pkqrx"]
-size = Vector2(40, 56)
+[sub_resource type="CircleShape2D" id="CircleShape2D_xho0b"]
+radius = 5.0
 
 [node name="CardUI" type="Control"]
 custom_minimum_size = Vector2(40, 56)
@@ -46,8 +47,8 @@ collision_mask = 2
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="dropPointDetector"]
-position = Vector2(20, 28)
-shape = SubResource("RectangleShape2D_pkqrx")
+position = Vector2(21, 27)
+shape = SubResource("CircleShape2D_xho0b")
 
 [node name="CardStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_fbx74")
@@ -63,6 +64,8 @@ state = 1
 [node name="CardReleasedState" type="Node" parent="CardStateMachine"]
 script = ExtResource("6_5qs8v")
 state = 2
+
+[node name="CardStats" parent="." instance=ExtResource("7_2hljo")]
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

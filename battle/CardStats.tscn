@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://t3u5kwglejav"]
+
+[ext_resource type="Script" path="res://battle/CardStats.gd" id="1_fgu25"]
+
+[node name="CardStats" type="Node"]
+script = ExtResource("1_fgu25")
