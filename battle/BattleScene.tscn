@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://srh7fu8uprij"]
+[gd_scene load_steps=19 format=3 uid="uid://srh7fu8uprij"]
 
 [ext_resource type="Texture2D" uid="uid://dkushodgai21s" path="res://assets/background.png" id="1"]
 [ext_resource type="Script" path="res://battle/BattleScene.gd" id="1_vb5nx"]
@@ -6,13 +6,18 @@
 [ext_resource type="Texture2D" uid="uid://cifdlrxp33p1u" path="res://assets/grid.png" id="5"]
 [ext_resource type="PackedScene" uid="uid://bub37ipigql3v" path="res://battle/Character.tscn" id="7"]
 [ext_resource type="PackedScene" uid="uid://d2x4fgnxceh5u" path="res://battle/end_of_turn.tscn" id="7_np6ef"]
+[ext_resource type="AudioStream" uid="uid://88wruo2jyoh8" path="res://Music/battle_music (surf).ogg" id="10_i4mvg"]
 [ext_resource type="Script" path="res://battle/Control.gd" id="7_w84vo"]
 [ext_resource type="PackedScene" uid="uid://t32b4boxehdt" path="res://battle/Enemy.tscn" id="8_kyk1e"]
 [ext_resource type="PackedScene" uid="uid://deikkfb2ghqvw" path="res://battle/food.tscn" id="9_1n73l"]
-[ext_resource type="AudioStream" uid="uid://88wruo2jyoh8" path="res://Music/battle_music (surf).ogg" id="10_i4mvg"]
 [ext_resource type="PackedScene" uid="uid://dxqbt1cqviw66" path="res://card_ui/card_ui.tscn" id="11_23mjc"]
 [ext_resource type="Script" path="res://battle_ui/hand.gd" id="11_o3fgr"]
+
+[ext_resource type="Script" path="res://Audio Subsystem/AudioManager.gd" id="13_4rmcv"]
 [ext_resource type="PackedScene" uid="uid://d0dini4k6lsu7" path="res://battle_ui/food_count.tscn" id="13_dakvr"]
+[ext_resource type="Script" path="res://Audio Subsystem/MusicPlayer.gd" id="14_cb6tr"]
+[ext_resource type="Script" path="res://Audio Subsystem/SFXPlayer.gd" id="15_rymsq"]
+
 
 [sub_resource type="GDScript" id="GDScript_76nkh"]
 script/source = "extends Button
@@ -31,9 +36,6 @@ script/source = "extends Button
 func _on_pressed():
 	get_tree().change_scene_to_file(\"res://overworld/Overworld.tscn\")
 "
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_u21m3"]
-size = Vector2(437, 304)
 
 [node name="BattleScene" type="Node2D"]
 script = ExtResource("1_vb5nx")
@@ -354,15 +356,6 @@ scale = Vector2(0.836259, 0.836259)
 stream = ExtResource("10_i4mvg")
 autoplay = true
 
-[node name="CardDropArea" type="Area2D" parent="."]
-collision_layer = 2
-metadata/_edit_lock_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CardDropArea"]
-visible = false
-position = Vector2(398.5, 184)
-shape = SubResource("RectangleShape2D_u21m3")
-
 [node name="BattleUI" type="CanvasLayer" parent="." groups=["ui_layer"]]
 
 [node name="Hand" type="HBoxContainer" parent="BattleUI"]
@@ -380,14 +373,32 @@ script = ExtResource("11_o3fgr")
 [node name="CardUI" parent="BattleUI/Hand" instance=ExtResource("11_23mjc")]
 layout_mode = 2
 
+[node name="CardStats" parent="BattleUI/Hand/CardUI" index="4"]
+ability_name = "IceBeam"
+
 [node name="CardUI2" parent="BattleUI/Hand" instance=ExtResource("11_23mjc")]
 layout_mode = 2
+
+[node name="CardStats" parent="BattleUI/Hand/CardUI2" index="4"]
+ability_name = "WindBeam"
 
 [node name="CardUI3" parent="BattleUI/Hand" instance=ExtResource("11_23mjc")]
 layout_mode = 2
 
+[node name="CardStats" parent="BattleUI/Hand/CardUI3" index="4"]
+ability_name = "WaterBeam"
+
 [node name="CardUI4" parent="BattleUI/Hand" instance=ExtResource("11_23mjc")]
 layout_mode = 2
+
+[node name="AudioManager" type="Node" parent="."]
+script = ExtResource("13_4rmcv")
+
+[node name="MusicPlayer" type="Node" parent="AudioManager"]
+script = ExtResource("14_cb6tr")
+
+[node name="SFXPlayer" type="Node" parent="AudioManager"]
+script = ExtResource("15_rymsq")
 
 [connection signal="enemys_turn" from="." to="Enemies/Jerry" method="_on_battle_scene_enemys_turn"]
 [connection signal="end_turn" from="Enemies/Jerry" to="." method="_on_enemy_end_turn"]
@@ -398,3 +409,9 @@ layout_mode = 2
 [connection signal="pressed" from="UI/Control/AttackButton" to="." method="_on_attack_button_pressed"]
 [connection signal="pressed" from="UI/Control/OverworldButton" to="UI/Control/OverworldButton" method="_on_pressed"]
 [connection signal="end_turn" from="EndOfTurn" to="." method="_on_end_of_turn_end_turn"]
+[connection signal="play_card" from="BattleUI/Hand" to="." method="_on_hand_play_card"]
+
+[editable path="BattleUI/Hand/CardUI"]
+[editable path="BattleUI/Hand/CardUI2"]
+[editable path="BattleUI/Hand/CardUI3"]
+[editable path="BattleUI/Hand/CardUI4"]
