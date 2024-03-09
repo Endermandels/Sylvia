@@ -9,6 +9,7 @@ func _ready():
 	musicPlayer = $MusicPlayer
 	sfxPlayer = $SFXPlayer
 
+
 func playMusic(track: String) -> void:
 	musicPlayer.play(track)
 	
