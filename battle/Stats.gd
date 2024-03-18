@@ -18,6 +18,12 @@ extends Node
 @onready var mov = MOV
 @onready var mor = 0
 
+@onready var saved_hp = hp
+@onready var saved_atk = atk
+@onready var saved_act = act
+@onready var saved_mov = mov
+@onready var saved_mor = mor
+
 func can_perform_act():
 	return act > 0
 
@@ -45,6 +51,21 @@ func receiveDMG(damage):
 
 func use_action():
 	act -= 1
+
+func save_stats():
+	saved_hp = hp
+	saved_atk = atk
+	saved_act = act
+	saved_mov = mov
+	saved_mor = mor
+
+func load_stats():
+	print("stats loaded")
+	hp = saved_hp
+	atk = saved_atk
+	act = saved_act
+	mov = saved_mov
+	mor = saved_mor
 
 func reset():
 	mov = MOV
