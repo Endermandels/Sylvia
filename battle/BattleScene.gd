@@ -34,6 +34,9 @@ var actions_taken = []
 # The various enemies and player characters are ordered by turn in this list
 var battle_queue = [] # TODO: Implement
 
+# Names of all the enemies currently on the board.
+var board_enemies = ["Jerry"]
+
 # Enemies affected by character abilities or attacks
 var affected_enemies = []
 
@@ -56,6 +59,7 @@ func _ready():
 	if Settings.keyboard_toggle:
 		$UI/Control/QuitButton.grab_focus()
 	current_char.save_stats()
+	spawn_enemies(board_enemies, 7)
 	players_turn()
 
 func hide_nodes():
@@ -67,6 +71,12 @@ Decides using base movement speed of each unit in battle.
 func decide_turn_order():
 	# TODO: Implement
 	current_char = $"Characters/Clover"
+	
+func spawn_enemies(enemies_to_spawn, num_cols):
+	for enemy_name in enemies_to_spawn:
+		var enemy = enemies.get_node(enemy_name)
+		enemy.enemy_pos = [randi() % num_cols, 0]
+		enemy.update_visual_position((enemy.enemy_pos))
 
 """
 INPUT
