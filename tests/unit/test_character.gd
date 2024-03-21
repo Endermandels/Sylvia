@@ -5,64 +5,64 @@ extends "res://addons/gut/test.gd"
 
 var cannot_move_to_params = [
 	[
-		[[3,2], [3,2], 0, 1]
+		[[3,2], [3,2], [3,2], 0]
 	],
 	[
-		[[3,2], [3,3], 0, 1]
+		[[3,2], [3,2], [3,3], 0]
 	],
 	[
-		[[3,2], [3,2], 1, 1]
+		[[3,2], [3,2], [3,2], 1]
 	],
 	[
-		[[3,2], [5,2], 1, 1]
+		[[3,2], [3,2], [5,2], 1]
 	],
 	[
-		[[3,2], [3,4], 1, 1]
+		[[3,2], [3,2], [3,4], 1]
 	],
 	[
-		[[3,2], [1,2], 1, 1]
+		[[3,2], [3,2], [1,2], 1]
 	],
 	[
-		[[3,2], [3,0], 1, 1]
+		[[3,2], [3,2], [3,0], 1]
 	],
 	[
-		[[3,2], [2,3], 1, 1]
+		[[3,2], [3,2], [2,3], 1]
 	],
 	[
-		[[3,2], [4,3], 1, 1]
+		[[3,2], [3,2], [4,3], 1]
 	],
 	[
-		[[3,2], [2,1], 1, 1]
+		[[3,2], [3,2], [2,1], 1]
 	],
 	[
-		[[3,2], [4,1], 1, 1]
+		[[3,2], [3,2], [4,1], 1]
 	],
 	[
-		[[0,0], [-1,0], 1, 1]
+		[[0,0], [0,0], [-1,0], 1]
 	],
 	[
-		[[0,0], [0,-1], 1, 1]
+		[[0,0], [0,0], [0,-1], 1]
 	],
 	[
-		[[6,4], [6,5], 1, 1]
+		[[6,4], [6,4], [6,5], 1]
 	],
 	[
-		[[6,4], [7,4], 1, 1]
+		[[6,4], [6,4], [7,4], 1]
 	],
 	[
-		[[3,2], [3,2], 2, 1]
+		[[3,2], [3,2], [3,2], 2]
 	],
 	[
-		[[3,2], [6,2], 2, 1]
+		[[3,2], [3,2], [6,2], 2]
 	],
 	[
-		[[3,2], [0,2], 2, 1]
+		[[3,2], [3,2], [0,2], 2]
 	],
 	[
-		[[3,2], [2,0], 2, 1]
+		[[3,2], [3,2], [2,0], 2]
 	],
 	[
-		[[3,2], [4,4], 2, 1]
+		[[3,2], [3,2], [4,4], 2]
 	]
 ]
 
@@ -174,19 +174,19 @@ func test_statement_coverage_move_to():
 	add_child(mychar)
 	
 	# Covers first if statement
-	var result = mychar.move_to([4,2], [4,3], 0, 1)
+	var result = mychar.move_to([4,2], [4,2], [4,3], 0, 1)
 	assert_eq(result, false, "Character should not be able to move with 0 movement")
 	
 	# Covers first for loop (x)
-	result = mychar.move_to([4,2], [2,2], 2, 1)
+	result = mychar.move_to([4,2], [4,2], [2,2], 2, 1)
 	assert_eq(result, true, "Character should be able to move from [4, 2] to [2, 2] with 2 movement")
 	
 	# Covers second for loop (y)
-	result = mychar.move_to([4,2], [4,4], 2, 1)
+	result = mychar.move_to([4,2], [4,2], [4,4], 2, 1)
 	assert_eq(result, true, "Character should be able to move from [4, 2] to [4, 4] with 2 movement")
 	
 	# Covers return false at end of function
-	result = mychar.move_to([4,2], [3,4], 2, 1)
+	result = mychar.move_to([4,2], [4,2], [3,4], 2, 1)
 	assert_eq(result, false, "Character should not be able to move from [4, 2] to [3, 4] with 2 movement")
 	
 	mychar.queue_free()
