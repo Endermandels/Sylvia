@@ -36,6 +36,7 @@ var battle_queue = [] # TODO: Implement
 
 # Enemies affected by character abilities or attacks
 var affected_enemies = []
+var affected_food = []
 
 # Reference to the current character
 var current_char = null
@@ -82,10 +83,17 @@ func _input(event):
 				for enemy in affected_enemies:
 					enemy.stats.load_stats()
 				
+				for food in affected_food:
+					food.load_stats()
+					food_counter.decrement_count()
+				
 				current_char.load_stats()
+				
 				affected_enemies = []
+				affected_food = []
 				actions_taken = []
 				moving = false
+				
 				players_turn()
 
 """
@@ -96,8 +104,8 @@ STATE CHANGE
 When the player ends their turn, signal that it is the enemy's turn.
 """
 func _on_end_of_turn_end_turn():
-	audio_manager.playSFX("horn")
 	if gamestate == State.PLAYER_TURN:
+		audio_manager.playSFX("horn")
 		gamestate = State.ENEMY_TURN
 		emit_signal("enemys_turn")
 
@@ -107,7 +115,15 @@ When the enemy ends their turn, signal that it is the player's turn.
 func _on_enemy_end_turn():
 	if gamestate == State.ENEMY_TURN:
 		gamestate = State.PLAYER_TURN
+		
+		for food in food_spaces.get_children():
+			food.reset_saved_rand_space()
+			food.save_stats()
+		
+		affected_enemies = []
+		affected_food = []
 		actions_taken = []
+		
 		current_char.reset_stats()
 		current_char.save_stats()
 		players_turn()
@@ -131,7 +147,7 @@ func players_turn():
 	# player starts their turn on a food space
 	# and they have room to collect more morsels
 	if not 'collect_food' in actions_taken and current_char.can_collect_food():
-		if get_food_under_character():
+		if get_food(current_char.grid_pos):
 			collect_food_button.visible = true
 	
 	if not 'attack' in actions_taken and len(enemies_in_range(current_char.get_attack_range())) > 0:
@@ -142,20 +158,26 @@ func players_turn():
 FOOD
 """
 # check if play is standing on a food space, return that food node
-func get_food_under_character():
+func get_food(grid_pos):
 	for food in food_spaces.get_children():
-		if food.grid_pos == current_char.grid_pos:
+		if food.grid_pos == grid_pos:
 			return food
 	return null
 	
 
 func _on_collect_food_button_pressed():
-	audio_manager.playSFX("eating")
 	current_char.collect_food()
 	current_char.use_action()
 	actions_taken.append('collect_food')
-	get_food_under_character().queue_free() # make that food item disapear.
-	food_counter.increment_count() # increment the food counter
+	
+	audio_manager.playSFX("eating")
+	food_counter.increment_count()
+	
+	var food = get_food(current_char.grid_pos)
+	food.save_stats()
+	food.rand_pos(spaces)
+	affected_food.append(food)
+	
 	players_turn()
 
 """

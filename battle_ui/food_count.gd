@@ -14,6 +14,11 @@ func increment_count():
 	food_count += 1
 	update_label()
 
+func decrement_count():
+	# decrements the count by one.
+	food_count -= 1
+	update_label()
+
 func set_count(value: int):
 	# sets the count to a specific number.
 	food_count = value
