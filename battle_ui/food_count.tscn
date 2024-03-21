@@ -17,7 +17,6 @@ scale = Vector2(4.91667, 4.91667)
 texture = ExtResource("1_lcmds")
 
 [node name="Label" type="Label" parent="Sprite2D"]
-anchors_preset = -1
 offset_left = -1.62712
 offset_top = -2.44068
 offset_right = 22.3729

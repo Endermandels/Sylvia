@@ -170,15 +170,14 @@ func generate_attack_list(pos):
 			attack_pos[i] = pos[i] + j
 			if attack_pos == clover_pos:
 				
-				return [["attack", [stats.atk]]]
+				return [["attack", [stats.atk, clover]]]
 
 # Attacks the player
-func attack(damage):
-	#temp way getting the characters stats
-	var clover_stats = clover.get_node("Stats")
+func attack(damage, animal):
+	var animal_stats = animal.get_node("Stats")
 	print('Player attacked for ' + str(damage))
-	clover_stats.receiveDMG(stats.atk)
-	print('Player remaining HP ' + str(clover_stats.hp))
+	animal_stats.receiveDMG(stats.atk)
+	print('Player remaining HP ' + str(animal_stats.hp))
 """
 new_pos is an array with two elements. The first element is the x
 coordinate of the animal and the second element is the y coordinate.
