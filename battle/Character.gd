@@ -70,7 +70,7 @@ func move_char(new_position, new_grid_pos):
 	if move_to(grid_pos, grid_pos, new_grid_pos, stats.mov, 1):
 		print('Mov left: ' + str(stats.mov))
 		sprite.global_position = new_position
-		grid_pos = new_grid_pos
+		grid_pos = new_grid_pos.duplicate()
 		
 		return true
 	return false
@@ -89,7 +89,7 @@ Load character's stats and enemies stats to before combat
 """
 func load_stats():
 	stats.load_stats()
-	grid_pos = saved_grid_pos[1]
+	grid_pos = saved_grid_pos[1].duplicate()
 	sprite.global_position = saved_grid_pos[0]
 
 func reset_stats():

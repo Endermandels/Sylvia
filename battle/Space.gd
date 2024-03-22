@@ -19,7 +19,6 @@ func _on_mouse_entered():
 
 func _on_mouse_exited():
 	has_mouse = false
-
 	color_rect.modulate = Color(1, 1, 1, 1)
 
  
@@ -32,8 +31,7 @@ func _process(delta):
 	else:
 		color_rect.color.a = 0
 		lit = false
-		
-		
+
 
 # This function checks if the character can move to the target position.
 # It does not actually move the character.

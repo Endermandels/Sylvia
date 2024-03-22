@@ -46,7 +46,6 @@ func receiveDMG(damage):
 		
 	#update hearts container
 	heartsContainer.setHearts(hp)
-		
 	 
 
 func use_action():
@@ -66,6 +65,7 @@ func load_stats():
 	act = saved_act
 	mov = saved_mov
 	mor = saved_mor
+	heartsContainer.setHearts(hp)
 
 func reset():
 	mov = MOV
