@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://b33bl8mslx3of"
+path="res://.godot/imported/punch.ogg-6289328fa48f0c48b2f7153cca7502af.oggvorbisstr"
+
+[deps]
+
+source_file="res://Sound Effects/punch.ogg"
+dest_files=["res://.godot/imported/punch.ogg-6289328fa48f0c48b2f7153cca7502af.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
