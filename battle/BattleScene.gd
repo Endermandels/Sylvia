@@ -57,8 +57,6 @@ func _ready():
 	set_process_input(true)
 	hide_nodes()
 	decide_turn_order()
-	if Settings.keyboard_toggle:
-		$UI/Control/QuitButton.grab_focus()
 	current_char.save_stats()
 	spawn_enemies(board_enemies, 7)
 	players_turn()
@@ -105,6 +103,8 @@ func _input(event):
 				moving = false
 				
 				players_turn()
+	if event.is_action_pressed("exit"):
+		exit()
 
 """
 STATE CHANGE
@@ -282,3 +282,6 @@ func _on_hand_play_card(card, targets):
 					actions_taken.append('ability')
 					players_turn()
 					break
+
+func exit():
+	get_tree().change_scene_to_file("res://start_menu/start_menu.tscn")

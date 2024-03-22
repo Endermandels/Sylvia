@@ -71,3 +71,9 @@ func _on_keyboard_toggled(toggled_on):
 		print("No longer allowing keyboard input")
 		Settings.keyboard_toggle = false
 		get_theme().clear()
+
+func _input(event):
+	if event.is_action_pressed("exit"):
+		exit()
+func exit():
+	get_tree().quit()

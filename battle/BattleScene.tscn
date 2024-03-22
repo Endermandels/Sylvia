@@ -20,9 +20,6 @@
 [sub_resource type="GDScript" id="GDScript_76nkh"]
 script/source = "extends Button
 
-
-
-
 func _on_pressed():
 	get_tree().change_scene_to_file(\"res://start_menu/start_menu.tscn\")
 "
@@ -302,6 +299,7 @@ offset_left = 16.0
 offset_top = 9.0
 offset_right = 157.0
 offset_bottom = 43.0
+focus_next = NodePath("../OverworldButton")
 text = "Quit to Menu"
 script = SubResource("GDScript_76nkh")
 metadata/_edit_use_anchors_ = true
@@ -337,6 +335,7 @@ offset_left = 15.0
 offset_top = 38.0
 offset_right = 156.0
 offset_bottom = 72.0
+focus_previous = NodePath("../QuitButton")
 text = "To Overworld"
 script = SubResource("GDScript_spr25")
 
