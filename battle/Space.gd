@@ -33,9 +33,7 @@ func _process(delta):
 	elif not has_mouse:
 		attackable_enemy = false
 		color_rect.modulate = Color(1, 1, 1, 1)
-		
 
-		
 	if can_move_to_character(character_pos, grid_pos, moves_left) and battle_scene.moving or attackable_enemy:
 		color_rect.color.a = 0.3
 		lit = true
