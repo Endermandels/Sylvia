@@ -18,4 +18,3 @@ script = ExtResource("2_or6a0")
 
 [node name="SFXPlayer" type="Node" parent="."]
 script = ExtResource("3_uvf7d")
-

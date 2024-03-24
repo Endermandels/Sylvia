@@ -12,6 +12,7 @@ func _ready():
 		"button" : "res://Sound Effects/Menu-Selection-Change-E.ogg", \
 		"horn" : "res://Sound Effects/horn.ogg", \
 		"eating" : "res://Sound Effects/eating-sound-effect-36186.ogg", \
+		"attack" : "res://Sound Effects/punch.ogg"
 	}
 	loadEffects(effects)
 	audioStreamPlayers["horn"].volume_db = -12

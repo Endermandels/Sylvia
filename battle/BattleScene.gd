@@ -222,6 +222,7 @@ ATTACK
 """
 
 func _on_attack_button_pressed():
+	audio_manager.playSFX("attack")
 	print('attack')
 	var choices = enemies_in_range(current_char.get_attack_range())
 	var chosen_enemy = null
