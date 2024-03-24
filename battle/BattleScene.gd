@@ -57,8 +57,6 @@ func _ready():
 	set_process_input(true)
 	hide_nodes()
 	decide_turn_order()
-	if Settings.keyboard_toggle:
-		$UI/Control/QuitButton.grab_focus()
 	current_char.save_stats()
 	spawn_enemies(board_enemies, 7)
 	players_turn()
@@ -105,6 +103,25 @@ func _input(event):
 				moving = false
 				
 				players_turn()
+	elif event.is_action_pressed("exit"):
+		exit()
+	elif event.is_action_pressed("move_up"):
+		keyboard_move_char("move_up")
+
+func keyboard_move_char(direction):
+	var new_row = current_char.grid_pos[1]
+	var new_col = current_char.grid_pos[0]
+	if direction == "move_up":
+		new_row = max(new_row - 1, 0)
+	var index = new_row * 7 + new_col
+	var space = spaces.get_children()[index]
+	if gamestate == State.PLAYER_TURN and current_char.can_act() and not 'movement' in actions_taken:
+		if current_char.move_char(space.global_position, space.grid_pos):
+			# Need to remove other actions while moving
+			collect_food_button.visible = false
+			attack_button.visible = false
+			finish_movement_button.visible = true
+			moving = true
 
 """
 STATE CHANGE
@@ -217,6 +234,7 @@ func move_char():
 					finish_movement_button.visible = true
 					moving = true
 
+
 """
 ATTACK
 """
@@ -283,3 +301,6 @@ func _on_hand_play_card(card, targets):
 					actions_taken.append('ability')
 					players_turn()
 					break
+
+func exit():
+	get_tree().change_scene_to_file("res://start_menu/start_menu.tscn")
