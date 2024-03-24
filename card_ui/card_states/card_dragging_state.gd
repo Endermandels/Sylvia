@@ -15,6 +15,7 @@ func on_input(event: InputEvent) -> void:
 	var cancel = event.is_action_pressed("right_mouse")
 	var confirm = event.is_action_released("left_mouse")
 	
+	
 	# if the event was mouse motion then update the global position of the card.
 	if mouse_motion:
 		card_ui.global_position = card_ui.get_global_mouse_position() - card_ui.pivot_offset

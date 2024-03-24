@@ -1,14 +1,14 @@
+class_name AudioManager
 extends Node
 
 var globalVolume: float = 1.0
 var musicPlayer
 var sfxPlayer
 
-
 func _ready():
 	musicPlayer = $MusicPlayer
 	sfxPlayer = $SFXPlayer
-	#TODO: Set up initial volumes or any other initialization needed
+
 
 func playMusic(track: String) -> void:
 	musicPlayer.play(track)
