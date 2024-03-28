@@ -1,0 +1,73 @@
+[gd_scene load_steps=6 format=3 uid="uid://fpysupt0lbee"]
+
+[ext_resource type="Script" path="res://Pause Menu/pause_menu.gd" id="1_7ky4s"]
+[ext_resource type="Shader" path="res://Pause Menu/pause_menu.gdshader" id="2_eq22m"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_putbs"]
+shader = ExtResource("2_eq22m")
+shader_parameter/amount = 4.0
+
+[sub_resource type="GDScript" id="GDScript_80lu1"]
+script/source = "extends Button
+
+
+func _on_pressed():
+	get_tree().change_scene_to_file(\"res://overworld/Overworld.tscn\")
+"
+
+[sub_resource type="GDScript" id="GDScript_lnr66"]
+script/source = "extends Button
+
+func _on_pressed():
+	get_tree().change_scene_to_file(\"res://start_menu/start_menu.tscn\")
+"
+
+[node name="PauseMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7ky4s")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_putbs")
+layout_mode = 2
+offset_left = -903.0
+offset_top = -415.0
+offset_right = 1462.0
+offset_bottom = 1025.0
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Resume" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Resume"
+
+[node name="Settings" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Settings"
+
+[node name="OverworldButton" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+focus_previous = NodePath("../QuitButton")
+text = "To Overworld"
+script = SubResource("GDScript_80lu1")
+
+[node name="QuitButton" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+focus_next = NodePath("../OverworldButton")
+text = "Quit to Menu"
+script = SubResource("GDScript_lnr66")
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/OverworldButton" to="MarginContainer/VBoxContainer/OverworldButton" method="_on_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/QuitButton" to="MarginContainer/VBoxContainer/QuitButton" method="_on_pressed"]

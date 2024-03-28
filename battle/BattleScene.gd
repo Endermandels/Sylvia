@@ -20,6 +20,8 @@ enum State {
 @onready var collect_food_button = $UI/Control/CollectFoodButton
 @onready var finish_movement_button = $UI/Control/FinishMovementButton
 @onready var attack_button = $UI/Control/AttackButton
+@onready var pause_menu = $CanvasLayer/PauseMenu
+var paused = false
 
 @onready var food_spaces = $FoodSpaces
 @onready var spaces = $Spaces
@@ -105,8 +107,19 @@ func _input(event):
 				players_turn()
 	elif event.is_action_pressed("exit"):
 		exit()
+	elif event.is_action_pressed("pause"):
+		pauseMenu()
 	elif event.is_action_pressed("move_up"):
 		keyboard_move_char("move_up")
+
+func pauseMenu():
+	if paused:
+		pause_menu.hide()
+		Engine.time_scale = 1
+	else:
+		pause_menu.show()
+		Engine.time_scale = 0
+	paused = !paused
 
 func keyboard_move_char(direction):
 	var new_row = current_char.grid_pos[1]
