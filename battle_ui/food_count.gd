@@ -9,14 +9,14 @@ var food_count: int = 0
 func _ready():
 	update_label() # initializes with 0
 
-func increment_count():
+func increment_count(amount):
 	# increments the count by one.
-	food_count += 1
+	food_count += amount
 	update_label()
 
-func decrement_count():
+func decrement_count(amount):
 	# decrements the count by one.
-	food_count -= 1
+	food_count -= amount
 	update_label()
 
 func set_count(value: int):

@@ -101,8 +101,14 @@ func collect_food():
 func use_action():
 	stats.use_action()
 
+func use_ability(card_stats, enemy):
+	stats.use_ability(card_stats, enemy)
+
 func get_attack_range():
 	return stats.get_attack_range()
+
+func can_use_ability(card_stats):
+	return stats.can_use_ability(card_stats)
 
 func can_collect_food():
 	return stats.can_collect_morsel()
