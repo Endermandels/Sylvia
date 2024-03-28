@@ -172,10 +172,6 @@ func _on_enemy_end_turn():
 Either enemy just ended their turn or player has used an action.
 """
 func players_turn():
-	
-	if "movement" not in actions_taken:
-		moving = true
-		
 	collect_food_button.visible = false
 	finish_movement_button.visible = false
 	attack_button.visible = false
@@ -297,6 +293,7 @@ Ability
 
 func _on_hand_play_card(card, targets):
 	if not moving:
+		print('true')
 		if gamestate == State.PLAYER_TURN and current_char.can_act() and \
 			not 'ability' in actions_taken:
 			for enemy in enemies.get_children():
