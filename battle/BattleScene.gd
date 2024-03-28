@@ -111,7 +111,7 @@ func _input(event):
 		pauseMenu()
 	else:
 		keyboard_move_char(event)
-
+		
 func pauseMenu():
 	if paused:
 		pause_menu.hide()
