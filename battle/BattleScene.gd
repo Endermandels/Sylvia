@@ -293,7 +293,6 @@ Ability
 
 func _on_hand_play_card(card, targets):
 	if not moving:
-		print('true')
 		if gamestate == State.PLAYER_TURN and current_char.can_act() and \
 			not 'ability' in actions_taken:
 			for enemy in enemies.get_children():
