@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://srh7fu8uprij"]
+[gd_scene load_steps=18 format=3 uid="uid://srh7fu8uprij"]
 
 [ext_resource type="Texture2D" uid="uid://dkushodgai21s" path="res://assets/background.png" id="1"]
 [ext_resource type="Script" path="res://battle/BattleScene.gd" id="1_vb5nx"]
@@ -16,21 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://d0dini4k6lsu7" path="res://battle_ui/food_count.tscn" id="13_dakvr"]
 [ext_resource type="Script" path="res://Audio Subsystem/MusicPlayer.gd" id="14_cb6tr"]
 [ext_resource type="Script" path="res://Audio Subsystem/SFXPlayer.gd" id="15_rymsq"]
-
-[sub_resource type="GDScript" id="GDScript_76nkh"]
-script/source = "extends Button
-
-func _on_pressed():
-	get_tree().change_scene_to_file(\"res://start_menu/start_menu.tscn\")
-"
-
-[sub_resource type="GDScript" id="GDScript_spr25"]
-script/source = "extends Button
-
-
-func _on_pressed():
-	get_tree().change_scene_to_file(\"res://overworld/Overworld.tscn\")
-"
+[ext_resource type="PackedScene" uid="uid://fpysupt0lbee" path="res://Pause Menu/pause_menu.tscn" id="17_y1xjj"]
 
 [node name="BattleScene" type="Node2D"]
 script = ExtResource("1_vb5nx")
@@ -288,22 +274,6 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("7_w84vo")
 
-[node name="QuitButton" type="Button" parent="UI/Control"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = -0.025
-anchor_top = -0.15
-anchor_right = -0.025
-anchor_bottom = -0.15
-offset_left = 16.0
-offset_top = 9.0
-offset_right = 157.0
-offset_bottom = 43.0
-focus_next = NodePath("../OverworldButton")
-text = "Quit to Menu"
-script = SubResource("GDScript_76nkh")
-metadata/_edit_use_anchors_ = true
-
 [node name="CollectFoodButton" type="Button" parent="UI/Control"]
 layout_mode = 0
 offset_left = 7.0
@@ -328,16 +298,6 @@ offset_top = 129.0
 offset_right = 83.0
 offset_bottom = 163.0
 text = "Attack"
-
-[node name="OverworldButton" type="Button" parent="UI/Control"]
-layout_mode = 0
-offset_left = 15.0
-offset_top = 38.0
-offset_right = 156.0
-offset_bottom = 72.0
-focus_previous = NodePath("../QuitButton")
-text = "To Overworld"
-script = SubResource("GDScript_spr25")
 
 [node name="EndOfTurn" parent="." instance=ExtResource("7_np6ef")]
 position = Vector2(52, 97)
@@ -397,14 +357,17 @@ script = ExtResource("14_cb6tr")
 [node name="SFXPlayer" type="Node" parent="AudioManager"]
 script = ExtResource("15_rymsq")
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("17_y1xjj")]
+visible = false
+
 [connection signal="enemys_turn" from="." to="Enemies/Jerry" method="_on_battle_scene_enemys_turn"]
 [connection signal="end_turn" from="Enemies/Jerry" to="." method="_on_enemy_end_turn"]
 [connection signal="ready" from="UI/Control" to="UI/Control" method="_on_ready"]
-[connection signal="pressed" from="UI/Control/QuitButton" to="UI/Control/QuitButton" method="_on_pressed"]
 [connection signal="pressed" from="UI/Control/CollectFoodButton" to="." method="_on_collect_food_button_pressed"]
 [connection signal="pressed" from="UI/Control/FinishMovementButton" to="." method="_on_finish_movement_button_pressed"]
 [connection signal="pressed" from="UI/Control/AttackButton" to="." method="_on_attack_button_pressed"]
-[connection signal="pressed" from="UI/Control/OverworldButton" to="UI/Control/OverworldButton" method="_on_pressed"]
 [connection signal="end_turn" from="EndOfTurn" to="." method="_on_end_of_turn_end_turn"]
 [connection signal="play_card" from="BattleUI/Hand" to="." method="_on_hand_play_card"]
 

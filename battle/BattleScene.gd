@@ -20,6 +20,7 @@ enum State {
 @onready var collect_food_button = $UI/Control/CollectFoodButton
 @onready var finish_movement_button = $UI/Control/FinishMovementButton
 @onready var attack_button = $UI/Control/AttackButton
+@onready var pause_menu = $CanvasLayer/PauseMenu
 
 @onready var food_spaces = $FoodSpaces
 @onready var spaces = $Spaces
@@ -45,6 +46,7 @@ var affected_food = []
 var current_char = null
 
 var moving = false
+var paused = false
 
 signal enemys_turn
 
@@ -83,10 +85,10 @@ INPUT
 
 func _input(event):
 	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT:
+		if not paused and event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed:
 				move_char()
-		elif event.button_index == MOUSE_BUTTON_RIGHT:
+		elif not paused and event.button_index == MOUSE_BUTTON_RIGHT:
 			if event.pressed:
 				for enemy in affected_enemies:
 					enemy.stats.load_stats()
@@ -105,9 +107,19 @@ func _input(event):
 				players_turn()
 	elif event.is_action_pressed("ui_cancel"):
 		exit()
+	elif event.is_action_pressed("pause"):
+		pauseMenu()
 	else:
 		keyboard_move_char(event)
 
+func pauseMenu():
+	if paused:
+		pause_menu.hide()
+		Engine.time_scale = 1
+	else:
+		pause_menu.show()
+		Engine.time_scale = 0
+	paused = !paused
 
 func keyboard_move_char(event):
 	var new_row = current_char.grid_pos[1]
