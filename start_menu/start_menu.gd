@@ -74,6 +74,10 @@ func _on_keyboard_toggled(toggled_on):
 
 func _input(event):
 	if event.is_action_pressed("exit"):
-		exit()
-func exit():
-	get_tree().quit()
+		get_tree().quit()
+
+func _on_remap_controls_pressed():
+	%InputPopUp.show()
+
+func _on_accept_pressed():
+	pass # Replace with function body.

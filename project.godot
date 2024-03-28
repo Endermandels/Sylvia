@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Settings="*res://ui_theme/Settings.gd"
+InputHelper="*res://addons/input_helper/input_helper.gd"
 
 [display]
 
@@ -32,7 +33,7 @@ window/size/test_height=720
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/gut/plugin.cfg")
+enabled=PackedStringArray("res://addons/gut/plugin.cfg", "res://addons/input_helper/plugin.cfg")
 
 [gui]
 
