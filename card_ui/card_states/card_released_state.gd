@@ -1,6 +1,6 @@
 extends CardState
 
-var played: bool
+var played = false
 var targets = []
 
 func enter() -> void:
