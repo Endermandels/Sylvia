@@ -8,7 +8,7 @@ var totalVolume: float
 
 func _ready():
 	add_child(audioStreamPlayer)
-	audioStreamPlayer.volume_db = -10
+	audioStreamPlayer.volume_db = -11
 
 func play(track: String) -> void:
 	currentTrack = track

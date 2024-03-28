@@ -34,8 +34,12 @@ var actions_taken = []
 # The various enemies and player characters are ordered by turn in this list
 var battle_queue = [] # TODO: Implement
 
+# Names of all the enemies currently on the board.
+var board_enemies = ["Jerry"]
+
 # Enemies affected by character abilities or attacks
 var affected_enemies = []
+var affected_food = []
 
 # Reference to the current character
 var current_char = null
@@ -53,9 +57,8 @@ func _ready():
 	set_process_input(true)
 	hide_nodes()
 	decide_turn_order()
-	if Settings.keyboard_toggle:
-		$UI/Control/QuitButton.grab_focus()
 	current_char.save_stats()
+	spawn_enemies(board_enemies, 7)
 	players_turn()
 
 func hide_nodes():
@@ -67,6 +70,12 @@ Decides using base movement speed of each unit in battle.
 func decide_turn_order():
 	# TODO: Implement
 	current_char = $"Characters/Clover"
+	
+func spawn_enemies(enemies_to_spawn, num_cols):
+	for enemy_name in enemies_to_spawn:
+		var enemy = enemies.get_node(enemy_name)
+		enemy.enemy_pos = [randi() % num_cols, 0]
+		enemy.update_visual_position((enemy.enemy_pos))
 
 """
 INPUT
@@ -82,11 +91,37 @@ func _input(event):
 				for enemy in affected_enemies:
 					enemy.stats.load_stats()
 				
+				for food in affected_food:
+					food.load_stats()
+					food_counter.decrement_count()
+				
 				current_char.load_stats()
+				
 				affected_enemies = []
+				affected_food = []
 				actions_taken = []
 				moving = false
+				
 				players_turn()
+	elif event.is_action_pressed("exit"):
+		exit()
+	elif event.is_action_pressed("move_up"):
+		keyboard_move_char("move_up")
+
+func keyboard_move_char(direction):
+	var new_row = current_char.grid_pos[1]
+	var new_col = current_char.grid_pos[0]
+	if direction == "move_up":
+		new_row = max(new_row - 1, 0)
+	var index = new_row * 7 + new_col
+	var space = spaces.get_children()[index]
+	if gamestate == State.PLAYER_TURN and current_char.can_act() and not 'movement' in actions_taken:
+		if current_char.move_char(space.global_position, space.grid_pos):
+			# Need to remove other actions while moving
+			collect_food_button.visible = false
+			attack_button.visible = false
+			finish_movement_button.visible = true
+			moving = true
 
 """
 STATE CHANGE
@@ -96,8 +131,8 @@ STATE CHANGE
 When the player ends their turn, signal that it is the enemy's turn.
 """
 func _on_end_of_turn_end_turn():
-	audio_manager.playSFX("horn")
 	if gamestate == State.PLAYER_TURN:
+		audio_manager.playSFX("horn")
 		gamestate = State.ENEMY_TURN
 		emit_signal("enemys_turn")
 
@@ -107,7 +142,15 @@ When the enemy ends their turn, signal that it is the player's turn.
 func _on_enemy_end_turn():
 	if gamestate == State.ENEMY_TURN:
 		gamestate = State.PLAYER_TURN
+		
+		for food in food_spaces.get_children():
+			food.reset_saved_rand_space()
+			food.save_stats()
+		
+		affected_enemies = []
+		affected_food = []
 		actions_taken = []
+		
 		current_char.reset_stats()
 		current_char.save_stats()
 		players_turn()
@@ -131,7 +174,7 @@ func players_turn():
 	# player starts their turn on a food space
 	# and they have room to collect more morsels
 	if not 'collect_food' in actions_taken and current_char.can_collect_food():
-		if get_food_under_character():
+		if get_food(current_char.grid_pos):
 			collect_food_button.visible = true
 	
 	if not 'attack' in actions_taken and len(enemies_in_range(current_char.get_attack_range())) > 0:
@@ -142,20 +185,26 @@ func players_turn():
 FOOD
 """
 # check if play is standing on a food space, return that food node
-func get_food_under_character():
+func get_food(grid_pos):
 	for food in food_spaces.get_children():
-		if food.grid_pos == current_char.grid_pos:
+		if food.grid_pos == grid_pos:
 			return food
 	return null
 	
 
 func _on_collect_food_button_pressed():
-	audio_manager.playSFX("eating")
 	current_char.collect_food()
 	current_char.use_action()
 	actions_taken.append('collect_food')
-	get_food_under_character().queue_free() # make that food item disapear.
-	food_counter.increment_count() # increment the food counter
+	
+	audio_manager.playSFX("eating")
+	food_counter.increment_count()
+	
+	var food = get_food(current_char.grid_pos)
+	food.save_stats()
+	food.rand_pos(spaces)
+	affected_food.append(food)
+	
 	players_turn()
 
 """
@@ -185,11 +234,13 @@ func move_char():
 					finish_movement_button.visible = true
 					moving = true
 
+
 """
 ATTACK
 """
 
 func _on_attack_button_pressed():
+	audio_manager.playSFX("attack")
 	print('attack')
 	var choices = enemies_in_range(current_char.get_attack_range())
 	var chosen_enemy = null
@@ -250,3 +301,6 @@ func _on_hand_play_card(card, targets):
 					actions_taken.append('ability')
 					players_turn()
 					break
+
+func exit():
+	get_tree().change_scene_to_file("res://start_menu/start_menu.tscn")
