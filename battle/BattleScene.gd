@@ -95,9 +95,9 @@ func _input(event):
 				
 				for food in affected_food:
 					food.load_stats()
-					food_counter.decrement_count()
 				
 				current_char.load_stats()
+				food_counter.set_count(current_char.stats.mor)
 				
 				affected_enemies = []
 				affected_food = []
@@ -207,7 +207,7 @@ func _on_collect_food_button_pressed():
 	actions_taken.append('collect_food')
 	
 	audio_manager.playSFX("eating")
-	food_counter.increment_count()
+	food_counter.increment_count(1)
 	
 	var food = get_food(current_char.grid_pos)
 	food.save_stats()
@@ -294,7 +294,7 @@ Ability
 func _on_hand_play_card(card, targets):
 	if not moving:
 		if gamestate == State.PLAYER_TURN and current_char.can_act() and \
-			not 'ability' in actions_taken:
+			not 'ability' in actions_taken and current_char.can_use_ability(card.stats):
 			for enemy in enemies.get_children():
 				# TODO: Affect multiple targets
 				print(enemy.enemy_pos, targets[0].grid_pos)
@@ -305,8 +305,9 @@ func _on_hand_play_card(card, targets):
 					if not enemy in affected_enemies:
 						affected_enemies.append(enemy)
 					
-					card.stats.apply_effects(enemy)
+					current_char.use_ability(card.stats, enemy)
 					current_char.use_action()
+					food_counter.decrement_count(card.stats.cost)
 					actions_taken.append('ability')
 					players_turn()
 					break
