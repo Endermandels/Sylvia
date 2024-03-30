@@ -28,6 +28,7 @@ enum State {
 @onready var enemies = $Enemies
 @onready var food_counter = $FoodCounter
 @onready var audio_manager = $AudioManager
+@onready var characters = $Characters
 
 var gamestate = State.PLAYER_TURN
 var actions_taken = []
@@ -241,7 +242,7 @@ Show finish movement button if the player moves.
 func move_char():
 	if gamestate == State.PLAYER_TURN and current_char.can_act() and not 'movement' in actions_taken:
 		for space in spaces.get_children():
-			if space.has_mouse:
+			if space.has_mouse and grid_space_free(space.grid_pos):
 				if current_char.move_char(space.global_position, space.grid_pos):
 					# Need to remove other actions while moving
 					collect_food_button.visible = false
@@ -249,11 +250,19 @@ func move_char():
 					finish_movement_button.visible = true
 					moving = true
 
+#check to ensure that the grid space is free of characters and enemies.
+func grid_space_free(grid_pos):
+	for enemy in enemies.get_children():
+		if enemy.enemy_pos == grid_pos:
+			return false
+	for character in characters.get_children():
+		if character.grid_pos == grid_pos:
+			return false
+	return true
 
 """
 ATTACK
 """
-
 func _on_attack_button_pressed():
 	audio_manager.playSFX("attack")
 	print('attack')
