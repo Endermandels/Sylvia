@@ -11,6 +11,8 @@ var grid_cols = 7
 var has_mouse = false
 var lit = false
 var attackable_enemy = false
+var can_move_too = false
+var enemy_present = false
 
 func _on_mouse_entered():
 	has_mouse = true
@@ -34,18 +36,27 @@ func _process(_delta):
 		attackable_enemy = false
 		color_rect.modulate = Color(1, 1, 1, 1)
 
-	if can_move_to_character(character_pos, grid_pos, moves_left, battle_scene.actions_taken) or attackable_enemy:
+	if can_move_to_character(character_pos, grid_pos, moves_left, battle_scene.actions_taken):
+		can_move_too = true
+	else:
+		can_move_too = false
+		
+	if can_move_too or attackable_enemy:
 		color_rect.color.a = 0.3
 		lit = true
 	else:
 		color_rect.color.a = 0
 		lit = false
+	if not attackable_enemy and can_move_too and enemy_present:
+		color_rect.modulate = Color(0.8, 0.4, 0, 1)
 
 func attackable_enemy_present():
 	var character_pos = character.grid_pos	# Assuming this is an array [x, y]
 	var taken_actions = battle_scene.actions_taken
+	enemy_present = false
 	for enemy in enemies.get_children():
 		if enemy.enemy_pos == grid_pos:
+			enemy_present=true
 			# Manually calculate the difference
 			var diff_x = enemy.enemy_pos[0] - character_pos[0]
 			var diff_y = enemy.enemy_pos[1] - character_pos[1]
