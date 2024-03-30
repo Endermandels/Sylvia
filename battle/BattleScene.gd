@@ -105,13 +105,13 @@ func _input(event):
 				moving = false
 				
 				players_turn()
-	elif event.is_action_pressed("exit"):
+	elif event.is_action_pressed("ui_cancel"):
 		exit()
 	elif event.is_action_pressed("pause"):
 		pauseMenu()
-	elif event.is_action_pressed("move_up"):
-		keyboard_move_char("move_up")
-
+	else:
+		keyboard_move_char(event)
+		
 func pauseMenu():
 	if paused:
 		pause_menu.hide()
@@ -121,11 +121,17 @@ func pauseMenu():
 		Engine.time_scale = 0
 	paused = !paused
 
-func keyboard_move_char(direction):
+func keyboard_move_char(event):
 	var new_row = current_char.grid_pos[1]
 	var new_col = current_char.grid_pos[0]
-	if direction == "move_up":
+	if event.is_action_pressed("ui_up"):
 		new_row = max(new_row - 1, 0)
+	elif event.is_action_pressed("ui_down"):
+		new_row = min(new_row + 1, 4)
+	elif event.is_action_pressed("ui_left"):
+		new_col = max(new_col - 1, 0)
+	elif event.is_action_pressed("ui_right"):
+		new_col = min(new_col + 1, 6)
 	var index = new_row * 7 + new_col
 	var space = spaces.get_children()[index]
 	if gamestate == State.PLAYER_TURN and current_char.can_act() and not 'movement' in actions_taken:
