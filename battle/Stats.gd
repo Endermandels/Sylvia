@@ -30,6 +30,9 @@ func can_perform_act():
 func can_collect_morsel():
 	return mor < MOR
 
+func can_use_ability(card_stats):
+	return card_stats.cost <= mor
+
 func get_attack_range():
 	return attack_range
 
@@ -50,6 +53,10 @@ func receiveDMG(damage):
 
 func use_action():
 	act -= 1
+
+func use_ability(card_stats, enemy):
+	card_stats.apply_effects(enemy)
+	mor -= card_stats.cost
 
 func save_stats():
 	saved_hp = hp

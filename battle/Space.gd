@@ -60,7 +60,9 @@ func attackable_enemy_present():
 # This function checks if the character can move to the target position.
 # It does not actually move the character.
 func can_move_to_character(character_grid_pos, target_grid_pos, moves_left, actions_taken):
-	return not "movement" in actions_taken and can_move_to(character_grid_pos, character_grid_pos, target_grid_pos, moves_left)
+	return 	not "movement" in actions_taken and \
+			character.can_act() and \
+			can_move_to(character_grid_pos, character_grid_pos, target_grid_pos, moves_left)
 
 func can_move_to(origin, start, target, moves_left):
 	if moves_left == 0:
