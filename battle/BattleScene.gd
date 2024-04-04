@@ -28,6 +28,7 @@ enum State {
 @onready var enemies = $Enemies
 @onready var food_counter = $FoodCounter
 @onready var audio_manager = $AudioManager
+@onready var characters = $Characters
 
 var gamestate = State.PLAYER_TURN
 var actions_taken = []
@@ -95,9 +96,9 @@ func _input(event):
 				
 				for food in affected_food:
 					food.load_stats()
-					food_counter.decrement_count()
 				
 				current_char.load_stats()
+				food_counter.set_count(current_char.stats.mor)
 				
 				affected_enemies = []
 				affected_food = []
@@ -105,13 +106,13 @@ func _input(event):
 				moving = false
 				
 				players_turn()
-	elif event.is_action_pressed("exit"):
+	elif event.is_action_pressed("ui_cancel"):
 		exit()
 	elif event.is_action_pressed("pause"):
 		pauseMenu()
-	elif event.is_action_pressed("move_up"):
-		keyboard_move_char("move_up")
-
+	else:
+		keyboard_move_char(event)
+		
 func pauseMenu():
 	if paused:
 		pause_menu.hide()
@@ -121,11 +122,17 @@ func pauseMenu():
 		Engine.time_scale = 0
 	paused = !paused
 
-func keyboard_move_char(direction):
+func keyboard_move_char(event):
 	var new_row = current_char.grid_pos[1]
 	var new_col = current_char.grid_pos[0]
-	if direction == "move_up":
+	if event.is_action_pressed("ui_up"):
 		new_row = max(new_row - 1, 0)
+	elif event.is_action_pressed("ui_down"):
+		new_row = min(new_row + 1, 4)
+	elif event.is_action_pressed("ui_left"):
+		new_col = max(new_col - 1, 0)
+	elif event.is_action_pressed("ui_right"):
+		new_col = min(new_col + 1, 6)
 	var index = new_row * 7 + new_col
 	var space = spaces.get_children()[index]
 	if gamestate == State.PLAYER_TURN and current_char.can_act() and not 'movement' in actions_taken:
@@ -172,10 +179,6 @@ func _on_enemy_end_turn():
 Either enemy just ended their turn or player has used an action.
 """
 func players_turn():
-	
-	if "movement" not in actions_taken:
-		moving = true
-		
 	collect_food_button.visible = false
 	finish_movement_button.visible = false
 	attack_button.visible = false
@@ -211,7 +214,7 @@ func _on_collect_food_button_pressed():
 	actions_taken.append('collect_food')
 	
 	audio_manager.playSFX("eating")
-	food_counter.increment_count()
+	food_counter.increment_count(1)
 	
 	var food = get_food(current_char.grid_pos)
 	food.save_stats()
@@ -239,7 +242,7 @@ Show finish movement button if the player moves.
 func move_char():
 	if gamestate == State.PLAYER_TURN and current_char.can_act() and not 'movement' in actions_taken:
 		for space in spaces.get_children():
-			if space.has_mouse:
+			if space.has_mouse and grid_space_free(space.grid_pos):
 				if current_char.move_char(space.global_position, space.grid_pos):
 					# Need to remove other actions while moving
 					collect_food_button.visible = false
@@ -247,11 +250,19 @@ func move_char():
 					finish_movement_button.visible = true
 					moving = true
 
+#check to ensure that the grid space is free of characters and enemies.
+func grid_space_free(grid_pos):
+	for enemy in enemies.get_children():
+		if enemy.enemy_pos == grid_pos:
+			return false
+	for character in characters.get_children():
+		if character.grid_pos == grid_pos:
+			return false
+	return true
 
 """
 ATTACK
 """
-
 func _on_attack_button_pressed():
 	audio_manager.playSFX("attack")
 	print('attack')
@@ -298,7 +309,7 @@ Ability
 func _on_hand_play_card(card, targets):
 	if not moving:
 		if gamestate == State.PLAYER_TURN and current_char.can_act() and \
-			not 'ability' in actions_taken:
+			not 'ability' in actions_taken and current_char.can_use_ability(card.stats):
 			for enemy in enemies.get_children():
 				# TODO: Affect multiple targets
 				print(enemy.enemy_pos, targets[0].grid_pos)
@@ -309,8 +320,9 @@ func _on_hand_play_card(card, targets):
 					if not enemy in affected_enemies:
 						affected_enemies.append(enemy)
 					
-					card.stats.apply_effects(enemy)
+					current_char.use_ability(card.stats, enemy)
 					current_char.use_action()
+					food_counter.decrement_count(card.stats.cost)
 					actions_taken.append('ability')
 					players_turn()
 					break
