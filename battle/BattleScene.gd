@@ -14,7 +14,8 @@ extends Node2D
 # Keeps track of game states
 enum State {
 	PLAYER_TURN,
-	ENEMY_TURN
+	ENEMY_TURN,
+	PLAYER_WON
 }
 
 @onready var collect_food_button = $UI/Control/CollectFoodButton
@@ -158,9 +159,15 @@ func _on_end_of_turn_end_turn():
 
 """
 When the enemy ends their turn, signal that it is the player's turn.
+Check if the player has successfully won.
 """
 func _on_enemy_end_turn():
 	if gamestate == State.ENEMY_TURN:
+		if player_won():
+			gamestate = State.PLAYER_WON
+			print('player won!')
+			return
+		
 		gamestate = State.PLAYER_TURN
 		
 		for food in food_spaces.get_children():
@@ -174,6 +181,32 @@ func _on_enemy_end_turn():
 		current_char.reset_stats()
 		current_char.save_stats()
 		players_turn()
+
+"""
+Player wins by having all creatures on top row without any enemies adjacent to their creatures.
+"""
+func player_won():
+	for character in characters.get_children():
+		for enemy in enemies.get_children():
+			var grid_pos = character.grid_pos
+			var enemy_pos = enemy.enemy_pos
+			
+			# Must be on top row
+			if grid_pos[1] > 0:
+				return false
+			
+			# Check for adjacent enemies
+			if grid_pos[0] - 1 >= 0 and grid_pos[0]-1 == enemy_pos[0] and grid_pos[1] == enemy_pos[1]:
+				return false
+			if grid_pos[1] - 1 >= 0 and grid_pos[0] == enemy_pos[0] and grid_pos[1]-1 == enemy_pos[1]:
+				return false
+			if grid_pos[0] + 1 < character.grid_cols and \
+				grid_pos[0]+1 == enemy_pos[0] and grid_pos[1] == enemy_pos[1]:
+				return false
+			if grid_pos[1] + 1 < character.grid_rows and \
+				grid_pos[0]-1 == enemy_pos[0] and grid_pos[1] == enemy_pos[1]:
+				return false
+	return true
 
 """
 Either enemy just ended their turn or player has used an action.
