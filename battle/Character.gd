@@ -12,7 +12,7 @@ extends Node2D
 
 var grid_rows = 5
 var grid_cols = 7
-
+var alive = true
 var grid_pos = [3, 4]
 var saved_grid_pos = []
 

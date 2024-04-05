@@ -192,7 +192,7 @@ Player wins by having all creatures on top row without any enemies adjacent to t
 """
 func player_won():
 	
-	if enemies.get_children() == []:
+	if all_enemies_died():
 		return true
 		
 	for character in characters.get_children():
@@ -215,6 +215,15 @@ func player_won():
 			if grid_pos[1] + 1 < character.grid_rows and \
 				grid_pos[0]-1 == enemy_pos[0] and grid_pos[1] == enemy_pos[1]:
 				return false
+	return true
+
+
+"""All Enemies have died"""
+
+func all_enemies_died():
+	for enemy in enemies.get_children():
+		if enemy.alive == true:
+			return false
 	return true
 
 """

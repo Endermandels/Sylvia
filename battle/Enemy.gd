@@ -11,6 +11,7 @@ extends Node2D
 var grid_rows = 5
 var grid_cols = 7
 var enemy_pos = [3, 0]
+var alive = true
 
 signal end_turn
 	
@@ -20,6 +21,10 @@ func attacked_for(damage):
 	print('Enemy remaining HP ' + str(stats.hp))
 
 func _on_battle_scene_enemys_turn():
+	if not alive:
+		emit_signal("end_turn")
+		return
+		
 	var possible_actions = [["generate_move_list", true, true],
 	["generate_attack_list", true, false]]
 	var turn_list = generate_turn_list(possible_actions, enemy_pos,
