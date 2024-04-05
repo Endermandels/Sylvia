@@ -7,6 +7,7 @@ var audioStreamPlayer = AudioStreamPlayer.new()
 var totalVolume: float
 
 func _ready():
+	audioStreamPlayer.bus = "Music"
 	add_child(audioStreamPlayer)
 	audioStreamPlayer.volume_db = -11
 
@@ -17,6 +18,7 @@ func play(track: String) -> void:
 		audioStreamPlayer.stream = stream
 		audioStreamPlayer.play()
 		isPlaying = true
+	
 
 func stop() -> void:
 	audioStreamPlayer.stop()

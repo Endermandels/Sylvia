@@ -1,0 +1,50 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwolbftybs5yt"]
+
+[ext_resource type="PackedScene" uid="uid://dtxydi0aim84d" path="res://volume_slider.tscn" id="1_1wc5r"]
+[ext_resource type="Script" path="res://Audio Subsystem/volume_settings.gd" id="1_4yvf0"]
+
+[node name="volume_settings" type="Window"]
+position = Vector2i(250, 140)
+size = Vector2i(113, 147)
+script = ExtResource("1_4yvf0")
+
+[node name="panel" type="PanelContainer" parent="."]
+offset_right = 152.0
+offset_bottom = 146.0
+scale = Vector2(0.75, 0.75)
+
+[node name="contents" type="VBoxContainer" parent="panel"]
+layout_mode = 2
+
+[node name="master_label" type="Label" parent="panel/contents"]
+layout_mode = 2
+text = "Master Volume"
+
+[node name="master" parent="panel/contents" instance=ExtResource("1_1wc5r")]
+layout_mode = 2
+bus_name = "Master"
+
+[node name="music_label" type="Label" parent="panel/contents"]
+layout_mode = 2
+text = "Music Volume"
+
+[node name="music" parent="panel/contents" instance=ExtResource("1_1wc5r")]
+layout_mode = 2
+bus_name = "Music"
+
+[node name="sfx_label" type="Label" parent="panel/contents"]
+layout_mode = 2
+text = "SFX Volume"
+
+[node name="sfx" parent="panel/contents" instance=ExtResource("1_1wc5r")]
+layout_mode = 2
+bus_name = "SFX"
+
+[node name="HSeparator" type="HSeparator" parent="panel/contents"]
+layout_mode = 2
+
+[node name="return_button" type="Button" parent="panel/contents"]
+layout_mode = 2
+text = "Return"
+
+[connection signal="pressed" from="panel/contents/return_button" to="." method="_on_return_button_pressed"]

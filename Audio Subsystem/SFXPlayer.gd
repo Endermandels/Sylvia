@@ -37,6 +37,7 @@ func loadEffects(effects: Dictionary) -> void:
 		var stream = load(effects[effect])
 		if stream:
 			var player = AudioStreamPlayer.new()
+			player.bus = "SFX"
 			player.stream = stream
 			add_child(player)
 			soundEffects[effect] = stream
