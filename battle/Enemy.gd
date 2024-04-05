@@ -3,7 +3,7 @@ extends Node2D
 @onready var sprite = $Sprite2D
 @onready var stats = $Stats
 @onready var hitbox = $Area2D
-
+@onready var enemies = $".."
 #temp way to get the player
 @onready var clover = get_parent().get_parent().get_node("Characters/Clover")
 
@@ -135,13 +135,28 @@ func generate_move_list(start, animal_speed : int):
 		if new_x >= 0 and new_x < grid_cols:
 			for i in range(-y, y+1):
 				var new_y : int = i + col
-				if new_y >= 0 and new_y < grid_rows and \
-				[new_x, new_y] != clover.grid_pos:
-					coordinates.append(["move", [[new_x, new_y]]])
+				if new_y >= 0 and new_y < grid_rows and [new_x, new_y] != clover.grid_pos:
+					# Check if the new position is occupied by any enemy
+					if not is_position_occupied_by_enemy(new_x, new_y):
+						coordinates.append(["move", [[new_x, new_y]]])
 		x += 1
 		if x <= 0: y += 1
 		else: y -= 1
 	return coordinates
+
+
+
+"""
+Checks to ensure that there is not an another enemy present at a space.
+"""
+func is_position_occupied_by_enemy(new_x, new_y):
+	for enemy in enemies.get_children():
+		# Skip the check for the current instance itself
+		if enemy == self:
+			continue
+		if enemy.enemy_pos == [new_x, new_y]:
+			return true
+	return false
 
 """
 Moves the enemy to the given coordinates and visually
