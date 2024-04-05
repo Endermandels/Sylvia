@@ -30,6 +30,7 @@ offset_left = 192.0
 offset_top = 40.0
 offset_right = 613.0
 offset_bottom = 95.0
+mouse_filter = 2
 color = Color(0.266667, 0.772549, 0.670588, 1)
 
 [node name="Grid" type="Sprite2D" parent="."]
