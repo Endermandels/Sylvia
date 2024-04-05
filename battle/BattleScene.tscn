@@ -260,6 +260,12 @@ grid_pos = [6, 2]
 [node name="Jerry" parent="Enemies" instance=ExtResource("8_kyk1e")]
 position = Vector2(399, 68)
 
+[node name="Jerry2" parent="Enemies" instance=ExtResource("8_kyk1e")]
+position = Vector2(399, 68)
+
+[node name="Jerry3" parent="Enemies" instance=ExtResource("8_kyk1e")]
+position = Vector2(399, 68)
+
 [node name="Characters" type="Node2D" parent="."]
 
 [node name="Clover" parent="Characters" instance=ExtResource("7")]
@@ -363,7 +369,11 @@ script = ExtResource("15_rymsq")
 visible = false
 
 [connection signal="enemys_turn" from="." to="Enemies/Jerry" method="_on_battle_scene_enemys_turn"]
+[connection signal="enemys_turn" from="." to="Enemies/Jerry2" method="_on_battle_scene_enemys_turn"]
+[connection signal="enemys_turn" from="." to="Enemies/Jerry3" method="_on_battle_scene_enemys_turn"]
 [connection signal="end_turn" from="Enemies/Jerry" to="." method="_on_enemy_end_turn"]
+[connection signal="end_turn" from="Enemies/Jerry2" to="." method="_on_enemy_end_turn"]
+[connection signal="end_turn" from="Enemies/Jerry3" to="." method="_on_enemy_end_turn"]
 [connection signal="ready" from="UI/Control" to="UI/Control" method="_on_ready"]
 [connection signal="pressed" from="UI/Control/CollectFoodButton" to="." method="_on_collect_food_button_pressed"]
 [connection signal="pressed" from="UI/Control/FinishMovementButton" to="." method="_on_finish_movement_button_pressed"]

@@ -38,7 +38,6 @@ var actions_taken = []
 var battle_queue = [] # TODO: Implement
 
 # Names of all the enemies currently on the board.
-var board_enemies = ["Jerry"]
 
 # Enemies affected by character abilities or attacks
 var affected_enemies = []
@@ -50,6 +49,8 @@ var current_char = null
 var moving = false
 var paused = false
 
+
+var enemies_completed_turn = 0
 signal enemys_turn
 
 """
@@ -62,7 +63,7 @@ func _ready():
 	hide_nodes()
 	decide_turn_order()
 	current_char.save_stats()
-	spawn_enemies(board_enemies, 7)
+	spawn_enemies( 7)
 	players_turn()
 
 func hide_nodes():
@@ -75,11 +76,12 @@ func decide_turn_order():
 	# TODO: Implement
 	current_char = $"Characters/Clover"
 	
-func spawn_enemies(enemies_to_spawn, num_cols):
-	for enemy_name in enemies_to_spawn:
-		var enemy = enemies.get_node(enemy_name)
+func spawn_enemies( num_cols):
+	for enemy in enemies.get_children():
 		enemy.enemy_pos = [randi() % num_cols, 0]
 		enemy.update_visual_position((enemy.enemy_pos))
+	#	enemy.enemys_turn.connect(_on_battle_scene_enemys_turn)
+		
 
 """
 INPUT
@@ -162,10 +164,13 @@ When the enemy ends their turn, signal that it is the player's turn.
 Check if the player has successfully won.
 """
 func _on_enemy_end_turn():
-	if gamestate == State.ENEMY_TURN:
+	enemies_completed_turn += 1
+	if enemies_completed_turn >= enemies.get_child_count():
+		# All enemies have completed their turn
+		enemies_completed_turn = 0  # Reset for the next round
 		if player_won():
 			gamestate = State.PLAYER_WON
-			print('player won!')
+			print('Player won!')
 			return
 		
 		gamestate = State.PLAYER_TURN
@@ -212,6 +217,7 @@ func player_won():
 Either enemy just ended their turn or player has used an action.
 """
 func players_turn():
+	
 	collect_food_button.visible = false
 	finish_movement_button.visible = false
 	attack_button.visible = false
@@ -299,22 +305,19 @@ ATTACK
 func _on_attack_button_pressed():
 	audio_manager.playSFX("attack")
 	print('attack')
-	var choices = enemies_in_range(current_char.get_attack_range())
-	var chosen_enemy = null
+	var enemies_in_range = enemies_in_range(current_char.get_attack_range())
 	
-	if len(choices) > 1:
-		#TODO: Implement Selection between multiple enemies
-		pass
-	else:
-		chosen_enemy = choices[0]
-		chosen_enemy.stats.save_stats()
-		if not chosen_enemy in affected_enemies:
-			affected_enemies.append(chosen_enemy)
+	for enemy in enemies_in_range:
+		enemy.stats.save_stats()
+		if not enemy in affected_enemies:
+			affected_enemies.append(enemy)
+		current_char.attack(enemy)
 	
-	current_char.attack(chosen_enemy)
 	current_char.use_action()
 	actions_taken.append('attack')
+	enemies_in_range = []
 	players_turn()
+
 
 """
 Check if there is an enemy within a custom range of the current character.
@@ -333,6 +336,7 @@ func enemies_in_range(custom_range):
 				enemy.enemy_pos[1] == coord[1] + current_char.grid_pos[1]:
 				in_range.append(enemy)
 				break
+	print(in_range)
 	return in_range
 
 """
