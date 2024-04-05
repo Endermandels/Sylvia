@@ -191,6 +191,10 @@ func _on_enemy_end_turn():
 Player wins by having all creatures on top row without any enemies adjacent to their creatures.
 """
 func player_won():
+	
+	if enemies.get_children() == []:
+		return true
+		
 	for character in characters.get_children():
 		for enemy in enemies.get_children():
 			var grid_pos = character.grid_pos
@@ -316,6 +320,12 @@ func _on_attack_button_pressed():
 	current_char.use_action()
 	actions_taken.append('attack')
 	enemies_in_range = []
+	
+	if player_won():
+			gamestate = State.PLAYER_WON
+			print('Player won!')
+			return
+			
 	players_turn()
 
 
@@ -361,6 +371,11 @@ func _on_hand_play_card(card, targets):
 					current_char.use_action()
 					food_counter.decrement_count(card.stats.cost)
 					actions_taken.append('ability')
+					
+					if player_won():
+						gamestate = State.PLAYER_WON
+						print('Player won!')
+						return
 					players_turn()
 					break
 

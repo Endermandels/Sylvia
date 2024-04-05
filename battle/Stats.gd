@@ -44,6 +44,7 @@ func receiveDMG(damage):
 	
 	#temporarily set hp back to max hp when player dies
 	if hp <= 0:
+		hp = 0
 		print("Unit Died, resetting HP...")
 		self.get_parent().queue_free()
 		
