@@ -15,7 +15,8 @@ extends Node2D
 enum State {
 	PLAYER_TURN,
 	ENEMY_TURN,
-	PLAYER_WON
+	PLAYER_WON,
+	PLAYER_LOST
 }
 
 @onready var collect_food_button = $UI/Control/CollectFoodButton
@@ -194,12 +195,14 @@ func player_won():
 	
 	if all_enemies_died():
 		return true
-		
+	
 	for character in characters.get_children():
 		for enemy in enemies.get_children():
 			var grid_pos = character.grid_pos
 			var enemy_pos = enemy.enemy_pos
 			
+			if grid_pos == [-1, -1]: #this is because apon death the grid pos gets set to this
+				return false
 			# Must be on top row
 			if grid_pos[1] > 0:
 				return false
@@ -225,11 +228,25 @@ func all_enemies_died():
 		if enemy.alive == true:
 			return false
 	return true
+	
+"""Player Lost, by having all characters be dead"""
+
+func player_lost():
+	for character in characters.get_children():
+		if character.alive == true:
+			return false
+	return true
+
 
 """
 Either enemy just ended their turn or player has used an action.
 """
 func players_turn():
+	
+	if player_lost():
+		print("Player Lost")
+		gamestate = State.PLAYER_TURN
+	
 	
 	collect_food_button.visible = false
 	finish_movement_button.visible = false
