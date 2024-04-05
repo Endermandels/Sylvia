@@ -154,7 +154,9 @@ func get_enemies_positions():
 	var enemy_positions = []
 	var parent = get_parent()
 	for enemy in parent.get_children():
-		if enemy.name != self.name: enemy_positions.append(enemy.grid_pos)
+		if enemy == self:
+			continue
+		enemy_positions.append(enemy.enemy_pos)
 	return enemy_positions
 
 # Returns an array of the positions of all the player characters on the board.
