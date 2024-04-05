@@ -20,8 +20,8 @@ const MAP_LINE = preload("res://overworld/map_line.tscn")
 @onready var visuals: Node2D = $Visuals
 @onready var camera_2d: Camera2D = $Camera2D
 
-var map_data: Array[Array]
-var floors_climbed: int
+@export var map_data: Array[Array]
+@export var floors_climbed: int
 var last_room: map_space
 var camera_edge_y: float
 
@@ -70,7 +70,7 @@ func unlock_floor(which_floor: int = floors_climbed) -> void:
 			
 #helper function
 func unlock_next_rooms() -> void:
-	for map_room: MapRoom in rooms.getchildren():
+	for map_room: MapRoom in rooms.get_children():
 		if last_room.next_rooms.has(map_room.room):
 			map_room.available = true
 			
@@ -111,12 +111,13 @@ func _on_map_room_selected(room: map_space) -> void:
 	for map_room: MapRoom in rooms.get_children():
 		if map_room.room.row == room.row:
 			map_room.available = false
-			
+	room.selected = true
 	last_room = room
 	floors_climbed += 1
+	unlock_next_rooms()
 	
 	#this functionality needs to be expanded for other node types and to save our map and position on it
-	get_tree().change_scene_to_file("res://battle/BattleScene.tscn")
+	#get_tree().change_scene_to_file("res://battle/BattleScene.tscn")
 	
 	
 	
