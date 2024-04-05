@@ -224,8 +224,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 4.0
 offset_top = 4.0
-offset_right = 644.0
-offset_bottom = 364.0
+offset_right = -4.0
+offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -293,6 +293,18 @@ text = "Right
 layout_mode = 2
 text = "Accept
 "
+
+[node name="Escape" type="Button" parent="InputPopUp/Control/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Escape"
+
+[node name="Horn" type="Button" parent="InputPopUp/Control/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Horn"
+
+[node name="Pause" type="Button" parent="InputPopUp/Control/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Pause"
 
 [node name="return" type="Button" parent="InputPopUp/Control"]
 custom_minimum_size = Vector2(300, 0)
@@ -381,6 +393,9 @@ script = ExtResource("6_61iuo")
 [connection signal="pressed" from="InputPopUp/Control/ScrollContainer/VBoxContainer/Left" to="InputPopUp/Listener/KeyMapScript" method="_on_left_pressed"]
 [connection signal="pressed" from="InputPopUp/Control/ScrollContainer/VBoxContainer/Right" to="InputPopUp/Listener/KeyMapScript" method="_on_right_pressed"]
 [connection signal="pressed" from="InputPopUp/Control/ScrollContainer/VBoxContainer/Accept" to="." method="_on_accept_pressed"]
+[connection signal="pressed" from="InputPopUp/Control/ScrollContainer/VBoxContainer/Escape" to="InputPopUp/Listener/KeyMapScript" method="_on_escape_pressed"]
+[connection signal="pressed" from="InputPopUp/Control/ScrollContainer/VBoxContainer/Horn" to="InputPopUp/Listener/KeyMapScript" method="_on_horn_pressed"]
+[connection signal="pressed" from="InputPopUp/Control/ScrollContainer/VBoxContainer/Pause" to="InputPopUp/Listener/KeyMapScript" method="_on_pause_pressed"]
 [connection signal="pressed" from="InputPopUp/Control/return" to="InputPopUp/Listener/KeyMapScript" method="_on_return_pressed"]
 [connection signal="canceled" from="InputPopUp/Listener/ConfirmAction" to="InputPopUp/Listener/KeyMapScript" method="_on_confirm_action_canceled"]
 [connection signal="confirmed" from="InputPopUp/Listener/ConfirmAction" to="InputPopUp/Listener/KeyMapScript" method="_on_confirm_action_confirmed"]
