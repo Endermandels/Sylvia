@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://fpysupt0lbee"]
+[gd_scene load_steps=7 format=3 uid="uid://fpysupt0lbee"]
 
 [ext_resource type="Script" path="res://Pause Menu/pause_menu.gd" id="1_7ky4s"]
 [ext_resource type="Shader" path="res://Pause Menu/pause_menu.gdshader" id="2_eq22m"]
+[ext_resource type="PackedScene" uid="uid://bwolbftybs5yt" path="res://volume_settings.tscn" id="3_2m88r"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_putbs"]
 shader = ExtResource("2_eq22m")
@@ -34,10 +35,10 @@ script = ExtResource("1_7ky4s")
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_putbs")
 layout_mode = 2
-offset_left = -903.0
-offset_top = -415.0
-offset_right = 1462.0
-offset_bottom = 1025.0
+offset_left = -890.0
+offset_top = -401.0
+offset_right = 1475.0
+offset_bottom = 1039.0
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 0
@@ -68,6 +69,10 @@ text = "Quit to Menu"
 script = SubResource("GDScript_lnr66")
 metadata/_edit_use_anchors_ = true
 
+[node name="volume_settings" parent="." instance=ExtResource("3_2m88r")]
+visible = false
+
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/OverworldButton" to="MarginContainer/VBoxContainer/OverworldButton" method="_on_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/QuitButton" to="MarginContainer/VBoxContainer/QuitButton" method="_on_pressed"]
