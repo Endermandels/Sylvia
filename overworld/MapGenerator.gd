@@ -24,8 +24,8 @@ const PATHS := 3
 const UNIQUE_PATHS := 2
 #weighting for each map_space's chance when receiving a type
 const ENEMY_ROOM_WEIGHT := 10.0
-const SHOP_ROOM_WEIGHT := 2.5
-const EVENT_ROOM_WEIGHT := 4.0
+const SHOP_ROOM_WEIGHT := 5.0
+const EVENT_ROOM_WEIGHT := 5.0
 
 var random_room_type_weights = {
 	map_space.Type.ENEMY: 0.0,
@@ -145,8 +145,6 @@ func _would_cross_existing_path(i: int, j: int, space: map_space) -> bool:
 				
 	return false
 	
-	
-	
 func _setup_boss_room() -> void:
 	var center := floori(MAP_WIDTH * 0.5)
 	var boss_room := map_data[FLOORS -1][center] as map_space
@@ -165,8 +163,7 @@ func _setup_random_room_weights() -> void:
 	random_room_type_weights[map_space.Type.SHOP] = ENEMY_ROOM_WEIGHT + SHOP_ROOM_WEIGHT
 	random_room_type_weights[map_space.Type.EVENT] = ENEMY_ROOM_WEIGHT + EVENT_ROOM_WEIGHT + SHOP_ROOM_WEIGHT
 	
-
-	random_room_type_total_weight = random_room_type_weights[map_space.Type.SHOP]
+	random_room_type_total_weight = random_room_type_weights[map_space.Type.EVENT]
 	
 #changes all map_space types so they aren't NO_TYPE
 func _setup_room_types() -> void:

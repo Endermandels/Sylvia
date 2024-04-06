@@ -11,6 +11,8 @@ NOTE:
 
 extends Node2D
 
+signal completed
+
 # Keeps track of game states
 enum State {
 	PLAYER_TURN,
@@ -165,6 +167,7 @@ func _on_enemy_end_turn():
 	if gamestate == State.ENEMY_TURN:
 		if player_won():
 			gamestate = State.PLAYER_WON
+			completed.emit()
 			print('player won!')
 			return
 		
