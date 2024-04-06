@@ -24,6 +24,12 @@ extends Node
 @onready var saved_mov = mov
 @onready var saved_mor = mor
 
+@onready var parent_node = self.get_parent()
+@onready var sprite_node = parent_node.get_node("Sprite2D")
+@onready var dead_node = parent_node.get_node("Dead")
+
+var death_position = []
+
 func can_perform_act():
 	return act > 0
 
@@ -44,11 +50,26 @@ func receiveDMG(damage):
 	
 	#temporarily set hp back to max hp when player dies
 	if hp <= 0:
-		print("Unit Died, resetting HP...")
-		hp = HP
+		print("Unit Died.")
+		
+		
+		dead_node.global_position = sprite_node.global_position  # Update Dead's position
+		sprite_node.visible = false  # Make Sprite2D invisible
+		dead_node.visible = true     # Make Dead visible
+		
+		parent_node.alive = false #set the parent to be dead
+		
+		if parent_node.get_name() == "Clover":
+			death_position = parent_node.grid_pos
+			parent_node.grid_pos = [-1,-1]
+		else:
+			death_position = parent_node.enemy_pos
+			parent_node.enemy_pos = [-1, -1] # set to something off board so it wont interfeir
+	
 		
 	#update hearts container
 	heartsContainer.setHearts(hp)
+	
 	 
 
 func use_action():
@@ -67,6 +88,15 @@ func save_stats():
 
 func load_stats():
 	print("stats loaded")
+	
+	if hp <= 0:
+		sprite_node.visible = true  # Make Sprite2D invisible
+		dead_node.visible = false 
+		parent_node.alive = true
+		parent_node.enemy_pos = death_position
+		
+		
+		
 	hp = saved_hp
 	atk = saved_atk
 	act = saved_act

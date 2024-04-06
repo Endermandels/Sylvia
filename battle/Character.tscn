@@ -1,12 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://bub37ipigql3v"]
+[gd_scene load_steps=6 format=3 uid="uid://bub37ipigql3v"]
 
 [ext_resource type="Texture2D" uid="uid://beaxj4qxkqcsh" path="res://assets/character.png" id="1"]
 [ext_resource type="Script" path="res://battle/Character.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://blul8swm87aem" path="res://battle/hearts_container.tscn" id="2_iitgv"]
 [ext_resource type="PackedScene" uid="uid://thokds7o172e" path="res://battle/Stats.tscn" id="3"]
+[ext_resource type="Texture2D" uid="uid://csrbjndfygj03" path="res://assets/rip.png" id="5_wrv2o"]
 
 [node name="Character" type="Node2D"]
 script = ExtResource("2")
+
+[node name="Dead" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("5_wrv2o")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-1.19209e-07, 1.19209e-07)
