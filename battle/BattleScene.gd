@@ -114,6 +114,8 @@ func _input(event):
 		exit()
 	elif event.is_action_pressed("pause"):
 		pauseMenu()
+	elif event.is_action_pressed("horn"):
+		_on_end_of_turn_end_turn()
 	else:
 		keyboard_move_char(event)
 		

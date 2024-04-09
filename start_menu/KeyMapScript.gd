@@ -22,6 +22,19 @@ func _on_accept_pressed():
 	action = "ui_accept"
 	%Listener.show()
 
+func _on_escape_pressed():
+	action = "ui_cancel"
+	%Listener.show()
+	
+func _on_horn_pressed():
+	action = "horn"
+	%Listener.show()
+	
+func _on_pause_pressed():
+	action = "pause"
+	%Listener.show()
+
+	
 func _unhandled_input(event) -> void:
 	if (event is InputEventKey or event is InputEventMouseButton) and event.is_pressed():
 		accept_event()
@@ -39,3 +52,6 @@ func _on_confirm_action_canceled():
 
 func _on_return_pressed():
 	%InputPopUp.hide()
+
+
+
