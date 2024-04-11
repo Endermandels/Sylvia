@@ -9,7 +9,6 @@ func _ready():
 	musicPlayer = $MusicPlayer
 	sfxPlayer = $SFXPlayer
 
-
 func playMusic(track: String) -> void:
 	musicPlayer.play(track)
 	
@@ -18,6 +17,15 @@ func stopMusic() -> void:
 	
 func playSFX(effect: String) -> void:
 	sfxPlayer.play(effect)
+
+func toggleFasterMusic() -> void:
+	musicPlayer.toggleFasterMusic()
+
+func fasterMusic() -> void:
+	musicPlayer.fasterMusic()
+
+func normalSpeedMusic() -> void:
+	musicPlayer.normalSpeedMusic()
 	
 func setVolume(volume: float) -> void:
 	globalVolume = volume
