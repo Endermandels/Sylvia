@@ -72,7 +72,70 @@ metadata/_edit_use_anchors_ = true
 [node name="volume_settings" parent="." instance=ExtResource("3_2m88r")]
 visible = false
 
+[node name="XboxControls" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -129.0
+offset_top = -85.5
+offset_right = 129.0
+offset_bottom = 85.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Xbox Controls
+Back = Exit Current Scene
+B = Horn
+Y = Select/Accept
+Menu = Pause Menu
+Joystick = Navigation"
+
+[node name="userControls" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -129.0
+offset_top = -85.5
+offset_right = 129.0
+offset_bottom = 85.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Non-default controls selected
+See settings menu for 
+mapping"
+
+[node name="KeyboardControls" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -171.5
+offset_top = -85.5
+offset_right = 171.5
+offset_bottom = 85.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Keyboard Controls
+Esc =Exit Current Scene
+H = Horn
+Tab = pause menu
+Enter = Select/Accept
+Up, Down, Left, Right = Navigation"
+
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/OverworldButton" to="MarginContainer/VBoxContainer/OverworldButton" method="_on_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/QuitButton" to="MarginContainer/VBoxContainer/QuitButton" method="_on_pressed"]
+[connection signal="ready" from="XboxControls" to="." method="_on_xbox_controls_ready"]
+[connection signal="ready" from="userControls" to="." method="_on_xbox_controls_ready"]
+[connection signal="ready" from="KeyboardControls" to="." method="_on_keyboard_controls_ready"]
