@@ -1,24 +1,66 @@
-[gd_scene load_steps=2 format=3 uid="uid://c0s26pemjhjbs"]
+[gd_scene load_steps=8 format=3 uid="uid://c0s26pemjhjbs"]
 
 [ext_resource type="Script" path="res://Events/EventScene.gd" id="1_mfa6v"]
+[ext_resource type="Texture2D" uid="uid://k5ishdacjv24" path="res://assets/event.png" id="2_seyw1"]
+[ext_resource type="Texture2D" uid="uid://0oyyx3t0ghbn" path="res://assets/tree.png" id="3_qpobm"]
+[ext_resource type="Texture2D" uid="uid://cu508loi11khm" path="res://assets/beehive.png" id="4_vxqqy"]
+
+[sub_resource type="Gradient" id="Gradient_7y1ra"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_7cwqg"]
+gradient = SubResource("Gradient_7y1ra")
+fill_from = Vector2(1, 0)
+fill_to = Vector2(0.027027, 0.454054)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n1p3f"]
 
 [node name="EventScene" type="Node2D"]
 script = ExtResource("1_mfa6v")
 
+[node name="Background" type="TextureRect" parent="."]
+modulate = Color(0.278431, 0.560784, 0.368627, 1)
+self_modulate = Color(0.788235, 0.788235, 0.788235, 1)
+offset_right = 640.0
+offset_bottom = 357.0
+texture = SubResource("GradientTexture2D_7cwqg")
+
+[node name="Morsel" type="Node2D" parent="."]
+position = Vector2(316, 191)
+scale = Vector2(4.82813, 3.84375)
+
+[node name="Morsel_Area2d" type="Area2D" parent="Morsel"]
+
+[node name="Morsel_Collision_Box" type="CollisionShape2D" parent="Morsel/Morsel_Area2d"]
+shape = SubResource("CircleShape2D_n1p3f")
+
+[node name="Morsel_Sprite" type="Sprite2D" parent="Morsel/Morsel_Area2d/Morsel_Collision_Box"]
+texture = ExtResource("2_seyw1")
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
-offset_left = 88.0
-offset_top = 84.0
-offset_right = 502.0
-offset_bottom = 160.0
-text = "Here will be events, such as a frog giving you a morsel for your next battle"
+offset_left = 41.0
+offset_top = 29.0
+offset_right = 323.0
+offset_bottom = 113.0
+text = "A morsel you can attempt to steal from the bees
+(bee careful)"
 
 [node name="Button" type="Button" parent="CanvasLayer"]
-offset_left = 194.0
-offset_top = 161.0
-offset_right = 334.0
-offset_bottom = 204.0
+offset_left = 258.0
+offset_top = 287.0
+offset_right = 398.0
+offset_bottom = 330.0
 text = "Continue"
+
+[node name="Tree_Sprite" type="Sprite2D" parent="."]
+position = Vector2(459, 162)
+scale = Vector2(7.14453, 7.24219)
+texture = ExtResource("3_qpobm")
+
+[node name="Beehive_Sprite" type="Sprite2D" parent="."]
+position = Vector2(433, 198)
+scale = Vector2(3.03906, 2.73438)
+texture = ExtResource("4_vxqqy")
 
 [connection signal="pressed" from="CanvasLayer/Button" to="." method="test_button_signal_completed"]

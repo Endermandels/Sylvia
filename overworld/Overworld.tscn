@@ -3,6 +3,14 @@
 [ext_resource type="Script" path="res://overworld/Overworld.gd" id="1_t75pi"]
 [ext_resource type="Script" path="res://overworld/MapGenerator.gd" id="4_3k8ay"]
 
+[sub_resource type="Gradient" id="Gradient_j8the"]
+offsets = PackedFloat32Array(0, 0.993506)
+colors = PackedColorArray(0.144063, 0.144063, 0.144063, 1, 0.516809, 0.218354, 0.121666, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_kpcvw"]
+gradient = SubResource("Gradient_j8the")
+width = 50
+
 [sub_resource type="GDScript" id="GDScript_8ndto"]
 script/source = "extends Button
 
@@ -13,43 +21,8 @@ func _on_pressed():
 	get_tree().change_scene_to_file(\"res://start_menu/start_menu.tscn\")
 "
 
-[sub_resource type="Gradient" id="Gradient_j8the"]
-offsets = PackedFloat32Array(0, 0.993506)
-colors = PackedColorArray(0.144063, 0.144063, 0.144063, 1, 0.516809, 0.218354, 0.121666, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_kpcvw"]
-gradient = SubResource("Gradient_j8the")
-width = 50
-
 [node name="Overworld" type="Node2D"]
 script = ExtResource("1_t75pi")
-
-[node name="Visuals" type="Node2D" parent="."]
-
-[node name="Lines" type="Node2D" parent="Visuals"]
-unique_name_in_owner = true
-
-[node name="Rooms" type="Node2D" parent="Visuals"]
-unique_name_in_owner = true
-
-[node name="MapGenerator" type="Node2D" parent="."]
-script = ExtResource("4_3k8ay")
-
-[node name="Menu" type="CanvasLayer" parent="."]
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Menu"]
-offset_left = 7.0
-offset_top = 14.0
-offset_right = 118.0
-offset_bottom = 94.0
-
-[node name="Quit to Menu" type="Button" parent="Menu/VBoxContainer"]
-layout_mode = 2
-text = "Quit to Menu"
-script = SubResource("GDScript_8ndto")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-offset = Vector2(320, 180)
 
 [node name="MapBackground" type="CanvasLayer" parent="."]
 layer = -1
@@ -62,4 +35,29 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture1D_kpcvw")
 
-[connection signal="pressed" from="Menu/VBoxContainer/Quit to Menu" to="Menu/VBoxContainer/Quit to Menu" method="_on_pressed"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MapBackground"]
+offset_left = 7.0
+offset_top = 14.0
+offset_right = 148.0
+offset_bottom = 94.0
+
+[node name="Quit to Menu" type="Button" parent="MapBackground/VBoxContainer"]
+layout_mode = 2
+text = "Quit to Menu"
+script = SubResource("GDScript_8ndto")
+
+[node name="Visuals" type="Node2D" parent="."]
+
+[node name="Lines" type="Node2D" parent="Visuals"]
+unique_name_in_owner = true
+
+[node name="Rooms" type="Node2D" parent="Visuals"]
+unique_name_in_owner = true
+
+[node name="MapGenerator" type="Node2D" parent="."]
+script = ExtResource("4_3k8ay")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(320, 180)
+
+[connection signal="pressed" from="MapBackground/VBoxContainer/Quit to Menu" to="MapBackground/VBoxContainer/Quit to Menu" method="_on_pressed"]

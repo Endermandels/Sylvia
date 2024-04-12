@@ -14,7 +14,7 @@ func _on_ready():
 		
 func _on_start_pressed():
 	audio_manager.playSFX("button")
-	get_tree().change_scene_to_file("res://battle/BattleScene.tscn")
+	get_tree().change_scene_to_file("res://Run/run.tscn")
 
 func _on_exit_pressed():
 	audio_manager.playSFX("button")
