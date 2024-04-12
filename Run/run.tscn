@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://do1eb2ygkcb5q"]
+
+[ext_resource type="Script" path="res://Run/run.gd" id="1_w1lr1"]
+[ext_resource type="PackedScene" uid="uid://ciygfyllvwgoa" path="res://overworld/Overworld.tscn" id="2_3wpyu"]
+
+[node name="Run" type="Node"]
+script = ExtResource("1_w1lr1")
+
+[node name="Overworld" parent="." instance=ExtResource("2_3wpyu")]
+
+[node name="CurrentView" type="Node" parent="."]

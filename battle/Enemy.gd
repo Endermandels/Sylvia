@@ -5,6 +5,7 @@ extends Node2D
 @onready var hitbox = $Area2D
 @onready var enemies = $".."
 @onready var behavior = $Behavior
+@onready var audio_manager = get_parent().get_parent().get_node("AudioManager")
 #temp way to get the player
 @onready var clover = get_parent().get_parent().get_node("Characters/Clover")
 
@@ -207,6 +208,10 @@ func attack(damage, animal):
 	print('Player attacked for ' + str(damage))
 	animal_stats.receiveDMG(stats.atk)
 	print('Player remaining HP ' + str(animal_stats.hp))
+	if animal_stats.hp <= 2:
+		audio_manager.fasterMusic()
+	if clover.alive == false:
+		audio_manager.normalSpeedMusic()
 """
 new_pos is an array with two elements. The first element is the x
 coordinate of the animal and the second element is the y coordinate.

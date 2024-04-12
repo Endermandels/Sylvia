@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://cl8ua4lg2e25f"]
+
+[ext_resource type="Script" path="res://Shop/ShopScene.gd" id="1_xwm50"]
+
+[node name="Shop" type="Node2D"]
+script = ExtResource("1_xwm50")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
+offset_left = 166.0
+offset_top = 59.0
+offset_right = 499.0
+offset_bottom = 91.0
+text = "A shop will be impemented here"
+
+[node name="Button" type="Button" parent="CanvasLayer"]
+offset_left = 255.0
+offset_top = 173.0
+offset_right = 356.0
+offset_bottom = 207.0
+text = "Continue"
+
+[connection signal="pressed" from="CanvasLayer/Button" to="." method="test_button_signal_completed"]

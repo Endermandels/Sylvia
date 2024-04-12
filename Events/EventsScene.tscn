@@ -1,30 +1,33 @@
-[gd_scene load_steps=4 format=3 uid="uid://dfqqq6h8ns5ww"]
+[gd_scene load_steps=2 format=3 uid="uid://c364pkkaty5es"]
 
-[sub_resource type="Gradient" id="Gradient_6nkii"]
-offsets = PackedFloat32Array(0, 0.402597, 0.467532, 1)
-colors = PackedColorArray(0, 0, 0, 1, 0.311688, 0.311688, 0.311688, 1, 0.467532, 0.467532, 0.467532, 1, 1, 1, 1, 1)
+[sub_resource type="GDScript" id="GDScript_j1nr6"]
+script/source = "class_name EventsScene
+extends Node2D
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_8ntel"]
+signal completed
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_7x0dj"]
-seamless = true
-seamless_blend_skirt = 1.0
-as_normal_map = true
-bump_strength = 29.9
-color_ramp = SubResource("Gradient_6nkii")
-noise = SubResource("FastNoiseLite_8ntel")
+func test_button_signal_completed() -> void:
+	completed.emit()
+"
 
 [node name="EventsScene" type="Node2D"]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="Node2D" type="Node2D" parent="."]
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
-offset_right = 638.0
-offset_bottom = 512.0
-texture = SubResource("NoiseTexture2D_7x0dj")
+[node name="CanvasLayer" type="CanvasLayer" parent="Node2D"]
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Node2D/CanvasLayer"]
 offset_top = 116.0
 offset_right = 638.0
 offset_bottom = 222.0
-text = "Here will be a frog to bless you with starting morsels in your next fight (or maybe an item that you can consume do give you a morsel)"
+text = "Here will be a frog to bless you with starting morsels in your next fight (or maybe an item that you can consume to give you a morsel)"
+
+[node name="Button" type="Button" parent="Node2D/CanvasLayer"]
+offset_left = 202.0
+offset_top = 226.0
+offset_right = 343.0
+offset_bottom = 269.0
+text = "Continue"
+script = SubResource("GDScript_j1nr6")
+
+[connection signal="pressed" from="Node2D/CanvasLayer/Button" to="Node2D/CanvasLayer/Button" method="test_button_signal_completed"]

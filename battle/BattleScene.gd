@@ -11,6 +11,8 @@ NOTE:
 
 extends Node2D
 
+signal completed
+
 # Keeps track of game states
 enum State {
 	PLAYER_TURN,
@@ -122,10 +124,8 @@ func _input(event):
 func pauseMenu():
 	if paused:
 		pause_menu.hide()
-		Engine.time_scale = 1
 	else:
 		pause_menu.show()
-		Engine.time_scale = 0
 	paused = !paused
 
 func keyboard_move_char(event):
@@ -173,7 +173,8 @@ func _on_enemy_end_turn():
 		enemies_completed_turn = 0  # Reset for the next round
 		if player_won():
 			gamestate = State.PLAYER_WON
-			print('Player won!')
+			completed.emit()
+			print('player won!')
 			return
 		
 		gamestate = State.PLAYER_TURN
