@@ -10,20 +10,22 @@ extends Node
 
 var map_data: Array[Array]
 #the distance between each node (the spacing between an array of dots)
-const X_DIST := 30
-const Y_DIST := 25
+const X_DIST := 60
+const Y_DIST := 40
 #setting to control how "wild" the map can look (how far each dot can vary from it's position)
-const PLACEMENT_RANDOMNESS := 5
+const PLACEMENT_RANDOMNESS := 15
 #i, the number of rows
-const FLOORS := 15
+const FLOORS := 8
 #j, the width of the rows
-const MAP_WIDTH := 7
+const MAP_WIDTH := 4
 #how many possible PATHS there can be
-const PATHS := 6
+const PATHS := 3
+#how many starting PATHS will be unique
+const UNIQUE_PATHS := 2
 #weighting for each map_space's chance when receiving a type
 const ENEMY_ROOM_WEIGHT := 10.0
-const SHOP_ROOM_WEIGHT := 2.5
-const EVENT_ROOM_WEIGHT := 4.0
+const SHOP_ROOM_WEIGHT := 5.0
+const EVENT_ROOM_WEIGHT := 5.0
 
 var random_room_type_weights = {
 	map_space.Type.ENEMY: 0.0,
@@ -83,7 +85,7 @@ func _get_random_starting_points() -> Array[int]:
 	var unique_points: int = 0
 	
 	#keeps resetting until at least 2 unique points are rolled
-	while unique_points < 2:
+	while unique_points < UNIQUE_PATHS:
 		unique_points = 0
 		y_coordinates = []
 		
@@ -143,8 +145,6 @@ func _would_cross_existing_path(i: int, j: int, space: map_space) -> bool:
 				
 	return false
 	
-	
-	
 func _setup_boss_room() -> void:
 	var center := floori(MAP_WIDTH * 0.5)
 	var boss_room := map_data[FLOORS -1][center] as map_space
@@ -163,8 +163,7 @@ func _setup_random_room_weights() -> void:
 	random_room_type_weights[map_space.Type.SHOP] = ENEMY_ROOM_WEIGHT + SHOP_ROOM_WEIGHT
 	random_room_type_weights[map_space.Type.EVENT] = ENEMY_ROOM_WEIGHT + EVENT_ROOM_WEIGHT + SHOP_ROOM_WEIGHT
 	
-
-	random_room_type_total_weight = random_room_type_weights[map_space.Type.SHOP]
+	random_room_type_total_weight = random_room_type_weights[map_space.Type.EVENT]
 	
 #changes all map_space types so they aren't NO_TYPE
 func _setup_room_types() -> void:
@@ -173,8 +172,8 @@ func _setup_room_types() -> void:
 		if room.next_rooms.size() > 0:
 			room.type = map_space.Type.ENEMY
 		
-	#9th floor is treasure
-	for room: map_space in map_data[8]:
+	#4th floor is treasure
+	for room: map_space in map_data[4]:
 		if room.next_rooms.size() > 0:
 			room.type = map_space.Type.TREASURE
 			

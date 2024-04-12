@@ -52,6 +52,7 @@ func set_volume(volume: float) -> void:
 		player.volume_db = totalVolume
 	
 #Helper function to convert linear volume to decibels
+#Credit: ChatGPT
 func linear2db(linear):
 	if linear <= 0:
 		return -80.0

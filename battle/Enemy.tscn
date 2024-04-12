@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://t32b4boxehdt"]
+[gd_scene load_steps=7 format=3 uid="uid://t32b4boxehdt"]
 
 [ext_resource type="Script" path="res://battle/Enemy.gd" id="1_0foq6"]
 [ext_resource type="Texture2D" uid="uid://diabusi8j80nn" path="res://assets/enemy.png" id="2_olglr"]
 [ext_resource type="PackedScene" uid="uid://blul8swm87aem" path="res://battle/hearts_container.tscn" id="3_08k4c"]
 [ext_resource type="PackedScene" uid="uid://thokds7o172e" path="res://battle/Stats.tscn" id="3_xep2x"]
+[ext_resource type="Texture2D" uid="uid://csrbjndfygj03" path="res://assets/rip.png" id="5_my15s"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vkj6t"]
 radius = 16.0
@@ -24,6 +25,10 @@ offset_right = 150.725
 offset_bottom = -0.971014
 scale = Vector2(0.5, 0.5)
 size_flags_vertical = 0
+
+[node name="Dead" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("5_my15s")
 
 [node name="Stats" parent="." instance=ExtResource("3_xep2x")]
 HP = 3

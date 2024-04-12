@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=3 uid="uid://c364pkkaty5es"]
+
+[sub_resource type="GDScript" id="GDScript_j1nr6"]
+script/source = "class_name EventsScene
+extends Node2D
+
+signal completed
+
+func test_button_signal_completed() -> void:
+	completed.emit()
+"
+
+[node name="EventsScene" type="Node2D"]
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Node2D"]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Node2D/CanvasLayer"]
+offset_top = 116.0
+offset_right = 638.0
+offset_bottom = 222.0
+text = "Here will be a frog to bless you with starting morsels in your next fight (or maybe an item that you can consume to give you a morsel)"
+
+[node name="Button" type="Button" parent="Node2D/CanvasLayer"]
+offset_left = 202.0
+offset_top = 226.0
+offset_right = 343.0
+offset_bottom = 269.0
+text = "Continue"
+script = SubResource("GDScript_j1nr6")
+
+[connection signal="pressed" from="Node2D/CanvasLayer/Button" to="Node2D/CanvasLayer/Button" method="test_button_signal_completed"]

@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://c0s26pemjhjbs"]
+
+[ext_resource type="Script" path="res://Events/EventScene.gd" id="1_mfa6v"]
+
+[node name="EventScene" type="Node2D"]
+script = ExtResource("1_mfa6v")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
+offset_left = 88.0
+offset_top = 84.0
+offset_right = 502.0
+offset_bottom = 160.0
+text = "Here will be events, such as a frog giving you a morsel for your next battle"
+
+[node name="Button" type="Button" parent="CanvasLayer"]
+offset_left = 194.0
+offset_top = 161.0
+offset_right = 334.0
+offset_bottom = 204.0
+text = "Continue"
+
+[connection signal="pressed" from="CanvasLayer/Button" to="." method="test_button_signal_completed"]

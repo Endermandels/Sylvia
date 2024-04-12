@@ -16,7 +16,7 @@ signal selected(room: map_space)
 const ICONS := {
 	map_space.Type.NO_TYPE: [preload("res://assets/ex.png"), Vector2.ONE],
 	map_space.Type.ENEMY: [preload("res://assets/horn.png"), Vector2(.7,.7)],
-	map_space.Type.EVENT: [preload("res://assets/heart.png"), Vector2.ONE],
+	map_space.Type.EVENT: [preload("res://assets/heart.png"), Vector2(.1,.1)],
 	map_space.Type.SHOP: [preload("res://assets/check.png"), Vector2.ONE],
 	map_space.Type.TREASURE: [preload("res://assets/apple.png"), Vector2.ONE],
 	map_space.Type.BOSS: [preload("res://assets/enemy.png"), Vector2(.5, .5)],

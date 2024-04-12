@@ -25,6 +25,14 @@ texture = ExtResource("1")
 centered = false
 metadata/_edit_lock_ = true
 
+[node name="ColorRect" type="ColorRect" parent="Background"]
+offset_left = 192.0
+offset_top = 40.0
+offset_right = 613.0
+offset_bottom = 95.0
+mouse_filter = 2
+color = Color(0.266667, 0.772549, 0.670588, 1)
+
 [node name="Grid" type="Sprite2D" parent="."]
 position = Vector2(399, 183)
 scale = Vector2(15.1034, 14.4762)
@@ -259,6 +267,12 @@ grid_pos = [6, 2]
 [node name="Jerry" parent="Enemies" instance=ExtResource("8_kyk1e")]
 position = Vector2(399, 68)
 
+[node name="Jerry2" parent="Enemies" instance=ExtResource("8_kyk1e")]
+position = Vector2(399, 68)
+
+[node name="Jerry3" parent="Enemies" instance=ExtResource("8_kyk1e")]
+position = Vector2(399, 68)
+
 [node name="Characters" type="Node2D" parent="."]
 
 [node name="Clover" parent="Characters" instance=ExtResource("7")]
@@ -269,7 +283,7 @@ position = Vector2(400, 296)
 [node name="Control" type="Control" parent="UI"]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
+offset_right = 40.51
 offset_bottom = 40.0
 script = ExtResource("7_w84vo")
 
@@ -358,7 +372,11 @@ script = ExtResource("15_rymsq")
 visible = false
 
 [connection signal="enemys_turn" from="." to="Enemies/Jerry" method="_on_battle_scene_enemys_turn"]
+[connection signal="enemys_turn" from="." to="Enemies/Jerry2" method="_on_battle_scene_enemys_turn"]
+[connection signal="enemys_turn" from="." to="Enemies/Jerry3" method="_on_battle_scene_enemys_turn"]
 [connection signal="end_turn" from="Enemies/Jerry" to="." method="_on_enemy_end_turn"]
+[connection signal="end_turn" from="Enemies/Jerry2" to="." method="_on_enemy_end_turn"]
+[connection signal="end_turn" from="Enemies/Jerry3" to="." method="_on_enemy_end_turn"]
 [connection signal="ready" from="UI/Control" to="UI/Control" method="_on_ready"]
 [connection signal="pressed" from="UI/Control/CollectFoodButton" to="." method="_on_collect_food_button_pressed"]
 [connection signal="pressed" from="UI/Control/FinishMovementButton" to="." method="_on_finish_movement_button_pressed"]

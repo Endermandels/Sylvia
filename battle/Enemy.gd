@@ -3,7 +3,8 @@ extends Node2D
 @onready var sprite = $Sprite2D
 @onready var stats = $Stats
 @onready var hitbox = $Area2D
-
+@onready var enemies = $".."
+@onready var audio_manager = get_parent().get_parent().get_node("AudioManager")
 #temp way to get the player
 @onready var clover = get_parent().get_parent().get_node("Characters/Clover")
 
@@ -11,6 +12,7 @@ extends Node2D
 var grid_rows = 5
 var grid_cols = 7
 var enemy_pos = [3, 0]
+var alive = true
 
 signal end_turn
 	
@@ -20,6 +22,10 @@ func attacked_for(damage):
 	print('Enemy remaining HP ' + str(stats.hp))
 
 func _on_battle_scene_enemys_turn():
+	if not alive:
+		emit_signal("end_turn")
+		return
+		
 	var possible_actions = [["generate_move_list", true, true],
 	["generate_attack_list", true, false]]
 	var turn_list = generate_turn_list(possible_actions, enemy_pos,
@@ -119,10 +125,6 @@ Each element of the array is an array that contains two elements.
 The first element is the string "move" and the second element is a
 coordinate that the animal can move to which is the argument
 that would be passed when calling the move function.
-
-Function currently assumes that the only animals are the board are 
-Jerry and Clover. This function will need to be refactored if more animals
-are added to the board.
 """
 func generate_move_list(start, animal_speed : int):
 	var row : int = start[0]
@@ -130,18 +132,42 @@ func generate_move_list(start, animal_speed : int):
 	var x : int = -1 * animal_speed
 	var y : int = 0
 	var coordinates = Array()
+	
 	while(x <= animal_speed):
 		var new_x : int = x + row
 		if new_x >= 0 and new_x < grid_cols:
 			for i in range(-y, y+1):
 				var new_y : int = i + col
+				var animals_positions = get_players_positions()
+				animals_positions.append_array(get_enemies_positions())
 				if new_y >= 0 and new_y < grid_rows and \
-				[new_x, new_y] != clover.grid_pos:
+				animals_positions.find([new_x, new_y]) == -1:
 					coordinates.append(["move", [[new_x, new_y]]])
+					
 		x += 1
 		if x <= 0: y += 1
 		else: y -= 1
 	return coordinates
+
+# Returns an array of the positions of all the enemies on the board 
+# (not including the current enemy that called this method).
+func get_enemies_positions():
+	var enemy_positions = []
+	var parent = get_parent()
+	for enemy in parent.get_children():
+		if enemy == self:
+			continue
+		enemy_positions.append(enemy.enemy_pos)
+	return enemy_positions
+
+# Returns an array of the positions of all the player characters on the board.
+func get_players_positions():
+	var players_positions = []
+	var players = get_parent().get_parent().get_node("Characters")
+	for player in players.get_children(): 
+		players_positions.append(player.grid_pos)
+	return players_positions
+
 
 """
 Moves the enemy to the given coordinates and visually
@@ -181,6 +207,10 @@ func attack(damage, animal):
 	print('Player attacked for ' + str(damage))
 	animal_stats.receiveDMG(stats.atk)
 	print('Player remaining HP ' + str(animal_stats.hp))
+	if animal_stats.hp <= 2:
+		audio_manager.fasterMusic()
+	if clover.alive == false:
+		audio_manager.normalSpeedMusic()
 """
 new_pos is an array with two elements. The first element is the x
 coordinate of the animal and the second element is the y coordinate.
