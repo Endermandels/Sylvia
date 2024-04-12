@@ -6,9 +6,11 @@ const EVENT_SCENE := preload("res://Events/EventScene.tscn")
 const SHOP_SCENE := preload("res://Shop/ShopScene.tscn")
 const TREASURE_SCENE := preload("res://Treasure/TreasureScene.tscn")
 
+
 @onready var CurrentView: Node = $CurrentView
 @onready var Overworld: Node = $Overworld
 
+var lastRoomEnteredType = map_space.Type.NO_TYPE
 
 func _ready() -> void:
 	Overworld.roomEntered.connect(_on_Overworld_roomEntered)
@@ -30,20 +32,28 @@ func _change_view(scene: PackedScene) -> void:
 	
 #when exiting other scenes, call this
 func _show_map() -> void:
+	if lastRoomEnteredType == map_space.Type.BOSS:
+		print("boss died lol")
+	
 	CurrentView.get_child(0).queue_free()
 	Overworld.show_map()
 
 func _on_Overworld_roomEntered(room: map_space.Type) -> void:
 	match room:
 		map_space.Type.ENEMY:
+			lastRoomEnteredType = map_space.Type.ENEMY
 			_change_view(BATTLE_SCENE)
 		map_space.Type.EVENT:
+			lastRoomEnteredType = map_space.Type.EVENT
 			_change_view(EVENT_SCENE)
 		map_space.Type.SHOP:
+			lastRoomEnteredType = map_space.Type.SHOP
 			_change_view(SHOP_SCENE)
 		map_space.Type.TREASURE:
-			_change_view(TREASURE_SCENE)		
+			lastRoomEnteredType = map_space.Type.TREASURE
+			_change_view(TREASURE_SCENE)
 		map_space.Type.BOSS:
+			lastRoomEnteredType = map_space.Type.BOSS
 			_change_view(BATTLE_SCENE)
 		
 

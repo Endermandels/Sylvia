@@ -23,6 +23,7 @@ signal roomEntered(room: map_space.Type)
 var last_room: map_space
 var camera_edge_y: float
 
+
 #calculate the distance from the first floor to the boss floor (needed for
 #the camera scoll)
 func _ready() -> void:
@@ -106,6 +107,7 @@ func _connect_lines(room: map_space) -> void:
 		
 #when you click on a node
 func _on_map_room_selected(room: map_space) -> void:
+
 	#ensure we can't click any other nodes on the floor we just clicked on
 	for map_room: MapRoom in rooms.get_children():
 		if map_room.room.row == room.row:
