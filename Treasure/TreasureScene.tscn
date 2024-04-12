@@ -1,24 +1,59 @@
-[gd_scene load_steps=2 format=3 uid="uid://i7n6q41i6vv4"]
+[gd_scene load_steps=6 format=3 uid="uid://i7n6q41i6vv4"]
 
 [ext_resource type="Script" path="res://Treasure/TreasureScene.gd" id="1_wwlev"]
+[ext_resource type="Texture2D" uid="uid://c86eqnycpc357" path="res://assets/treasure.png" id="2_bm7b2"]
+
+[sub_resource type="Gradient" id="Gradient_0yy6q"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_skxxh"]
+gradient = SubResource("Gradient_0yy6q")
+fill_from = Vector2(1, 0.794595)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xhjgo"]
+size = Vector2(90, 82)
 
 [node name="TreasureScene" type="Node2D"]
+visibility_layer = 3
 script = ExtResource("1_wwlev")
 
+[node name="Background" type="TextureRect" parent="."]
+modulate = Color(0.572549, 0.258824, 0.423529, 1)
+self_modulate = Color(0.917647, 0.8, 0.768627, 1)
+offset_right = 639.0
+offset_bottom = 357.0
+texture = SubResource("GradientTexture2D_skxxh")
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
-offset_left = 87.0
-offset_top = 88.0
-offset_right = 558.0
-offset_bottom = 123.0
-text = "A treasure chest will be available to open here"
+offset_left = 127.0
+offset_top = 48.0
+offset_right = 513.0
+offset_bottom = 109.0
+text = "   This treasure chest could give you
+anything, for now it gives you nothing."
 
 [node name="Button" type="Button" parent="CanvasLayer"]
-offset_left = 241.0
-offset_top = 180.0
-offset_right = 351.0
-offset_bottom = 214.0
+offset_left = 258.0
+offset_top = 264.0
+offset_right = 368.0
+offset_bottom = 298.0
 text = "Continue"
 
+[node name="Treasure" type="Node2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="Treasure"]
+position = Vector2(313, 168)
+
+[node name="Treasure_Click_Area" type="CollisionShape2D" parent="Treasure/Area2D"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_xhjgo")
+
+[node name="Treasure_Sprite" type="Sprite2D" parent="Treasure/Area2D/Treasure_Click_Area"]
+position = Vector2(-1.00001, -4.76837e-06)
+scale = Vector2(4.125, 3.875)
+texture = ExtResource("2_bm7b2")
+
 [connection signal="pressed" from="CanvasLayer/Button" to="." method="test_button_signal_completed"]
+[connection signal="input_event" from="Treasure/Area2D" to="." method="_on_area_2d_input_event"]
