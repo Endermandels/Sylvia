@@ -3,7 +3,7 @@ extends Node2D
 @onready var sprite = $Sprite2D
 @onready var stats = $Stats
 @onready var hitbox = $Area2D
-
+@onready var enemies = $".."
 #temp way to get the player
 @onready var clover = get_parent().get_parent().get_node("Characters/Clover")
 
@@ -11,6 +11,7 @@ extends Node2D
 var grid_rows = 5
 var grid_cols = 7
 var enemy_pos = [3, 0]
+var alive = true
 
 signal end_turn
 	
@@ -20,6 +21,10 @@ func attacked_for(damage):
 	print('Enemy remaining HP ' + str(stats.hp))
 
 func _on_battle_scene_enemys_turn():
+	if not alive:
+		emit_signal("end_turn")
+		return
+		
 	var possible_actions = [["generate_move_list", true, true],
 	["generate_attack_list", true, false]]
 	var turn_list = generate_turn_list(possible_actions, enemy_pos,
@@ -149,7 +154,9 @@ func get_enemies_positions():
 	var enemy_positions = []
 	var parent = get_parent()
 	for enemy in parent.get_children():
-		if enemy.name != self.name: enemy_positions.append(enemy.grid_pos)
+		if enemy == self:
+			continue
+		enemy_positions.append(enemy.enemy_pos)
 	return enemy_positions
 
 # Returns an array of the positions of all the player characters on the board.
