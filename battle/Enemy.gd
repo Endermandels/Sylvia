@@ -4,6 +4,7 @@ extends Node2D
 @onready var stats = $Stats
 @onready var hitbox = $Area2D
 @onready var enemies = $".."
+@onready var behavior = $Behavior
 @onready var audio_manager = get_parent().get_parent().get_node("AudioManager")
 #temp way to get the player
 @onready var clover = get_parent().get_parent().get_node("Characters/Clover")
@@ -33,9 +34,9 @@ func _on_battle_scene_enemys_turn():
 	print("All the actions for the enemy are: ")
 	for turn in turn_list:
 		print(turn)
-	var next_turn = turn_list[randi() % len(turn_list)]
-	print("Next turn will be: ")
-	print(next_turn)
+	var next_turn = behavior.choose_actions(self, turn_list, 
+	get_players_positions())
+	print("%s Next turn will be: %s" % [self, next_turn])
 	for action in next_turn:
 		callv(action[0], action[1])
 	

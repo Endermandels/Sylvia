@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://t32b4boxehdt"]
+[gd_scene load_steps=8 format=3 uid="uid://t32b4boxehdt"]
 
 [ext_resource type="Script" path="res://battle/Enemy.gd" id="1_0foq6"]
 [ext_resource type="Texture2D" uid="uid://diabusi8j80nn" path="res://assets/enemy.png" id="2_olglr"]
 [ext_resource type="PackedScene" uid="uid://blul8swm87aem" path="res://battle/hearts_container.tscn" id="3_08k4c"]
 [ext_resource type="PackedScene" uid="uid://thokds7o172e" path="res://battle/Stats.tscn" id="3_xep2x"]
 [ext_resource type="Texture2D" uid="uid://csrbjndfygj03" path="res://assets/rip.png" id="5_my15s"]
+[ext_resource type="Script" path="res://battle/Behavior.gd" id="6_j8ofn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vkj6t"]
 radius = 16.0
@@ -38,3 +39,6 @@ collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_vkj6t")
+
+[node name="Behavior" type="Node" parent="."]
+script = ExtResource("6_j8ofn")
