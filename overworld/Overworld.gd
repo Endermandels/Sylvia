@@ -1,4 +1,3 @@
-
 #this code was written following the guide on: 
 #https://www.youtube.com/watch?v=7HYu7QXBuCY&t=6341s&ab_channel=GodotGameLab
 #the github for the video's "starter project" is here:
@@ -12,14 +11,13 @@ const SCROLL_SPEED := 15
 const MAP_ROOM = preload("res://overworld/map_room.tscn")
 const MAP_LINE = preload("res://overworld/map_line.tscn")
 
-#use map_generator to generate a 2D array of map_spaces for map_data, 
-#which we use to populate our rooms, then build lines connecting the rooms
+signal roomEntered(room: map_space.Type)
+
 @onready var map_generator: MapGenerator = $MapGenerator
 @onready var lines: Node2D = %Lines
 @onready var rooms: Node2D = %Rooms
 @onready var visuals: Node2D = $Visuals
 @onready var camera_2d: Camera2D = $Camera2D
-
 @export var map_data: Array[Array]
 @export var floors_climbed: int
 var last_room: map_space
@@ -30,6 +28,7 @@ var camera_edge_y: float
 func _ready() -> void:
 	camera_edge_y = MapGenerator.Y_DIST * (MapGenerator.FLOORS - 1)
 	generate_new_map()
+	create_map()
 	unlock_floor(0)
 	
 #scrolling functionality 
@@ -41,14 +40,14 @@ func _input(event: InputEvent) -> void:
 	#make sure we don't scroll past our boundaries
 	camera_2d.position.y = clamp(camera_2d.position.y, -camera_edge_y, 0)	
 	
-#get a 2D array of map_spaces, then use create_map() to build the user interface
+#set map_data to a newly generated map
 func generate_new_map() -> void:
 	floors_climbed = 0
 	map_data = map_generator.generate_map()
-	create_map()
 	
-#spawns all map_spaces from map_data that have a next_room (ie part of a path)
-#spawning will draw them using their positioning variable 
+	
+#draws all map_spaces from map_data that have a next_room (ie part of a path)
+#using their positioning variable 
 func create_map() -> void:
 	for current_floor: Array in map_data:
 		for room: map_space in current_floor:
@@ -115,9 +114,9 @@ func _on_map_room_selected(room: map_space) -> void:
 	last_room = room
 	floors_climbed += 1
 	unlock_next_rooms()
+	roomEntered.emit(room.type)
 	
-	#this functionality needs to be expanded for other node types and to save our map and position on it
-	#get_tree().change_scene_to_file("res://battle/BattleScene.tscn")
+
 	
 	
 	

@@ -18,7 +18,3 @@ enum Type {NO_TYPE, ENEMY, EVENT, SHOP, TREASURE, BOSS}
 @export var positioning: Vector2
 @export var next_rooms: Array[map_space]
 @export var selected: = false
-
-#print for debugging
-func _to_string() -> String:
-	return "%s (%s)" % [column, Type.keys()[type][1]]

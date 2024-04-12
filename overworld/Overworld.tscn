@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://ciygfyllvwgoa"]
+[gd_scene load_steps=6 format=3 uid="uid://ciygfyllvwgoa"]
 
 [ext_resource type="Script" path="res://overworld/Overworld.gd" id="1_t75pi"]
 [ext_resource type="Script" path="res://overworld/MapGenerator.gd" id="4_3k8ay"]
@@ -11,36 +11,6 @@ script/source = "extends Button
 
 func _on_pressed():
 	get_tree().change_scene_to_file(\"res://start_menu/start_menu.tscn\")
-"
-
-[sub_resource type="GDScript" id="GDScript_p38hw"]
-script/source = "extends Button
-
-
-func _on_pressed():
-	pass # Replace with function body.
-"
-
-[sub_resource type="GDScript" id="GDScript_4pstf"]
-script/source = "extends Button
-
-
-func _on_pressed():
-	pass # Replace with function body.
-"
-
-[sub_resource type="GDScript" id="GDScript_e6wno"]
-script/source = "extends Button
-
-func _on_pressed():
-	pass # Replace with function body.
-"
-
-[sub_resource type="GDScript" id="GDScript_agli2"]
-script/source = "extends Button
-
-func _on_pressed():
-	pass # Replace with function body.
 "
 
 [sub_resource type="Gradient" id="Gradient_j8the"]
@@ -78,32 +48,6 @@ layout_mode = 2
 text = "Quit to Menu"
 script = SubResource("GDScript_8ndto")
 
-[node name="testing buttons" type="HBoxContainer" parent="Menu"]
-offset_left = 212.0
-offset_top = 300.0
-offset_right = 450.0
-offset_bottom = 336.0
-
-[node name="set column 1 complete" type="Button" parent="Menu/testing buttons"]
-layout_mode = 2
-text = "Col 1"
-script = SubResource("GDScript_p38hw")
-
-[node name="set column 2 complete2" type="Button" parent="Menu/testing buttons"]
-layout_mode = 2
-text = "Col 2"
-script = SubResource("GDScript_4pstf")
-
-[node name="set column 3 complete3" type="Button" parent="Menu/testing buttons"]
-layout_mode = 2
-text = "Col 3"
-script = SubResource("GDScript_e6wno")
-
-[node name="set column 4 complete4" type="Button" parent="Menu/testing buttons"]
-layout_mode = 2
-text = "Col 4"
-script = SubResource("GDScript_agli2")
-
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(320, 180)
 
@@ -119,7 +63,3 @@ grow_vertical = 2
 texture = SubResource("GradientTexture1D_kpcvw")
 
 [connection signal="pressed" from="Menu/VBoxContainer/Quit to Menu" to="Menu/VBoxContainer/Quit to Menu" method="_on_pressed"]
-[connection signal="pressed" from="Menu/testing buttons/set column 1 complete" to="Menu/testing buttons/set column 1 complete" method="_on_pressed"]
-[connection signal="pressed" from="Menu/testing buttons/set column 2 complete2" to="Menu/testing buttons/set column 2 complete2" method="_on_pressed"]
-[connection signal="pressed" from="Menu/testing buttons/set column 3 complete3" to="Menu/testing buttons/set column 3 complete3" method="_on_pressed"]
-[connection signal="pressed" from="Menu/testing buttons/set column 4 complete4" to="Menu/testing buttons/set column 4 complete4" method="_on_pressed"]
