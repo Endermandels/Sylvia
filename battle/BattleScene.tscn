@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://srh7fu8uprij"]
+[gd_scene load_steps=18 format=3 uid="uid://srh7fu8uprij"]
 
 [ext_resource type="Texture2D" uid="uid://dkushodgai21s" path="res://assets/background.png" id="1"]
 [ext_resource type="Script" path="res://battle/BattleScene.gd" id="1_vb5nx"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://battle/Control.gd" id="7_w84vo"]
 [ext_resource type="PackedScene" uid="uid://t32b4boxehdt" path="res://battle/Enemy.tscn" id="8_kyk1e"]
 [ext_resource type="PackedScene" uid="uid://deikkfb2ghqvw" path="res://battle/food.tscn" id="9_1n73l"]
+[ext_resource type="Texture2D" uid="uid://bnnot0v7rnml4" path="res://assets/pause_button.png" id="9_g3806"]
 [ext_resource type="PackedScene" uid="uid://dxqbt1cqviw66" path="res://card_ui/card_ui.tscn" id="11_23mjc"]
 [ext_resource type="Script" path="res://battle_ui/hand.gd" id="11_o3fgr"]
 [ext_resource type="Script" path="res://Audio Subsystem/AudioManager.gd" id="13_4rmcv"]
@@ -312,6 +313,17 @@ offset_right = 83.0
 offset_bottom = 163.0
 text = "Attack"
 
+[node name="pauseButton" type="Button" parent="UI"]
+offset_left = 9.0
+offset_top = 8.0
+offset_right = 42.0
+offset_bottom = 41.0
+
+[node name="PauseButton" type="Sprite2D" parent="UI/pauseButton"]
+position = Vector2(16, 16)
+scale = Vector2(0.04, 0.04)
+texture = ExtResource("9_g3806")
+
 [node name="EndOfTurn" parent="." instance=ExtResource("7_np6ef")]
 position = Vector2(52, 97)
 
@@ -381,6 +393,7 @@ visible = false
 [connection signal="pressed" from="UI/Control/CollectFoodButton" to="." method="_on_collect_food_button_pressed"]
 [connection signal="pressed" from="UI/Control/FinishMovementButton" to="." method="_on_finish_movement_button_pressed"]
 [connection signal="pressed" from="UI/Control/AttackButton" to="." method="_on_attack_button_pressed"]
+[connection signal="pressed" from="UI/pauseButton" to="." method="_on_pause_button_pressed"]
 [connection signal="end_turn" from="EndOfTurn" to="." method="_on_end_of_turn_end_turn"]
 [connection signal="play_card" from="BattleUI/Hand" to="." method="_on_hand_play_card"]
 

@@ -79,12 +79,20 @@ func decide_turn_order():
 	# TODO: Implement
 	current_char = $"Characters/Clover"
 	
-func spawn_enemies( num_cols):
+func spawn_enemies(num_cols):
+	var used_positions = []
 	for enemy in enemies.get_children():
-		enemy.enemy_pos = [randi() % num_cols, 0]
-		enemy.update_visual_position((enemy.enemy_pos))
-	#	enemy.enemys_turn.connect(_on_battle_scene_enemys_turn)
+		var pos = randi() % num_cols
+		# Ensure no two enemies share the same position
+		while pos in used_positions:
+			pos = randi() % num_cols
+		
+		used_positions.append(pos)  # Record position as used
+		enemy.enemy_pos = [pos, 0]  # Set enemy position
+		enemy.update_visual_position(enemy.enemy_pos)
+		# enemy.enemys_turn.connect(_on_battle_scene_enemys_turn)
 		print("%s behavior is %s" % [enemy, enemy.behavior.Behavior])
+
 
 """
 INPUT
@@ -250,7 +258,8 @@ func players_turn():
 	
 	if player_lost():
 		print("Player Lost")
-		gamestate = State.PLAYER_TURN
+		get_tree().change_scene_to_file("res://game_end/lossScreen.tscn")
+		gamestate = State.PLAYER_LOST
 	
 	
 	collect_food_button.visible = false
@@ -412,3 +421,9 @@ func _on_hand_play_card(card, targets):
 
 func exit():
 	get_tree().change_scene_to_file("res://start_menu/start_menu.tscn")
+
+
+
+
+func _on_pause_button_pressed():
+	pauseMenu()
