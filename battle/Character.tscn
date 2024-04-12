@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://bub37ipigql3v"]
 
-[ext_resource type="Texture2D" uid="uid://beaxj4qxkqcsh" path="res://assets/character.png" id="1"]
 [ext_resource type="Script" path="res://battle/Character.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://blul8swm87aem" path="res://battle/hearts_container.tscn" id="2_iitgv"]
 [ext_resource type="PackedScene" uid="uid://thokds7o172e" path="res://battle/Stats.tscn" id="3"]
+[ext_resource type="Texture2D" uid="uid://cd15esii12y10" path="res://assets/clover.png" id="3_w5mmq"]
 [ext_resource type="Texture2D" uid="uid://csrbjndfygj03" path="res://assets/rip.png" id="5_wrv2o"]
 
 [node name="Character" type="Node2D"]
@@ -14,16 +14,15 @@ visible = false
 texture = ExtResource("5_wrv2o")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-1.19209e-07, 1.19209e-07)
+position = Vector2(2.13163e-14, 3)
 scale = Vector2(1.725, 1.725)
-texture = ExtResource("1")
-hframes = 4
+texture = ExtResource("3_w5mmq")
 
 [node name="heartsContainer" parent="Sprite2D" instance=ExtResource("2_iitgv")]
-offset_left = -49.2754
-offset_top = -17.971
-offset_right = 150.725
-offset_bottom = -0.971014
+offset_left = -48.1159
+offset_top = -22.029
+offset_right = 151.884
+offset_bottom = -5.02898
 scale = Vector2(0.5, 0.5)
 size_flags_vertical = 0
 
