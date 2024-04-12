@@ -45,6 +45,7 @@ func _unhandled_input(event) -> void:
 
 func _on_confirm_action_confirmed():
 	InputHelper.set_keyboard_input_for_action(action, new_action)
+	InputHelper.default = false
 	%Listener.hide()
 
 func _on_confirm_action_canceled():

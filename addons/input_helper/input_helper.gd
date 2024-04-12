@@ -22,6 +22,7 @@ const PLAYSTATION_BUTTON_LABELS = ["Cross", "Circle", "Square", "Triangle", "Sel
 
 @onready var device: String = guess_device_name()
 @onready var device_index: int = 0 if has_joypad() else -1
+@onready var default = true
 
 var deadzone: float = 0.5
 var device_last_changed_at: int = 0
