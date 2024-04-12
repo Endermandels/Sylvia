@@ -250,7 +250,8 @@ func players_turn():
 	
 	if player_lost():
 		print("Player Lost")
-		gamestate = State.PLAYER_TURN
+		get_tree().change_scene_to_file("res://game_end/lossScreen.tscn")
+		gamestate = State.PLAYER_LOST
 	
 	
 	collect_food_button.visible = false
@@ -412,3 +413,9 @@ func _on_hand_play_card(card, targets):
 
 func exit():
 	get_tree().change_scene_to_file("res://start_menu/start_menu.tscn")
+
+
+
+
+func _on_pause_button_pressed():
+	pauseMenu()
