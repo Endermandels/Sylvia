@@ -82,7 +82,7 @@ func spawn_enemies( num_cols):
 		enemy.enemy_pos = [randi() % num_cols, 0]
 		enemy.update_visual_position((enemy.enemy_pos))
 	#	enemy.enemys_turn.connect(_on_battle_scene_enemys_turn)
-		
+		print("%s behavior is %s" % [enemy, enemy.behavior.Behavior])
 
 """
 INPUT
