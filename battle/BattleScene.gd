@@ -173,7 +173,7 @@ func _on_enemy_end_turn():
 		enemies_completed_turn = 0  # Reset for the next round
 		if player_won():
 			gamestate = State.PLAYER_WON
-			completed.emit()
+			
 			print('player won!')
 			return
 		
@@ -197,6 +197,7 @@ Player wins by having all creatures on top row without any enemies adjacent to t
 func player_won():
 	
 	if all_enemies_died():
+		completed.emit()
 		return true
 	
 	for character in characters.get_children():
@@ -221,6 +222,7 @@ func player_won():
 			if grid_pos[1] + 1 < character.grid_rows and \
 				grid_pos[0]-1 == enemy_pos[0] and grid_pos[1] == enemy_pos[1]:
 				return false
+	completed.emit()
 	return true
 
 
