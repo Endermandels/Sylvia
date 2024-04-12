@@ -32,8 +32,12 @@ func _change_view(scene: PackedScene) -> void:
 	
 #when exiting other scenes, call this
 func _show_map() -> void:
+	
+	# We check if the boss was defeated here
 	if lastRoomEnteredType == map_space.Type.BOSS:
-		print("boss died lol")
+		print("boss died")
+		get_tree().change_scene_to_file("res://game_end/winScreen.tscn")
+		return
 	
 	CurrentView.get_child(0).queue_free()
 	Overworld.show_map()

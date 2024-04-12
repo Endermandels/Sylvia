@@ -1,0 +1,131 @@
+[gd_scene load_steps=7 format=3 uid="uid://dmw6fv56lbde1"]
+
+[ext_resource type="Script" path="res://game_end/winScreen.gd" id="1_e5gat"]
+[ext_resource type="Texture2D" uid="uid://dkushodgai21s" path="res://assets/background.png" id="2_1ugwh"]
+[ext_resource type="FontFile" uid="uid://mdn03mrrb765" path="res://ui_theme/Font/Metamorphous-Regular.ttf" id="3_y8flk"]
+[ext_resource type="Script" path="res://Audio Subsystem/AudioManager.gd" id="5_fpb3f"]
+[ext_resource type="Script" path="res://Audio Subsystem/MusicPlayer.gd" id="6_wpncc"]
+[ext_resource type="Script" path="res://Audio Subsystem/SFXPlayer.gd" id="7_3bivj"]
+
+[node name="Main_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_e5gat")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_1ugwh")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -16.0
+offset_top = 32.0
+offset_right = -8.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="Seperator" type="Control" parent="MarginContainer/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_y8flk")
+theme_override_font_sizes/font_size = 44
+text = "Sylvia"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Seperator2" type="Control" parent="MarginContainer/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="Seperator3" type="Control" parent="MarginContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Seperator4" type="Control" parent="MarginContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(0.775, 1.525)
+layout_mode = 2
+
+[node name="Seperator5" type="Control" parent="MarginContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(0.775, 1.525)
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 2
+offset_left = 8.0
+offset_top = 119.0
+offset_right = 620.0
+offset_bottom = 193.0
+theme_override_fonts/font = ExtResource("3_y8flk")
+theme_override_font_sizes/font_size = 24
+text = "YOU WIN!
+Thanks for Playing!
+"
+horizontal_alignment = 1
+justification_flags = 2
+uppercase = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+offset_top = 184.0
+offset_right = 624.0
+offset_bottom = 316.0
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 2
+
+[node name="Start" type="Button" parent="HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+clip_contents = true
+custom_minimum_size = Vector2(40, 10)
+layout_mode = 2
+text = "Main Menu"
+
+[node name="Exit" type="Button" parent="HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+clip_contents = true
+custom_minimum_size = Vector2(150, 30)
+layout_mode = 2
+text = "Exit"
+
+[node name="Seperator2" type="Control" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="AudioManager" type="Node" parent="."]
+script = ExtResource("5_fpb3f")
+
+[node name="MusicPlayer" type="Node" parent="AudioManager"]
+script = ExtResource("6_wpncc")
+
+[node name="SFXPlayer" type="Node" parent="AudioManager"]
+script = ExtResource("7_3bivj")
+
+[connection signal="ready" from="." to="." method="_on_ready"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
