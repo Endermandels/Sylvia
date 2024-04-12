@@ -8,6 +8,15 @@ extends Node2D
 var saved_rand_space = null # Previously-generated random space
 var origin = [] # Keeps track of original position, in case the board is reset
 
+
+
+func _ready():
+	# Assuming `spaces` node is a sibling or accessible from `parent`
+	var spaces = $"../../Spaces"
+	rand_pos(spaces)
+	save_stats()  # Save the initial stats if necessary
+	
+	
 func rand_pos(spaces):
 	var x = null
 	var space = null
@@ -17,6 +26,11 @@ func rand_pos(spaces):
 			x = randi_range(0, len(spaces.get_children())-1)
 			space = spaces.find_child("Space" + str(x))
 			
+			
+			if space.grid_pos[1] == 0:
+				space = null
+				continue
+				
 			for food in parent.get_children():
 				if food.name != self.name and food.grid_pos == space.grid_pos:
 					space = null
