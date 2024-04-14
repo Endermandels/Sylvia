@@ -9,6 +9,10 @@ extends Node2D
 #temp way to get the player
 @onready var clover = get_parent().get_parent().get_node("Characters/Clover")
 
+const FRAME_CAUTIOUS = 0
+const FRAME_NEUTRAL = 1
+const FRAME_VENGEFUL = 2
+const FRAME_AGGRESSIVE = 3
 
 var grid_rows = 5
 var grid_cols = 7
@@ -16,6 +20,9 @@ var enemy_pos = [3, 0]
 var alive = true
 
 signal end_turn
+
+func _ready():
+	update_sprite()
 	
 func attacked_for(damage):
 	print('Enemy attacked for ' + str(damage))
@@ -36,12 +43,23 @@ func _on_battle_scene_enemys_turn():
 		print(turn)
 	var next_turn = behavior.choose_actions(self, turn_list, 
 	get_players_positions())
+	update_sprite()
 	print("%s Next turn will be: %s" % [self, next_turn])
 	for action in next_turn:
 		callv(action[0], action[1])
 	
 	emit_signal("end_turn")
 
+func update_sprite():
+	match behavior.Behavior:
+		behavior.Behaviors.CAUTIOUS:
+			sprite.frame = FRAME_CAUTIOUS
+		behavior.Behaviors.NEUTRAL:
+			sprite.frame = FRAME_NEUTRAL
+		behavior.Behaviors.VENGEFUL:
+			sprite.frame = FRAME_VENGEFUL
+		behavior.Behaviors.AGGRESSIVE:
+			sprite.frame = FRAME_AGGRESSIVE
 """
 Generates all the possible actions that a given animal can do for its turn.
 This function has 4 parameters.

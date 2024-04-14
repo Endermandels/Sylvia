@@ -20,10 +20,10 @@ texture = ExtResource("2_olglr")
 hframes = 4
 
 [node name="heartsContainer" parent="Sprite2D" instance=ExtResource("3_08k4c")]
-offset_left = -49.2754
-offset_top = -17.971
-offset_right = 150.725
-offset_bottom = -0.971014
+offset_left = -49.5653
+offset_top = -24.1305
+offset_right = 150.435
+offset_bottom = -7.13049
 scale = Vector2(0.5, 0.5)
 size_flags_vertical = 0
 
