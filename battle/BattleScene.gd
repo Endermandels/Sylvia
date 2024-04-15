@@ -62,8 +62,8 @@ SETUP
 
 func _ready():
 	audio_manager.playMusic("res://Music/battle_music (surf).ogg")
-	audio_manager.normalSpeedMusic()
 	set_process_input(true)
+	audio_manager.normalSpeedMusic()
 	hide_nodes()
 	decide_turn_order()
 	current_char.save_stats()
