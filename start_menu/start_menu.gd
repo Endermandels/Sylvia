@@ -4,6 +4,7 @@ extends Control
 
 func _on_ready():
 	audio_manager.playMusic("res://Music/menu_music.ogg")
+	audio_manager.normalSpeedMusic()
 	theme = load(Settings.theme)
 	set_theme(theme)
 	get_theme().default_font_size = Settings.font_size

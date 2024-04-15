@@ -20,6 +20,7 @@ signal roomEntered(room: map_space.Type)
 @onready var camera_2d: Camera2D = $Camera2D
 @export var map_data: Array[Array]
 @export var floors_climbed: int
+@onready var audio_manager = $AudioManager
 var last_room: map_space
 var camera_edge_y: float
 
@@ -27,6 +28,7 @@ var camera_edge_y: float
 #calculate the distance from the first floor to the boss floor (needed for
 #the camera scoll)
 func _ready() -> void:
+	audio_manager.normalSpeedMusic()
 	camera_edge_y = MapGenerator.Y_DIST * (MapGenerator.FLOORS - 1)
 	generate_new_map()
 	create_map()
