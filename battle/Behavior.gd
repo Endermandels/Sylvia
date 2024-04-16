@@ -9,9 +9,6 @@ enum Behaviors {CAUTIOUS=0, NEUTRAL=1, VENGEFUL=2, AGGRESSIVE=3}
 func pick_random_behavior():
 	return randi() % 4
 	
-
-	
-	
 # From a given turn list, choose what turn the enemy
 # would make based on its behavior.
 func choose_actions(enemy, turn_list, player_pos):
@@ -29,7 +26,7 @@ func choose_actions(enemy, turn_list, player_pos):
 	if Behavior == Behaviors.VENGEFUL:
 		var enemies = enemy.get_parent()
 		for animal in enemies.get_children():
-			if enemy.alive == false:
+			if animal.alive == false:
 				return aggressive_turn(turn_list, player_pos)
 		if enemy.stats.hp == enemy.stats.saved_hp:
 			return choose_random_turn(turn_list)
