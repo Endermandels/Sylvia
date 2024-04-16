@@ -7,7 +7,7 @@ enum Behaviors {CAUTIOUS=0, NEUTRAL=1, VENGEFUL=2, AGGRESSIVE=3}
 
 # Picks a random behavior
 func pick_random_behavior():
-	return randi() % 4
+	return randi() & 3
 	
 # From a given turn list, choose what turn the enemy
 # would make based on its behavior.
